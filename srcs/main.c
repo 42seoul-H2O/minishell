@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/03 16:57:37 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:08:22 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	init(void)
 {
 	init_term_setting();
-	signal(SIGINT, interupt_handler);
-	signal(SIGQUIT, SIG_IGN);
+	set_sig_handler();
 	return (0);
 }
 

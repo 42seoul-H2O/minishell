@@ -6,11 +6,17 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:20:02 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/03 17:06:55 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:08:14 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h" 
+
+void	set_sig_handler(void)
+{
+	signal(SIGINT, interupt_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
 
 void	interupt_handler(int signum)
 {
