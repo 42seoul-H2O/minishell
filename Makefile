@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/04 15:23:16 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/04 16:06:03 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ INCS = -I./include
 
 SRCS_NAME = main.c \
 			prompt.c \
+			builtin_main.c \
 			builtin_exit.c \
 			builtin_pwd.c 
 SRCS_PATH = ./srcs

@@ -6,11 +6,25 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:08 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 15:26:11 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:08:44 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+
+static int	is_all_digit(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!ft_isdigit((int)s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 void	builtin_exit(int errnum)
 {
@@ -18,18 +32,18 @@ void	builtin_exit(int errnum)
 	exit(errnum);
 }
 
-void	exec_builtins(char *line)
+void	check_exit_code(char **input, int len)
 {
-	int	line_len;
-
-	line_len = ft_strlen(line);
-	if (line_len > 5 && ft_strnstr(line, "exit", 4) != NULL
-		&& ft_isdigit(line[5]))
-		builtin_exit(ft_atoi(line + 4));
-	else if (ft_strnstr(line, "exit", 4) != NULL)
+	if (len == 1)
 		builtin_exit(0);
-	else if (ft_strnstr(line, "pwd", 3) != NULL)
-		builtin_pwd();
+	else if (len == 2)
+	{
+		if (is_all_digit(input[1]))
+			builtin_exit(atoi(input[1]));
+		printf("exit\nh2osh: exit: %s: numeric argument required\n",
+			input[1]);
+		exit(255);
+	}
 	else
-		printf("h2osh: %s: command not found\n", line);
+		printf("exit\nh2osh: exit: too many arguments\n");
 }
