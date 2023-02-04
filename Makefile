@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/04 16:18:13 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/04 18:23:56 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRCS_NAME = main.c \
 			builtin_main.c \
 			builtin_exit.c \
 			builtin_pwd.c \
+			builtin_export.c \
+			builtin_env.c \
 			builtin_cd.c
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 16:24:29 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 18:29:03 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ void	check_exit_code(char **input, int len);
 void	builtin_exit(int errnum);
 void	builtin_pwd(void);
 void	builtin_cd(char *path);
+void	builtin_export(char **input, char **env);
+void	builtin_env(char **input, char **env);
 
 #endif
