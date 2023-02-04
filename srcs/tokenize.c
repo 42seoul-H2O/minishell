@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:46:57 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/04 14:48:00 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/04 16:47:53 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 
 #include "minishell.h"
 
-static char		**ft_split(char const *s, char *c, char *special_delimiter);
-static int		word_count(char const *s, char *c);
-static int		is_delimiter(char const *s, char *c, int idx);
+static char		**my_split(char const *s, char *c, char *special_delimiter);
+static int		word_count(char const *s, char *c, char *special_delimiter);
 static char		*create_word(char const *s, char *c, int start_idx);
 
 char	**tokenize(char const *s)
 {
-	return (my_split(s, " \t<>|"));
+	return (my_split(s, " \t<>|", "<>|"));
 }
 
-static char	**ft_split(char const *s, char *c, char *special_delimiter)
+static char	**my_split(char const *s, char *c, char *special_delimiter)
 {
 	int		i;
 	int		j;
@@ -34,26 +33,25 @@ static char	**ft_split(char const *s, char *c, char *special_delimiter)
 
 	i = 0;
 	j = 0;
-	len = word_count(s, c);
+	len = word_count(s, c, special_delimiter);
 	strs = malloc(sizeof (char *) * (len + 1));
 	if (!strs)
 		exit(12);
 	while (s[i])
 	{
-		if (is_delimiter(s, c, i - 1) && !is_delimiter(s, c, i))
+		if ((is_delimiter(s, c, i - 1) && !is_delimiter(s, c, i)) || \
+			is_special_delimiter(s[i], special_delimiter))
 		{
 			strs[j] = create_word(s, c, i);
 			j++;
 		}
 		i++;
 	}
-	if (word_count(s, c) <= 0)
-		strs[0] = 0;
-	strs[i] = (NULL);
+	strs[j] = (NULL);
 	return (strs);
 }
 
-static int	word_count(char const *s, char *c)
+static int	word_count(char const *s, char *c, char *special_delimiter)
 {
 	int	i;
 	int	count;
@@ -65,25 +63,11 @@ static int	word_count(char const *s, char *c)
 		if (!is_delimiter(s, c, i)
 			&& is_delimiter(s, c, i + 1))
 			count++;
+		if (is_special_delimiter(s[i], special_delimiter))
+			count++;
 		i++;
 	}
 	return (count);
-}
-
-static int	is_delimiter(char const *s, char *c, int idx)
-{
-	size_t	i;
-
-	i = 0;
-	if (idx == -1 || !s[idx])
-		return (1);
-	while (c[i])
-	{
-		if (s[idx] == c[i])
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 static char	*create_word(char const *s, char *c, int start_idx)
@@ -98,7 +82,7 @@ static char	*create_word(char const *s, char *c, int start_idx)
 		exit (1);
 	word = malloc(sizeof (char) * (word_len + 1));
 	if (!word)
-		exit (1);
+		exit (12);
 	while (i < word_len)
 	{
 		word[i] = s[start_idx];
@@ -107,4 +91,20 @@ static char	*create_word(char const *s, char *c, int start_idx)
 	}
 	word[i] = 0;
 	return (word);
+}
+
+int	is_delimiter(char const *s, char *c, int idx)
+{
+	size_t	i;
+
+	i = 0;
+	if (idx == -1 || !s[idx])
+		return (1);
+	while (c[i])
+	{
+		if (s[idx] == c[i])
+			return (1);
+		i++;
+	}
+	return (0);
 }
