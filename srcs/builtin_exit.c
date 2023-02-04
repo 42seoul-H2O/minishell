@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 14:50:52 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/04 13:29:08 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/04 14:49:38 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#include "builtin.h"
 
-enum e_token_type
+void	builtin_exit(int errnum)
 {
-	NO_QUOTE = -1,
-	SWITCH_OFF = 0,
-	SWITCH_ON = 1,
-	PIPE,
-	REDIRECTION,
-	HEREDOC,
-	COMMAND,
-	BUILTIN,
-	ARGUMENT,
-};
+	printf("%s\n", "exit");
+	exit(errnum);
+}
 
-#endif
+void	exec_builtins(char *line)
+{
+	int	line_len;
+
+	line_len = ft_strlen(line);
+	if (ft_strnstr(line, "exit", 4) != NULL)
+	{
+		builtin_exit(0);
+	}
+	if (ft_strnstr(line, "exit", 4) != NULL)
+		builtin_exit(ft_atoi(line + 4));
+	printf("%s\n", line);
+}

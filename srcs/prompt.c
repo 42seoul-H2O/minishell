@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:20:02 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/03 17:08:14 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:43:57 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,19 @@ void	init_term_setting(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-char	*get_line(void)
+char	*get_line(char *line)
 {
-	char	*line;
-
+	if (line != NULL)
+	{
+		free(line);
+		line = NULL;
+	}
 	line = readline("h2osh$ ");
 	if (line == NULL)
 	{
 		printf("\033[1A");
 		printf("\033[7C");
-		printf("exit\n");
-		exit(0);
-	}
-	if (ft_strncmp(line, "quit", sizeof(line)) == 0)
-	{
-		free(line);
-		return (NULL);
+		builtin_exit(0);
 	}
 	add_history(line);
 	return (line);

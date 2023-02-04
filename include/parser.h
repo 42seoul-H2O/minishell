@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 14:50:52 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/04 14:49:57 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/04 14:54:40 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#ifndef PARSER_H
+# define PARSER_H
 
-enum e_token_type
+typedef struct s_token
 {
-	NO_QUOTE = -1,
-	SWITCH_OFF = 0,
-	SWITCH_ON = 1,
-	PIPE,
-	REDIRECTION,
-	HEREDOC,
-	COMMAND,
-	BUILTIN,
-	ARGUMENT,
-};
+	int		type;
+	char	*str;
+}				t_token;
 
 #endif
