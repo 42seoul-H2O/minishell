@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 14:49:57 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 15:09:43 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/04 15:13:12 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/04 15:22:10 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "builtin.h"
 
-typedef struct s_token
+void	builtin_pwd(void)
 {
-	int		type;
-	char	*str;
-}				t_token;
+	char	*buf;
 
-#endif
+	buf = getcwd(NULL, 0);
+	if (buf == NULL)
+	{
+		perror("pwd : failed to getcwd()\n");
+		exit(1);
+	}
+	printf("%s\n", buf);
+	free(buf);
+}
