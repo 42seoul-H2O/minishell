@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 16:08:13 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:24:20 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	exec_builtins(char **input, int len)
 	else if (ft_strnstr(input[0], "pwd", 3) != NULL)
 		builtin_pwd();
 	else if (ft_strnstr(input[0], "cd", 3) != NULL)
-		dummy();
+		builtin_cd(input[1]);
 	else if (ft_strnstr(input[0], "export", 6) != NULL)
 		dummy();
 	else if (ft_strnstr(input[0], "unset", 5) != NULL)
 		dummy();
-	else if (ft_strnstr(input[0], "pwd", 3) != NULL)
+	else if (ft_strnstr(input[0], "echo", 3) != NULL)
 		dummy();
 	else if (ft_strnstr(input[0], "env", 3) != NULL)
 		dummy();
