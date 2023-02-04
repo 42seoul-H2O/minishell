@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:46:57 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/03 19:28:20 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/04 11:25:18 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		word_count(char const *s, char *c);
 static int		is_delimiter(char const *s, char *c, int idx);
 static char		*create_word(char const *s, char *c, int start_idx);
 
-char	**ft_split(char const *s, char *c)
+char	**ft_tokenize(char const *s, char *c)
 {
 	int		i;
 	int		j;
