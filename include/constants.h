@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 11:29:19 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:26:03 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 enum e_token_type
 {
 	NO_QUOTE = -1,
-	SWITCH_OFF = 0,
-	SWITCH_ON = 1,
+	OFF = 0,
+	ON = 1,
 };
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 11:29:22 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:14:29 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 # include "constants.h"
 # include "prompt.h"
+# include "tokenizer.h"
 
 int		init(void);
-int		*find_quote(char const *s, char *c, int start_idx);
-int		get_word_len(char const *s, char *c, int start_idx);
-char	**ft_tokenize(char const *s, char *c);
 
 #endif

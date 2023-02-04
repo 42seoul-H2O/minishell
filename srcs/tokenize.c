@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:46:57 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/04 11:25:18 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:48:00 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 
 #include "minishell.h"
 
+static char		**ft_split(char const *s, char *c, char *special_delimiter);
 static int		word_count(char const *s, char *c);
 static int		is_delimiter(char const *s, char *c, int idx);
 static char		*create_word(char const *s, char *c, int start_idx);
 
-char	**ft_tokenize(char const *s, char *c)
+char	**tokenize(char const *s)
+{
+	return (my_split(s, " \t<>|"));
+}
+
+static char	**ft_split(char const *s, char *c, char *special_delimiter)
 {
 	int		i;
 	int		j;
@@ -31,7 +37,7 @@ char	**ft_tokenize(char const *s, char *c)
 	len = word_count(s, c);
 	strs = malloc(sizeof (char *) * (len + 1));
 	if (!strs)
-		return (NULL);
+		exit(12);
 	while (s[i])
 	{
 		if (is_delimiter(s, c, i - 1) && !is_delimiter(s, c, i))
@@ -93,7 +99,7 @@ static char	*create_word(char const *s, char *c, int start_idx)
 	word = malloc(sizeof (char) * (word_len + 1));
 	if (!word)
 		exit (1);
-	while (!is_delimiter(s, c, start_idx))
+	while (i < word_len)
 	{
 		word[i] = s[start_idx];
 		i++;

@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error_and_exit.c                             :+:      :+:    :+:   */
+/*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/18 17:00:07 by hocsong           #+#    #+#             */
-/*   Updated: 2023/01/03 10:13:49 by hocsong          ###   ########seoul.kr  */
+/*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
+/*   Updated: 2023/02/04 14:14:22 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef TOKENIZER_H
+# define TOKENIZER_H
 
-void	print_error_and_exit(char *prefix1, char *prefix2)
-{
-	char	*err_prefix;
+typedef struct s_quote{
+	int		idx;
+	char	value;
+}t_quote;
 
-	prefix1 = ft_strjoin(prefix1, ": ");
-	err_prefix = ft_strjoin(prefix1, prefix2);
-	perror(err_prefix);
-	exit(1);
-}
+char	**tokenize(char const *s);
+t_quote	find_quote(char const *s, char *c, int start_idx);
+int		get_word_len(char const *s, char *c, int start_idx);
 
-void	print_error(char *prefix1, char *prefix2)
-{
-	char	*err_prefix;
-
-	prefix1 = ft_strjoin(prefix1, ": ");
-	err_prefix = ft_strjoin(prefix1, prefix2);
-	perror(err_prefix);
-}
+#endif
