@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/03 17:08:22 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/03 15:38:43 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/03 17:08:01 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PROMPT_H
+# define PROMPT_H
 
-int	init(void)
-{
-	init_term_setting();
-	set_sig_handler();
-	return (0);
-}
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
+# include <termios.h>
+# include "../lib/libft/libft.h"
 
-int	main(int argc, char **argv, char **envp)
-{
-	char	*line;
+void	set_sig_handler(void);
+void	interupt_handler(int signum);
+void	init_term_setting(void);
+char	*get_line(void);
 
-	if (init() == -1)
-		return (-1);
-	line = get_line();
-	while (line != NULL)
-	{
-		printf("%s\n", line);
-		free(line);
-		line = NULL;
-		line = get_line();
-	}
-	return (0);
-}
+#endif
