@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 15:38:43 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 13:44:19 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/04 13:36:53 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-# include <unistd.h>
-# include <stdio.h>
+# include <errno.h>
 # include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include <termios.h>
-# include "../lib/libft/libft.h"
-# include "builtin.h"
+# include <stdio.h>
 
-void	set_sig_handler(void);
-void	interupt_handler(int signum);
-void	init_term_setting(void);
-char	*get_line(char *line);
+void	builtin_exit(int errnum);
 
 #endif
