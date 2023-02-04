@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error_and_exit.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 17:00:07 by hocsong           #+#    #+#             */
-/*   Updated: 2023/01/03 10:13:49 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/04 14:33:29 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

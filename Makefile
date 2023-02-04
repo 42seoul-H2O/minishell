@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/04 13:36:09 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/04 14:06:49 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ INCS = -I./include
 
 SRCS_NAME = main.c \
 			prompt.c \
-			builtin_exit.c
+			builtin_exit.c \
+			print_error_and_exit.c
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 13:44:34 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:59:19 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 	line = get_line(line);
 	while (line != NULL)
 	{
-		printf("%s\n", line);
+		exec_builtins(line);
 		line = get_line(line);
 	}
 	return (0);
