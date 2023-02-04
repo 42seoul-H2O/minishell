@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:08 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 16:08:44 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:28:34 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_exit_code(char **input, int len)
 			builtin_exit(atoi(input[1]));
 		printf("exit\nh2osh: exit: %s: numeric argument required\n",
 			input[1]);
-		exit(255);
+		exit(2);
 	}
 	else
 		printf("exit\nh2osh: exit: too many arguments\n");

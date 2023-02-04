@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 18:45:26 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:06:04 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	exec_builtins(char **input, int len)
 {
 	int	cmd_len;
 
+	if (len == 0)
+		return ;
 	cmd_len = ft_strlen(input[0]);
 	if (cmd_len == 4 && ft_strnstr(input[0], "exit", 4) != NULL)
 		check_exit_code(input, len);
