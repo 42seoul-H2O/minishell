@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:40:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 13:23:06 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/05 14:53:07 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	set_quote_flags(t_str *str)
 	t_quote	quote;
 
 	quote.is_quoted = 0;
-	flags = malloc(sizeof (char) * ft_strlen(str -> s));
+	flags = malloc(sizeof (int) * ft_strlen(str -> s));
 	if (!flags)
 		builtin_exit(12);
 	str -> quote_flags = flags;
@@ -51,8 +51,14 @@ static void	set_quote_flags(t_str *str)
 
 static int	is_quote(char c, t_quote *quote)
 {
-	if (!quote -> is_quoted)
-		return (c == '\'' || c == '\"');
+	if (!quote -> is_quoted && (c == '\'' || c == '\"'))
+	{
+		if (c == '\'')
+			quote -> type = '\'';
+		else
+			quote -> type = '\"';
+		return (1);
+	}
 	else
 		return (c == quote -> type);
 }

@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:08:35 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 13:29:22 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/05 14:45:57 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_delimiter(t_str *str, int idx)
 		return (1);
 	while (str -> delimiters[i])
 	{
-		if (str -> s[idx] == str -> delimiters[i])
+		if (str -> s[idx] == str -> delimiters[i] && !is_quoted(str, idx))
 			return (1);
 		i++;
 	}
@@ -35,7 +35,8 @@ int	is_special_delimiter(t_str *str, int idx)
 	i = 0;
 	while (str -> included_delimiters[i])
 	{
-		if (str -> s[idx] == str -> included_delimiters[i])
+		if (str -> s[idx] == str -> included_delimiters[i] && \
+			!is_quoted(str, idx))
 			return (1);
 		i++;
 	}
