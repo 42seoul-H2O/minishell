@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_word_len.c                                     :+:      :+:    :+:   */
+/*   get_word_count.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 19:51:57 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 10:01:14 by hocsong          ###   ########seoul.kr  */
+/*   Created: 2023/02/05 11:22:41 by hocsong           #+#    #+#             */
+/*   Updated: 2023/02/05 11:25:14 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_word_len(t_str *str, int start_idx)
+void	set_word_count(t_str *str)
 {
 	int	i;
+	int	count;
 
-	i = start_idx;
-	if (is_special_delimiter(str, i))
-		return (1);
+	i = 0;
+	count = 0;
 	while (str -> s[i])
 	{
-		if (is_special_delimiter(str, i) || \
-			is_delimiter(str, i))
-			return (i - start_idx);
+		if (!is_delimiter(str, i)
+			&& is_delimiter(str, i + 1))
+			count++;
+		if (is_special_delimiter(str, i))
+			count++;
 		i++;
 	}
-	return (i - start_idx - 1);
+	str -> word_count = count;
 }
