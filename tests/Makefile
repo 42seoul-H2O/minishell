@@ -6,7 +6,7 @@
 #    By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 16:27:42 by hocsong           #+#    #+#              #
-#    Updated: 2023/02/05 13:34:33 by hocsong          ###   ########seoul.kr   #
+#    Updated: 2023/02/05 20:29:23 by hocsong          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ OBJS_PATH = objs
 SRCS_PATH = srcs
 
 EXT_SRCS_WO_PATH = init_t_str.c is_quoted.c my_split.c set_word_count.c \
-	get_word_len.c is_delimiter.c set_token_indices.c builtin_exit.c
+	get_word_len.c is_delimiter.c set_token_indices.c builtin_exit.c \
+	convert_dollar_to_env.c convert_dollar_to_env2.c ft_getenv.c 
 SRCS_WO_PATH = test.c test_split.c
 SRCS_WO_PATH += $(EXT_SRCS_WO_PATH)
 
@@ -54,4 +55,3 @@ re:
 
 copy:
 	cp $(EXT_SRCS) srcs/
-	touch copy
