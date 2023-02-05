@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:51:57 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 13:28:46 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/05 14:07:34 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	get_word_len(t_str *str, int start_idx)
 			return (i - start_idx);
 		i++;
 	}
-	return (i - start_idx - 1);
+	return (i - start_idx);
 }

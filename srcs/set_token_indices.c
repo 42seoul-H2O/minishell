@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:02:42 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 13:30:04 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/05 14:04:30 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	set_token_indices(t_str *str)
 	i = 0;
 	j = 0;
 	str -> token_indices = malloc(sizeof (int) * \
-		str -> word_count + 1);
+		(str -> word_count + 1));
 	if (!(str -> token_indices))
 		builtin_exit(12);
 	while (str -> s[i])
