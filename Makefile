@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/03 16:56:40 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/05 15:51:52 by hocsong          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ LIB_RDL_INC = -I/opt/homebrew/opt/readline/include
 #LIB_RDL = -L/Users/hocsong/.brew/opt/readline/lib
 #LIB_RDL_INC = -I/Users/hocsong/.brew/opt/readline/include
 
+TEST_PATH = ./tests
+
 all : $(NAME)
 
 $(NAME) : $(OBJS)
@@ -54,4 +56,7 @@ re :
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY : all clean fclean re
+test :
+	$(MAKE) -C $(TEST_PATH) re
+
+.PHONY : all clean fclean re test
