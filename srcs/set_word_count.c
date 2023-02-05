@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_word_count.c                                   :+:      :+:    :+:   */
+/*   set_word_count.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:22:41 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 11:25:14 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/05 13:28:12 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
 void	set_word_count(t_str *str)
 {

@@ -6,15 +6,15 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:08:35 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 10:09:00 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/05 13:29:22 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
 int	is_delimiter(t_str *str, int idx)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (idx == -1 || !str -> s[idx])

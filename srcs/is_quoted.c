@@ -6,12 +6,13 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:40:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 12:30:25 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/05 13:23:06 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 #include "libft.h"
+#include "builtin.h"
 
 static void	set_quote_flags(t_str *str);
 static int	is_quote(char c, t_quote *quote);
@@ -35,6 +36,7 @@ static void	set_quote_flags(t_str *str)
 	flags = malloc(sizeof (char) * ft_strlen(str -> s));
 	if (!flags)
 		builtin_exit(12);
+	str -> quote_flags = flags;
 	i = 0;
 	while (str -> s[i])
 	{
@@ -45,7 +47,6 @@ static void	set_quote_flags(t_str *str)
 		flags[i] = quote.is_quoted;
 		i++;
 	}
-	return (flags);
 }
 
 static int	is_quote(char c, t_quote *quote)

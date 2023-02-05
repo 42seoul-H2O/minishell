@@ -6,11 +6,11 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:10:00 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 11:09:24 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/05 13:20:27 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
 void	init_t_str(t_str *str, char *s)
 {

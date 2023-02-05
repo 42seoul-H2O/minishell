@@ -6,11 +6,13 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:02:42 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 11:26:37 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/05 13:30:04 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parser.h"
+#include "builtin.h"
 
 void	set_token_indices(t_str *str)
 {
