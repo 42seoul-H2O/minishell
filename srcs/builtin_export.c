@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 17:33:14 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:52:04 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,15 @@ static t_vararr	*get_no_value(t_vararr *env)
 	if (!result)
 		return (NULL);
 	i = 0;
-	while (i < env->len)
+	while (env->arr[i] != NULL)
 	{
-		if (ft_strnstr((env->arr)[i], "=", ft_strlen((env->arr)[i])) == NULL)
+		if (ft_strchr((env->arr)[i], '=') == NULL)
 		{
 			append_element(result, env->arr[i]);
 			delete_element(env, env->arr[i]);
 		}
-		i++;
+		else
+			i++;
 	}
 	return (result);
 }
