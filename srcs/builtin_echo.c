@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 18:57:07 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:52:08 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_n_option(char *input)
 	return (1);
 }
 
-void	builtin_echo(char **input, char **env)
+void	builtin_echo(char **input, t_vararr *env)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 14:47:04 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:47:57 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ static int	split_len(char **s)
 	return (i);
 }
 
-
 int	main(int argc, char **argv, char **envp)
 {
-	// char		*line;
-	// char		**splited;
+	char		*line;
+	char		**splited;
 	t_vararr	*env;
 
 	env = make_new_arr(30);
@@ -56,21 +55,15 @@ int	main(int argc, char **argv, char **envp)
 		return (-1);
 	if (init(env, envp) == -1)
 		return (-1);
-	// line = NULL;
-	// line = get_line(line);
-	// while (line != NULL)
-	// {
-	// 	splited = ft_split(line, ' ');
-	// 	exec_builtins(splited, split_len(splited));
-	// 	splited = freeall(splited);
-	// 	line = get_line(line);
-	// }
-	printf("------------------------\n");
-	printf("%s\n", ft_getenv(env, "USER"));
-	ft_unsetenv(env, "USER");
-	printf("%s\n", ft_getenv(env, "USER"));
-	ft_setenv(env, "USER", "hocsong", 1);
-	printf("%s\n", ft_getenv(env, "USER"));
+	line = NULL;
+	line = get_line(line);
+	while (line != NULL)
+	{
+		splited = ft_split(line, ' ');
+		exec_builtins(splited, split_len(splited), env);
+		splited = freeall(splited);
+		line = get_line(line);
+	}
 	return (0);
 }
 

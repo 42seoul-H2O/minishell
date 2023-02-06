@@ -6,19 +6,17 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 11:12:49 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:49:08 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-extern char	**environ;
-
 static void	dummy(void)
 {
 }
 
-int	exec_builtins(char **input, int len)
+int	exec_builtins(char **input, int len, t_vararr *env)
 {
 	int	cmd_len;
 
@@ -32,13 +30,13 @@ int	exec_builtins(char **input, int len)
 	else if (cmd_len == 2 && ft_strnstr(input[0], "cd", 2) != NULL)
 		builtin_cd(input[1]);
 	else if (cmd_len == 6 && ft_strnstr(input[0], "export", 6) != NULL)
-		builtin_export(input, environ);
+		builtin_export(input, env);
 	else if (cmd_len == 5 && ft_strnstr(input[0], "unset", 5) != NULL)
 		dummy();
 	else if (cmd_len == 4 && ft_strnstr(input[0], "echo", 4) != NULL)
-		builtin_echo(input, environ);
+		builtin_echo(input, env);
 	else if (cmd_len == 3 && ft_strnstr(input[0], "env", 3) != NULL)
-		builtin_env(input, environ);
+		builtin_env(input, env);
 	else
 	{
 		printf("h2osh: %s: command not found\n", input[0]);

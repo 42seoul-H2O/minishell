@@ -6,20 +6,16 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:23:42 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 18:29:54 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:52:34 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	builtin_env(char **input, char **env)
+void	builtin_env(char **input, t_vararr *env)
 {
-	int	i;
-
 	if (input[1] == NULL)
 	{
-		i = 0;
-		while (env[i] != NULL)
-			printf("%s\n", env[i++]);
+		print_all_string(env->arr);
 	}
 }
