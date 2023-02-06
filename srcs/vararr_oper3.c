@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   vararr_oper3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 11:55:50 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/06 11:37:48 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/06 11:37:55 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "vararr.h"
 
-# include "constants.h"
-# include "prompt.h"
-# include "vararr.h"
-
-int		init(void);
-int		*find_quote(char const *s, char *c, int start_idx);
-int		get_word_len(char const *s, char *c, int start_idx);
-char	**ft_tokenize(char const *s, char *c);
-
-#endif
+char		*ft_getenv(t_vararr *env, char *key);
+char		*ft_setenv(t_vararr *env, char *key, char *value, int overwrite);
+int			ft_unsetenv(t_vararr *env, char *key);
+void		print_all_env(char **env);

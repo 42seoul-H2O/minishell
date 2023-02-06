@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 18:36:38 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:00:49 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 # include "../lib/libft/libft.h"
 
-void	exec_builtins(char **input, int len);
+int		exec_builtins(char **input, int len);
 void	check_exit_code(char **input, int len);
 void	builtin_exit(int errnum);
 void	builtin_pwd(void);
