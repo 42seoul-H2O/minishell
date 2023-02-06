@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:48 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 14:44:25 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:08:50 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,19 @@ int	ft_unsetenv(t_vararr *env, char *key)
 	return (result);
 }
 
-void	print_all_string(char **arr)
+void	print_all_string(char *prefix, char **arr)
 {
 	int	i;
 
 	i = 0;
+	if (prefix == NULL)
+	{
+		while (arr[i] != NULL)
+			printf("%s\n", arr[i++]);
+		return ;
+	}
 	while (arr[i] != NULL)
-		printf("%s\n", arr[i++]);
+		printf("%s%s\n", prefix, arr[i++]);
 }
 
 int	init_env_arr(t_vararr *env, char **envp)

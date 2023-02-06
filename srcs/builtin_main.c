@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 15:32:13 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:37:41 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ int	exec_builtins(char **input, int len, t_vararr *env)
 	else if (cmd_len == 3 && ft_strncmp(input[0], "env", 3) == 0)
 		builtin_env(input, env);
 	else
-	{
-		printf("h2osh: %s: command not found\n", input[0]);
 		return (0);
-	}
 	return (1);
 }

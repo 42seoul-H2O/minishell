@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 15:21:27 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:48:49 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,14 @@ static int	split_len(char **s)
 	return (i);
 }
 
+static int	exec_bin(void)
+{
+	return (0);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
+	int			flag;
 	char		*line;
 	char		**splited;
 	t_vararr	*env;
@@ -59,12 +65,15 @@ int	main(int argc, char **argv, char **envp)
 	line = get_line(line);
 	while (line != NULL)
 	{
+		flag = 0;
 		splited = ft_split(line, ' ');
-		if (exec_builtins(splited, split_len(splited), env) == 1)
+		if (split_len(splited) != 0)
 		{
-			splited = freeall(splited);
-			line = get_line(line);
-			continue ;
+			flag += exec_builtins(splited, split_len(splited), env);
+			if (flag == 0)
+				flag += exec_bin();
+			if (flag == 0)
+				printf("h2osh: %s: command not found\n", splited[0]);
 		}
 		splited = freeall(splited);
 		line = get_line(line);

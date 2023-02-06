@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 15:34:51 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:05:34 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	builtin_echo(char **input, t_vararr *env)
 				i++;
 				continue ;
 			}
-			printf("%s", get_element(env, find_element(env, &input[i][1])));
+			printf("%s", ft_getenv(env, &input[i][1]));
 		}
 		else
 			printf("%s", input[i]);
