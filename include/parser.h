@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 20:04:23 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/06 14:00:35 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int		get_word_len(t_str *str, int start_idx);
 int		is_quoted(t_str *str, int idx);
 int		is_special_delimiter(t_str *str, int idx);
 int		is_delimiter(t_str *str, int idx);
-char	*ft_getenv(char **envp, char *name);
-void	replace_dollar_with_env(t_str *str, t_dollar_sign *dollar);
+char	*my_getenv(char **envp, char *name);
+int		replace_dollar_with_env(t_str *str, t_dollar_sign *dollar);
 void	convert_dollar_to_env(t_str *str, char **envp);
 int		convert_single_dollar_to_env(t_str *str, char **envp);
 

@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/06 10:32:20 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/06 16:54:27 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ void	test_convert_dollar(void)
 {
 	printf("---- Convert_dollar Test Cases ----\n");
 	convert_dollar_test("blahblah $", 1, "blahblah $");
+	convert_dollar_test("blahblah $^", 1, "blahblah $^");
+	convert_dollar_test("blahblah $\'\'", 1, "blahblah $");
+	convert_dollar_test("blahblah $\'PATH\'", 1, "blahblah $PATH");
+	convert_dollar_test("blahblah $\"PATH\"", 1, "blahblah $PATH");
+	convert_dollar_test("blahblah \"$\"PATH", 1, "blahblah $PATH");
+	convert_dollar_test("blahblah \"$'PATH\"", 1, "blahblah $\'PATH");
+	convert_dollar_test("blahblah \'$\"PATH\'", 1, "blahblah $\"PATH\"");
+	convert_dollar_test("blahblah \'\"$PATH\"\'", 1, "blahblah \"$PATH\"");
+	convert_dollar_test("$SHELL$LOGNAME", 1, "/bin/bashhocsong");
 	convert_dollar_test("blahblah $", 0, "blahblah $");
 	convert_dollar_test("blahblah $\"dff\"", 1, "blahblah ");
 	convert_dollar_test("blahblah $\"dff\"", 0, "blahblah ");
@@ -30,12 +39,23 @@ void	test_convert_dollar(void)
 	convert_dollar_test("blahblah$", 0, "blahblah$");
 	convert_dollar_test("blahblah $.", 1, "blahblah $.");
 	convert_dollar_test("blahblah $.", 0, "blahblah $.");
+	convert_dollar_test("$HOME is defined!", 1, "/Users/hocsong is defined!");
+	convert_dollar_test("$HOMEI is undefined!", 1, " is undefined!");
 	convert_dollar_test("$yadi", 1, "");
 	convert_dollar_test("$yadi", 0, "");
 	convert_dollar_test("$", 1, "$");
 	convert_dollar_test("$.", 1, "$.");
 	convert_dollar_test("$,", 1, "$,");
 	convert_dollar_test("$\'", 1, "$\'");
+	convert_dollar_test("abc$SHELL\'ab\'", 1, "abc/bin/bash\'ab\'");
+	convert_dollar_test("abc$SHELL\'ab\'", 0, "abc\'ab\'");
+	//Test cases with more than one $
+	convert_dollar_test("blahblah $$", 1, "blahblah $$");
+	convert_dollar_test("blahblah $$$", 1, "blahblah $$$");
+	convert_dollar_test("blahblah $ $", 1, "blahblah $ $");
+	convert_dollar_test("blahblah $ $", 0, "blahblah $ $");
+	convert_dollar_test("blahblah $\"dff\" $", 1, "blahblah $");
+	convert_dollar_test("blahblah $\"dff\" $", 0, "blahblah $");
 	printf("---- End of Convert_dollar ----\n\n");
 }
 
@@ -47,12 +67,13 @@ static void	convert_dollar_test(char *input, int has_envp, \
 
 	init_t_str(&str, input);
 	envp = init_envp();
-	printf("---- Test Case: %s has_envp: %d\n", input, has_envp);
+	printf("---- Test Case: %s ----\n", input);
+	printf("---- has_envp: %d ----\n", has_envp);
 	convert_dollar_to_env(&str, envp);
 	printf("---- Output ----\n");
 	printf("%s\n", str.s);
-	printf("---- Expected Output with envp----\n");
-	printf("%s\n", expected_output);
+	printf("---- Expected Output ----\n");
+	printf("%s\n\n", expected_output);
 	free(envp);
 }
 
