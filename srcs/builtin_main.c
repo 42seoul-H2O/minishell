@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 19:06:04 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:12:49 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static void	dummy(void)
 {
 }
 
-void	exec_builtins(char **input, int len)
+int	exec_builtins(char **input, int len)
 {
 	int	cmd_len;
 
 	if (len == 0)
-		return ;
+		return (0);
 	cmd_len = ft_strlen(input[0]);
 	if (cmd_len == 4 && ft_strnstr(input[0], "exit", 4) != NULL)
 		check_exit_code(input, len);
@@ -40,5 +40,9 @@ void	exec_builtins(char **input, int len)
 	else if (cmd_len == 3 && ft_strnstr(input[0], "env", 3) != NULL)
 		builtin_env(input, environ);
 	else
+	{
 		printf("h2osh: %s: command not found\n", input[0]);
+		return (0);
+	}
+	return (1);
 }
