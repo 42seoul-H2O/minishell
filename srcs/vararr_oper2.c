@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 14:09:07 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:29:04 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	update_element(t_vararr *varr, char *key, char *value)
 ** return
 **** -1 : invalid varr or ft_strjoin error
 **** 0 : failed to update
-**** 1 : update successfully
+**** 1 : update successfully or append successfully
 
 int	delete_element(t_vararr *varr, char *key)
 ** delete element of variable array
@@ -119,8 +119,11 @@ int	update_element(t_vararr *varr, char *key, char *value)
 		return (-1);
 	i = find_element(varr, key);
 	if (i == -1)
+	{
 		if (append_element(varr, target) != 1)
 			return (0);
+		return (1);
+	}
 	free(varr->arr[i]);
 	varr->arr[i] = target;
 	return (1);

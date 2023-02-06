@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:20:02 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 19:21:22 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:36:53 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ void	interupt_handler(int signum)
 		exit(-1);
 	rl_replace_line("", 1);
 	rl_redisplay();
-}
-
-void	init_term_setting(void)
-{
-	struct termios	term;
-
-	tcgetattr(STDIN_FILENO, &term);
-	term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
 char	*get_line(char *line)

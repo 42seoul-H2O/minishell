@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 11:55:50 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:39:09 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "prompt.h"
 # include "vararr.h"
 
-int		init(void);
+int		init(t_vararr *env, char **envp);
 int		*find_quote(char const *s, char *c, int start_idx);
 int		get_word_len(char const *s, char *c, int start_idx);
 char	**ft_tokenize(char const *s, char *c);
