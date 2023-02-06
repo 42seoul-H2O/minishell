@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:48 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 17:46:56 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:17:28 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,14 @@ void	print_all_string(char *prefix, char **arr, int value_quote, int no_val)
 		{
 			if (prefix != NULL)
 				printf("%s", prefix);
-			if (!value_quote)
-			{
-				printf("%s\n", arr[i++]);
-				continue ;
-			}
 			if (ft_strnstr(arr[i], "=", ft_strlen(arr[i])) != NULL)
 				j = (ft_strnstr(arr[i], "=", ft_strlen(arr[i])) - arr[i]);
-			printf("%.*s", j, arr[i]);
-			if (j >= 0)
-				printf("\"%s\"", &arr[i][j]);
+			if (!value_quote)
+				printf("%s", arr[i]);
+			else if (j >= 0)
+				printf("%.*s\"%s\"", j + 1, arr[i], &arr[i][j + 1]);
+			else
+				printf("%.*s", j, arr[i]);
 			printf("\n");
 		}
 		i++;

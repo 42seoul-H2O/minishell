@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 17:16:45 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:13:49 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,6 @@ static int	exec_bin(void)
 	return (0);
 }
 
-void	check_leak(void)
-{
-	system("leaks --list minishell");
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	int			flag;
@@ -75,7 +70,6 @@ int	main(int argc, char **argv, char **envp)
 	char		**splited;
 	t_vararr	*env;
 
-	atexit(check_leak);
 	env = make_new_arr(30);
 	if (!env)
 		return (-1);
@@ -100,4 +94,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
