@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 12:58:05 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:52:34 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,21 @@ int	main(int argc, char **argv, char **envp)
 	while (envp[i] != NULL)
 		i++;
 	temp = make_new_arr(i);
-	temp->arr[0] = ft_strdup("Hello");
-	temp->arr[1] = ft_strdup("World");
-	printf("%s\n", temp->arr[0]);
-	printf("%s\n", temp->arr[1]);
-	temp->len = 2;
-	printf("%d\n", temp->capacity);
-	realloc_2x_arr(temp);
-	printf("%d\n", temp->capacity);
-	printf("%s\n", temp->arr[0]);
-	printf("%s\n", temp->arr[1]);
-	tt = copy_arr(temp);
+	for (i = 0; envp[i] != NULL; i++)
+		append_element(temp, envp[i]);
+	for (i = 0; i < temp->len; i++)
+		printf("%s\n", get_element(temp, i));
+	printf("-----------------------\n");
+	append_element(temp, "a=1");
+	printf("%s\n", get_element(temp, temp->len - 1));
+	printf("-----------------------\n");
+	update_element(temp, "a", "2");
+	printf("%s\n", get_element(temp, temp->len - 1));
+	printf("%s\n", get_element(temp, find_element(temp, "USER")));
+	printf("-----------------------\n");
+	update_element(temp, "USER", "hocsong");
+	for (i = 0; i < temp->len; i++)
+		printf("%s\n", get_element(temp, i));
 	destroy_arr(temp);
-	printf("%s %s\n", tt[0], tt[1]);
-	free_arr(tt);
 	system("leaks minishell");
 }
