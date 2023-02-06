@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/06 12:01:11 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/06 14:07:43 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ SRCS_NAME = main.c \
 			builtin_echo.c \
 			builtin_cd.c \
 			vararr_oper1.c \
-			vararr_oper2.c \
-			vararr_oper3.c
+			vararr_oper2.c 
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 

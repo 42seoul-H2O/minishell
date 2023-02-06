@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 13:52:34 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:09:36 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	main(int argc, char **argv, char **envp)
 	update_element(temp, "USER", "hocsong");
 	for (i = 0; i < temp->len; i++)
 		printf("%s\n", get_element(temp, i));
+	delete_element(temp, "USER");
+	printf("%s\n", get_element(temp, find_element(temp, "USER")));	
 	destroy_arr(temp);
 	system("leaks minishell");
 }

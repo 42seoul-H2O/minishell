@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 13:50:06 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:09:07 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	find_element(t_vararr *varr, char *val)
 ** varr = variable array
 ** val = string to find
 ** return
-**** -1 : cannot find val
+**** -1 : invalid varr or cannot find val
 **** index : val's index of array
 
 int	append_element(t_vararr *varr, char *val)
@@ -34,7 +34,7 @@ int	append_element(t_vararr *varr, char *val)
 ** varr = variable array
 ** val = string to append
 ** return
-**** -1 : malloc error
+**** -1 : invalid varr or malloc error
 **** 0 : array has 'val' already
 **** 1 : append successfully
 
@@ -46,16 +46,25 @@ int	update_element(t_vararr *varr, char *key, char *value)
 ** key = key string to find
 ** value = value string to update
 ** return
-**** -1 : ft_strjoin error
+**** -1 : invalid varr or ft_strjoin error
 **** 0 : failed to update
 **** 1 : update successfully
+
+int	delete_element(t_vararr *varr, char *key)
+** delete element of variable array
+** find key and delete it
+** varr = variable array
+** key = key string to delete
+** return
+**** -1 : invalid varr or failed to find key
+**** 1 : delete successfully
 */
 
 char	*get_element(t_vararr *varr, int idx)
 {
 	if (!varr)
 		return (NULL);
-	if (idx >= varr->len)
+	if (idx >= varr->len || idx < 0)
 		return (NULL);
 	return ((varr->arr[idx]));
 }
@@ -78,6 +87,8 @@ int	append_element(t_vararr *varr, char *val)
 {
 	char	*temp;
 
+	if (!varr)
+		return (-1);
 	if (varr->capacity == varr->len)
 		if (realloc_2x_arr(varr) == -1)
 			return (-1);
@@ -97,6 +108,8 @@ int	update_element(t_vararr *varr, char *key, char *value)
 	char	*temp;
 	int		i;
 
+	if (!varr)
+		return (-1);
 	temp = ft_strjoin(key, "=");
 	if (temp == NULL)
 		return (-1);
@@ -110,5 +123,24 @@ int	update_element(t_vararr *varr, char *key, char *value)
 			return (0);
 	free(varr->arr[i]);
 	varr->arr[i] = target;
+	return (1);
+}
+
+int	delete_element(t_vararr *varr, char *key)
+{
+	int	i;
+	int	j;
+
+	if (!varr)
+		return (-1);
+	i = find_element(varr, key);
+	if (i == -1)
+		return (-1);
+	free(varr->arr[i]);
+	j = i + 1;
+	while (varr->arr[j] != NULL)
+		varr->arr[i++] = varr->arr[j++];
+	varr->arr[i] = NULL;
+	varr->len -= 1;
 	return (1);
 }
