@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 15:28:10 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:34:51 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	check_n_option(char *input)
 {
 	int	i;
 
+	if (input == NULL)
+		return (0);
 	if (input[0] != '-')
 		return (0);
 	i = 1;
