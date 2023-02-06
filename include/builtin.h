@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 14:51:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:23:21 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ void	builtin_export(char **input, t_vararr *env);
 void	builtin_env(char **input, t_vararr *env);
 void	builtin_echo(char **input, t_vararr *env);
 void	builtin_unset(char **input, t_vararr *env);
+
+void	swap_element(char **a, char **b);
 
 #endif

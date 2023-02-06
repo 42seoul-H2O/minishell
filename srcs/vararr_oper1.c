@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:36:54 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 17:00:10 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:20:34 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_arr(char **arr)
 
 void	destroy_arr(t_vararr *varr)
 {
-	if (varr)
+	if (!varr)
 		return ;
 	free_arr(varr->arr);
 	free(varr);

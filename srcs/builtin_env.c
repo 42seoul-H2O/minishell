@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:23:42 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 17:33:04 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:23:35 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,13 @@ void	builtin_env(char **input, t_vararr *env)
 		print_all_string(NULL, env->arr, 0, 0);
 	else
 		printf("h2osh: env: too many argument\n");
+}
+
+void	swap_element(char **a, char **b)
+{
+	char	*temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
