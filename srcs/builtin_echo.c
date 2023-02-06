@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 16:05:34 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:08:56 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	builtin_echo(char **input, t_vararr *env)
 	{
 		if (input[i][0] == '$')
 		{
-			if (find_element(env, &input[i][1]) == -1)
+			if (ft_getenv(env, &input[i][1]) == NULL)
 			{
 				i++;
 				continue ;
