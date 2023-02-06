@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:48 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 16:08:50 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:46:56 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*ft_getenv(t_vararr *env, char *key)
 		return (NULL);
 	temp = get_element(env, i);
 	temp = ft_strnstr(temp, "=", ft_strlen(temp));
+	if (temp == NULL)
+		return (NULL);
 	return (++temp);
 }
 
@@ -50,31 +52,46 @@ int	ft_unsetenv(t_vararr *env, char *key)
 	return (result);
 }
 
-void	print_all_string(char *prefix, char **arr)
+void	print_all_string(char *prefix, char **arr, int value_quote, int no_val)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	if (prefix == NULL)
-	{
-		while (arr[i] != NULL)
-			printf("%s\n", arr[i++]);
-		return ;
-	}
 	while (arr[i] != NULL)
-		printf("%s%s\n", prefix, arr[i++]);
-}
-
-int	init_env_arr(t_vararr *env, char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i] != NULL)
 	{
-		if (append_element(env, envp[i]) == -1)
-			return (-1);
+		j = -1;
+		if (no_val == 1 || ft_strnstr(arr[i], "=", ft_strlen(arr[i])) != NULL)
+		{
+			if (prefix != NULL)
+				printf("%s", prefix);
+			if (!value_quote)
+			{
+				printf("%s\n", arr[i++]);
+				continue ;
+			}
+			if (ft_strnstr(arr[i], "=", ft_strlen(arr[i])) != NULL)
+				j = (ft_strnstr(arr[i], "=", ft_strlen(arr[i])) - arr[i]);
+			printf("%.*s", j, arr[i]);
+			if (j >= 0)
+				printf("\"%s\"", &arr[i][j]);
+			printf("\n");
+		}
 		i++;
 	}
-	return (0);
+}
+
+char	*join_key_value_string(char *key, char *value)
+{
+	char	*result;
+	char	*temp;
+
+	if (!value)
+		return (ft_strdup(key));
+	temp = ft_strjoin(key, "=");
+	if (temp == NULL)
+		return (NULL);
+	result = ft_strjoin(temp, value);
+	free(temp);
+	return (result);
 }

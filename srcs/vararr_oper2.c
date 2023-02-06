@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 14:29:04 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:32:49 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int	append_element(t_vararr *varr, char *val)
 	if (varr->capacity == varr->len)
 		if (realloc_2x_arr(varr) == -1)
 			return (-1);
+	if (find_element(varr, val) != -1)
+		return (0);
 	temp = ft_strdup(val);
 	if (temp == NULL)
 		return (-1);
-	if (find_element(varr, val) != -1)
-		return (0);
 	(varr->arr)[varr->len] = temp;
 	varr->len++;
 	return (1);
@@ -108,19 +108,17 @@ int	update_element(t_vararr *varr, char *key, char *value)
 	char	*temp;
 	int		i;
 
-	if (!varr)
+	if (!varr || !key)
 		return (-1);
-	temp = ft_strjoin(key, "=");
-	if (temp == NULL)
-		return (-1);
-	target = ft_strjoin(temp, value);
-	free(temp);
+	target = join_key_value_string(key, value);
 	if (target == NULL)
 		return (-1);
 	i = find_element(varr, key);
 	if (i == -1)
 	{
-		if (append_element(varr, target) != 1)
+		i = append_element(varr, target);
+		free(target);
+		if (i != 1)
 			return (0);
 		return (1);
 	}

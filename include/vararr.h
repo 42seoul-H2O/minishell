@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:13:54 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 16:09:02 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:40:11 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int			delete_element(t_vararr *varr, char *key);
 char		*ft_getenv(t_vararr *env, char *key);
 int			ft_setenv(t_vararr *env, char *key, char *value, int overwrite);
 int			ft_unsetenv(t_vararr *env, char *key);
-void		print_all_string(char *prefix, char **arr);
-int			init_env_arr(t_vararr *env, char **envp);
+void		print_all_string(char *prefix, char **arr,
+				int value_quote, int no_val);
+char		*join_key_value_string(char *key, char *value);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 15:48:49 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:16:45 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ int	init(t_vararr *env, char **envp)
 	set_sig_handler();
 	if (init_env_arr(env, envp) == -1)
 		return (-1);
+	return (0);
+}
+
+int	init_env_arr(t_vararr *env, char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		if (append_element(env, envp[i]) == -1)
+			return (-1);
+		i++;
+	}
 	return (0);
 }
 
@@ -49,6 +63,11 @@ static int	exec_bin(void)
 	return (0);
 }
 
+void	check_leak(void)
+{
+	system("leaks --list minishell");
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	int			flag;
@@ -56,6 +75,7 @@ int	main(int argc, char **argv, char **envp)
 	char		**splited;
 	t_vararr	*env;
 
+	atexit(check_leak);
 	env = make_new_arr(30);
 	if (!env)
 		return (-1);

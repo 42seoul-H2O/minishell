@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:36:54 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 13:07:44 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:00:10 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ char	**copy_arr(t_vararr *varr)
 		result[i] = ft_strdup((varr->arr)[i]);
 		i++;
 	}
+	result[varr->len] = NULL;
 	return (result);
 }
