@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:30:47 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 20:01:48 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/06 10:25:44 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define TESTS_H
 
 void	test_split(void);
+void	test_convert_dollar(void);
 
 #endif
