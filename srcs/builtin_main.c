@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 14:49:08 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:56:05 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	exec_builtins(char **input, int len, t_vararr *env)
 	else if (cmd_len == 6 && ft_strnstr(input[0], "export", 6) != NULL)
 		builtin_export(input, env);
 	else if (cmd_len == 5 && ft_strnstr(input[0], "unset", 5) != NULL)
-		dummy();
+		builtin_unset(input, env);
 	else if (cmd_len == 4 && ft_strnstr(input[0], "echo", 4) != NULL)
 		builtin_echo(input, env);
 	else if (cmd_len == 3 && ft_strnstr(input[0], "env", 3) != NULL)

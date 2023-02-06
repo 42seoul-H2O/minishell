@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:49:21 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 14:51:53 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:55:00 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,12 @@
 
 void	builtin_unset(char **input, t_vararr *env)
 {
-	
+	int	i;
+
+	i = 1;
+	while (input[i] != NULL)
+	{
+		ft_unsetenv(env, input[i]);
+		i++;
+	}
 }

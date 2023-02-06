@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/06 14:25:25 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/06 14:53:38 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS_NAME = main.c \
 			builtin_env.c \
 			builtin_echo.c \
 			builtin_cd.c \
+			builtin_unset.c \
 			vararr_oper1.c \
 			vararr_oper2.c \
 			vararr_oper3.c
