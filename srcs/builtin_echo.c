@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 14:52:08 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:28:10 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,14 @@ void	builtin_echo(char **input, t_vararr *env)
 	while (input[i] != NULL)
 	{
 		if (input[i][0] == '$')
-			printf("%s", input[i]); //환경 변수가 존재하는지 체크하고, 없으면 x, 있으면 출력하는 함수로 변경
+		{
+			if (find_element(env, &input[i][1]) == -1)
+			{
+				i++;
+				continue ;
+			}
+			printf("%s", get_element(env, find_element(env, &input[i][1])));
+		}
 		else
 			printf("%s", input[i]);
 		i++;
