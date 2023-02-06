@@ -6,7 +6,7 @@
 #    By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/05 20:21:33 by hocsong          ###   ########seoul.kr   #
+#    Updated: 2023/02/06 12:00:04 by hocsong          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,10 @@ re :
 	$(MAKE) all
 
 test :
-	$(MAKE) -C $(TEST_PATH) re
+	@echo Compiling the tests
+	@$(MAKE) -sC $(TEST_PATH) test
+	@echo The tests have been compiled. The tests will now be executed.
 	tests/test
+	@$(MAKE) -sC $(TEST_PATH) fclean
 
 .PHONY : all clean fclean re test
