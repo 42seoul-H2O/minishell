@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/04 14:06:49 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/06 19:17:58 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,17 @@ INCS = -I./include
 
 SRCS_NAME = main.c \
 			prompt.c \
+			builtin_main.c \
 			builtin_exit.c \
-			print_error_and_exit.c
+			builtin_pwd.c \
+			builtin_export.c \
+			builtin_env.c \
+			builtin_echo.c \
+			builtin_cd.c \
+			builtin_unset.c \
+			vararr_oper1.c \
+			vararr_oper2.c \
+			vararr_oper3.c
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 
@@ -39,10 +48,10 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT_PATH)
-	$(CC) $(CFLAGS) $(OBJS) $(INCS) -L$(LIBFT_PATH) -lft $(LIB_RDL) -lreadline -o $(NAME)
+	$(CC) -g $(CFLAGS) $(OBJS) $(INCS) -L$(LIBFT_PATH) -lft $(LIB_RDL) -lreadline -o $(NAME)
 
 $(OBJS_PATH)/%.o : $(SRCS_PATH)/%.c
-	$(CC) $(CFALGS) $(INCS) $(LIB_RDL_INC) -o $@ -c $<
+	$(CC) -g $(CFALGS) $(INCS) $(LIB_RDL_INC) -o $@ -c $<
 
 clean :
 	rm -f $(OBJS)

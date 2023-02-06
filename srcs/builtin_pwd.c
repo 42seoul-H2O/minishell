@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 15:27:26 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/04 15:13:12 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/04 15:22:10 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#include "builtin.h"
 
-enum e_token_type
+void	builtin_pwd(void)
 {
-	NO_QUOTE = -1,
-	SWITCH_OFF = 0,
-	SWITCH_ON = 1,
-	PIPE,
-	REDIRECTION,
-	HEREDOC,
-	COMMAND,
-	BUILTIN,
-	ARGUMENT,
-};
+	char	*buf;
 
-#endif
+	buf = getcwd(NULL, 0);
+	if (buf == NULL)
+	{
+		perror("pwd : failed to getcwd()\n");
+		exit(1);
+	}
+	printf("%s\n", buf);
+	free(buf);
+}

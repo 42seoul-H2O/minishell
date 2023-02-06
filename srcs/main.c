@@ -6,30 +6,90 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 13:59:19 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/06 19:25:08 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	init(void)
+int	init(t_vararr *env, char **envp)
 {
-	init_term_setting();
 	set_sig_handler();
+	if (init_env_arr(env, envp) == -1)
+		return (-1);
+	return (0);
+}
+
+int	init_env_arr(t_vararr *env, char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		if (append_element(env, envp[i]) == -1)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+static char	**freeall(char **s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		free(s[i]);
+		i++;
+	}
+	free(s);
+	return (NULL);
+}
+
+static int	split_len(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+static int	exec_bin(void)
+{
 	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*line;
+	int			flag;
+	char		*line;
+	char		**splited;
+	t_vararr	*env;
 
-	if (init() == -1)
+	env = make_new_arr(30);
+	if (!env)
+		return (-1);
+	if (init(env, envp) == -1)
 		return (-1);
 	line = NULL;
 	line = get_line(line);
 	while (line != NULL)
 	{
-		exec_builtins(line);
+		flag = 0;
+		splited = ft_split(line, ' ');
+		if (split_len(splited) != 0)
+		{
+			flag += exec_builtins(splited, split_len(splited), env);
+			if (flag == 0)
+				flag += exec_bin();
+			if (flag == 0)
+				printf("h2osh: %s: command not found\n", splited[0]);
+		}
+		splited = freeall(splited);
 		line = get_line(line);
 	}
 	return (0);

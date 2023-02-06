@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 15:27:26 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/04 18:23:42 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/06 19:23:35 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#include "builtin.h"
 
-enum e_token_type
+void	builtin_env(char **input, t_vararr *env)
 {
-	NO_QUOTE = -1,
-	SWITCH_OFF = 0,
-	SWITCH_ON = 1,
-	PIPE,
-	REDIRECTION,
-	HEREDOC,
-	COMMAND,
-	BUILTIN,
-	ARGUMENT,
-};
+	if (input[1] == NULL)
+		print_all_string(NULL, env->arr, 0, 0);
+	else
+		printf("h2osh: env: too many argument\n");
+}
 
-#endif
+void	swap_element(char **a, char **b)
+{
+	char	*temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
