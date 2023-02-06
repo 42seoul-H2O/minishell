@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 19:53:32 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/06 10:24:31 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@
 static t_dollar_sign	*init_dollar_sign(t_str *str, char **envp);
 static void				set_dollar_env_value(t_str *str, char **envp, \
 						t_dollar_sign *dollar);
-static int				set_dollar_indices(t_str *str, char **envp, \
-						t_dollar_sign *dollar);
+static int				set_dollar_indices(t_str *str, t_dollar_sign *dollar);
 static int				is_unallowed_char(t_str *str, int char_idx);
 
 int	convert_single_dollar_to_env(t_str *str, char **envp)
 {
 	t_dollar_sign	*dollar;
-	char			*replaced_s;
 
 	dollar = init_dollar_sign(str, envp);
 	if (!dollar)
@@ -40,9 +38,9 @@ static t_dollar_sign	*init_dollar_sign(t_str *str, char **envp)
 	dollar = malloc(sizeof (t_dollar_sign) * 1);
 	if (!dollar)
 		builtin_exit(12);
-	else if (!set_dollar_indices(str, envp, &dollar))
+	else if (!set_dollar_indices(str, dollar))
 		return (NULL);
-	set_dollar_env_value(str, envp, &dollar);
+	set_dollar_env_value(str, envp, dollar);
 	return (dollar);
 }
 
@@ -63,7 +61,7 @@ static void	set_dollar_env_value(t_str *str, char **envp, t_dollar_sign *dollar)
 	free(name);
 }
 
-static int	set_dollar_indices(t_str *str, char **envp, t_dollar_sign *dollar)
+static int	set_dollar_indices(t_str *str, t_dollar_sign *dollar)
 {
 	int	i;
 
