@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 15:19:38 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:21:53 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void	builtin_export(char **input, t_vararr *env)
 			builtin_exit(1);
 		return ;
 	}
-	i = 1;
-	while (input[i] != NULL)
+	i = 0;
+	while (input[++i] != NULL)
 	{
 		if (!ft_isalpha(input[i][0]))
 			printf("h2osh: export: '%s': not a valid identifier\n", input[i]);
@@ -119,6 +119,5 @@ void	builtin_export(char **input, t_vararr *env)
 				&input[i][ft_strchr(input[i], '=') - input[i] + 1], 1);
 			free(temp);
 		}
-		i++;
 	}
 }

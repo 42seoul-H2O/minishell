@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 15:16:10 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:25:11 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,20 @@ static t_vararr	*parse_input(char *s, char c)
 {
 	char		**splited;
 	t_vararr	*result;
+	int			i;
 
+	i = 0;
 	result = make_new_arr(10);
+	if (!result)
+		return (NULL);
 	splited = ft_split(s, c);
+	while (splited[i] != NULL)
+	{
+		append_element(result, splited[i]);
+		i++;
+	}
 	free_arr(splited);
+	return (result);
 }
 
 static int	split_len(char **s)
@@ -62,6 +72,11 @@ static int	exec_bin(void)
 	return (0);
 }
 
+static void	check_leak(void)
+{
+	system("leaks --list minishell | grep leaks");
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	int			flag;
@@ -69,6 +84,7 @@ int	main(int argc, char **argv, char **envp)
 	t_vararr	*input;
 	t_vararr	*env;
 
+	atexit(check_leak);
 	if (init(&env, envp) == -1)
 		return (-1);
 	line = NULL;
@@ -76,7 +92,7 @@ int	main(int argc, char **argv, char **envp)
 	while (line != NULL)
 	{
 		flag = 0;
-		input = ft_split(line, ' ');
+		input = parse_input(line, ' ');
 		if (input->len != 0)
 		{
 			flag += exec_builtins(input, env);
@@ -85,7 +101,7 @@ int	main(int argc, char **argv, char **envp)
 			if (flag == 0)
 				printf("h2osh: %s: command not found\n", input->arr[0]);
 		}
-		destroy_arr(env);
+		destroy_arr(input);
 		line = get_line(line);
 	}
 	return (0);
