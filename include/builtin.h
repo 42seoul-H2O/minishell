@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 19:23:21 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:16:53 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "../lib/libft/libft.h"
 # include "vararr.h"
 
-int		exec_builtins(char **input, int len, t_vararr *env);
-void	check_exit_code(char **input, int len);
+int		exec_builtins(t_vararr *input, t_vararr *env);
+void	check_exit_code(t_vararr *input);
 void	builtin_exit(int errnum);
 void	builtin_pwd(void);
 void	builtin_cd(char *path);

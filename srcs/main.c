@@ -6,16 +6,19 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 14:44:00 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:16:10 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	init(t_vararr *env, char **envp)
+int	init(t_vararr **env, char **envp)
 {
 	set_sig_handler();
-	if (init_env_arr(env, envp) == -1)
+	*env = make_new_arr(30);
+	if (!env)
+		return (-1);
+	if (init_env_arr(*env, envp) == -1)
 		return (-1);
 	return (0);
 }
@@ -34,18 +37,14 @@ int	init_env_arr(t_vararr *env, char **envp)
 	return (0);
 }
 
-static char	**freeall(char **s)
+static t_vararr	*parse_input(char *s, char c)
 {
-	size_t	i;
+	char		**splited;
+	t_vararr	*result;
 
-	i = 0;
-	while (s[i])
-	{
-		free(s[i]);
-		i++;
-	}
-	free(s);
-	return (NULL);
+	result = make_new_arr(10);
+	splited = ft_split(s, c);
+	free_arr(splited);
 }
 
 static int	split_len(char **s)
@@ -67,30 +66,26 @@ int	main(int argc, char **argv, char **envp)
 {
 	int			flag;
 	char		*line;
-	char		**splited;
+	t_vararr	*input;
 	t_vararr	*env;
 
-	env = make_new_arr(30);
-	if (!env)
-		return (-1);
-	if (init(env, envp) == -1)
+	if (init(&env, envp) == -1)
 		return (-1);
 	line = NULL;
 	line = get_line(line);
 	while (line != NULL)
 	{
 		flag = 0;
-		splited = ft_split(line, ' ');
-		if (split_len(splited) != 0)
+		input = ft_split(line, ' ');
+		if (input->len != 0)
 		{
-			flag += exec_builtins(splited, split_len(splited), env);
+			flag += exec_builtins(input, env);
 			if (flag == 0)
 				flag += exec_bin();
 			if (flag == 0)
-				printf("h2osh: %s: command not found\n", splited[0]);
-			printf("vararr's size, capa = %d, %d\n", env->len, env->capacity);
+				printf("h2osh: %s: command not found\n", input->arr[0]);
 		}
-		splited = freeall(splited);
+		destroy_arr(env);
 		line = get_line(line);
 	}
 	return (0);

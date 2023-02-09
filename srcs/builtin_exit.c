@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:08 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 19:28:34 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:16:40 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ void	builtin_exit(int errnum)
 	exit(errnum);
 }
 
-void	check_exit_code(char **input, int len)
+void	check_exit_code(t_vararr *input)
 {
-	if (len == 1)
+	if (input->len == 1)
 		builtin_exit(0);
-	else if (len == 2)
+	else if (input->len == 2)
 	{
-		if (is_all_digit(input[1]))
-			builtin_exit(atoi(input[1]));
+		if (is_all_digit(input->arr[1]))
+			builtin_exit(atoi(input->arr[1]));
 		printf("exit\nh2osh: exit: %s: numeric argument required\n",
-			input[1]);
+			input->arr[1]);
 		exit(2);
 	}
 	else
