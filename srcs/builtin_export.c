@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 15:21:53 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:23:11 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	builtin_export(char **input, t_vararr *env)
 	if (input[1] == NULL)
 	{
 		if (builtin_export_no_arg(env) == -1)
-			builtin_exit(1);
+			ft_exit(1);
 		return ;
 	}
 	i = 0;

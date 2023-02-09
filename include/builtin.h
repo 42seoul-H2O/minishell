@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 18:14:47 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:22:45 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "constants.h"
 
 int		exec_builtins(t_list *exec, t_vararr *env);
-void	check_exit_code(t_list *exec);
-void	builtin_exit(int errnum);
+void	ft_exit(int errnum);
+void	builtin_exit(t_list	*node);
 void	builtin_pwd(void);
 void	builtin_cd(char *path);
 void	builtin_export(char **input, t_vararr *env);

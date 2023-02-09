@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:20:02 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 15:27:25 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:23:22 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*get_line(char *line)
 	}
 	line = readline("h2osh$ ");
 	if (line == NULL)
-		builtin_exit(0);
+		ft_exit(0);
 	add_history(line);
 	return (line);
 }
