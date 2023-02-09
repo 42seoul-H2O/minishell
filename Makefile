@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/09 17:55:54 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/09 18:34:48 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS_NAME = main.c \
 			builtin_exit.c \
 			builtin_pwd.c \
 			builtin_export.c \
+			builtin_export2.c \
 			builtin_env.c \
 			builtin_echo.c \
 			builtin_cd.c \

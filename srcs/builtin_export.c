@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 18:23:11 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:37:05 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,30 +94,21 @@ static int	builtin_export_no_arg(t_vararr *env)
 	return (1);
 }
 
-void	builtin_export(char **input, t_vararr *env)
+void	builtin_export(t_list *node, t_vararr *env)
 {
 	int		i;
 	char	*temp;
 
-	if (input[1] == NULL)
+	if (node->args->len == 0)
 	{
 		if (builtin_export_no_arg(env) == -1)
 			ft_exit(1);
 		return ;
 	}
 	i = 0;
-	while (input[++i] != NULL)
+	while (i < node->args->len)
 	{
-		if (!ft_isalpha(input[i][0]))
-			printf("h2osh: export: '%s': not a valid identifier\n", input[i]);
-		else if (ft_strchr(input[i], '=') == NULL)
-			append_element(env, input[i]);
-		else
-		{
-			temp = ft_substr(input[i], 0, ft_strchr(input[i], '=') - input[i]);
-			ft_setenv(env, temp,
-				&input[i][ft_strchr(input[i], '=') - input[i] + 1], 1);
-			free(temp);
-		}
+		builtin_export_check_args(get_element(node->args, i), env);
+		i++;
 	}
 }

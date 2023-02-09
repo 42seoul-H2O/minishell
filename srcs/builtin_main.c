@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 18:24:45 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:38:32 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	exec_builtins(t_list *exec, t_vararr *env)
 	else if (exec->cmd_type == CD)
 		builtin_cd(exec);
 	else if (exec->cmd_type == EXPORT)
-		builtin_export(input->arr, env);
+		builtin_export(exec, env);
 	else if (exec->cmd_type == UNSET)
 		builtin_unset(input->arr, env);
 	else if (exec->cmd_type == ECHO)
