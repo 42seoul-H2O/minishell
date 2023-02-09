@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 19:25:08 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:44:00 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	main(int argc, char **argv, char **envp)
 				flag += exec_bin();
 			if (flag == 0)
 				printf("h2osh: %s: command not found\n", splited[0]);
+			printf("vararr's size, capa = %d, %d\n", env->len, env->capacity);
 		}
 		splited = freeall(splited);
 		line = get_line(line);

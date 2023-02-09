@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 16:32:49 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:42:33 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	append_element(t_vararr *varr, char *val)
 	if (!varr)
 		return (-1);
 	if (varr->capacity == varr->len)
-		if (realloc_2x_arr(varr) == -1)
+		if (realloc_arr(varr, 2.0) == -1)
 			return (-1);
 	if (find_element(varr, val) != -1)
 		return (0);
@@ -143,5 +143,8 @@ int	delete_element(t_vararr *varr, char *key)
 		varr->arr[i++] = varr->arr[j++];
 	varr->arr[i] = NULL;
 	varr->len -= 1;
+	if (varr->len * 3 < varr->capacity)
+		if (realloc_arr(varr, 0.5) == -1)
+			return (-1);
 	return (1);
 }
