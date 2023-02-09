@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 19:23:59 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:24:26 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ void	builtin_export(char **input, t_vararr *env)
 	i = 1;
 	while (input[i] != NULL)
 	{
-		if (ft_strchr(input[i], '=') == NULL)
+		if (!ft_isalpha(input[i][0]))
+			printf("h2osh: export: '%s': not a valid identifier\n", input[i]);
+		else if (ft_strchr(input[i], '=') == NULL)
 			append_element(env, input[i]);
 		else
 		{
