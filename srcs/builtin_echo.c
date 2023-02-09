@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 19:13:19 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:44:52 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,31 @@ static int	check_n_option(char *input)
 	return (1);
 }
 
-void	builtin_echo(char **input, t_vararr *env)
+void	builtin_echo(t_list *node, t_vararr *env)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
-	i = 1;
-	i += check_n_option(input[1]);
-	while (input[i] != NULL)
+	i = 0;
+	i += check_n_option(get_element(node->args, 0));
+	while (i < node->args->len)
 	{
-		if (input[i][0] == '$')
+		temp = get_element(node->args, i);
+		if (temp[0] == '$') // TODO : 달러 사인 파싱 부분 삭제
 		{
-			if (ft_getenv(env, &input[i][1]) == NULL)
+			if (ft_getenv(env, &temp[1]) == NULL)
 			{
 				i++;
 				continue ;
 			}
-			printf("%s", ft_getenv(env, &input[i][1]));
+			printf("%s", ft_getenv(env, &temp[1]));
 		}
 		else
-			printf("%s", input[i]);
+			printf("%s", temp);
 		i++;
-		if (input[i] != NULL)
+		if (temp != NULL)
 			printf(" ");
 	}
-	if (check_n_option(input[1]) != 1)
+	if (check_n_option(get_element(node->args, 0)) != 1)
 		printf("\n");
 }
