@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 14:24:26 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:32:38 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ static int	builtin_export_no_arg(t_vararr *env)
 void	builtin_export(char **input, t_vararr *env)
 {
 	int		i;
-	int		j;
 	char	*temp;
 
 	if (input[1] == NULL)
@@ -115,9 +114,9 @@ void	builtin_export(char **input, t_vararr *env)
 			append_element(env, input[i]);
 		else
 		{
-			j = ft_strchr(input[i], '=') - input[i];
-			temp = ft_substr(input[i], 0, j);
-			ft_setenv(env, temp, &input[i][j + 1], 1);
+			temp = ft_substr(input[i], 0, ft_strchr(input[i], '=') - input[i]);
+			ft_setenv(env, temp,
+				&input[i][ft_strchr(input[i], '=') - input[i] + 1], 1);
 			free(temp);
 		}
 		i++;
