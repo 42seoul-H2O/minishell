@@ -6,12 +6,13 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/06 16:54:27 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/09 15:30:11 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
+#include "libft.h"
 
 static void	convert_dollar_test(char *input, int has_envp, \
 			char *expected_output);
@@ -19,11 +20,16 @@ static char	**init_envp(void);
 
 void	test_convert_dollar(void)
 {
+	char	*name;
+
+	name = malloc(sizeof (char) * 100);
+	if (!name)
+		exit (1);
 	printf("---- Convert_dollar Test Cases ----\n");
 	convert_dollar_test("blahblah $", 1, "blahblah $");
 	convert_dollar_test("blahblah $^", 1, "blahblah $^");
-	convert_dollar_test("blahblah $\'\'", 1, "blahblah $");
-	convert_dollar_test("blahblah $\'PATH\'", 1, "blahblah $PATH");
+	convert_dollar_test("blahblah $\'\'", 1, "blahblah $\'\'");
+	convert_dollar_test("blahblah $\'PATH\'", 1, "blahblah $\'PATH\'");
 	convert_dollar_test("blahblah $\"PATH\"", 1, "blahblah $PATH");
 	convert_dollar_test("blahblah \"$\"PATH", 1, "blahblah $PATH");
 	convert_dollar_test("blahblah \"$'PATH\"", 1, "blahblah $\'PATH");
@@ -65,6 +71,10 @@ static void	convert_dollar_test(char *input, int has_envp, \
 	t_str	str;
 	char	**envp;
 
+	str.s = malloc(sizeof (char) * 100);
+	if (!str.s)
+		exit(1);
+	ft_strlcpy(str.s, input, 100);
 	init_t_str(&str, input);
 	envp = init_envp();
 	printf("---- Test Case: %s ----\n", input);

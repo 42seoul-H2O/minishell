@@ -6,32 +6,36 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/06 14:37:31 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/09 15:23:18 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "parser.h"
+#include "vararr.h"
 
-static t_dollar_sign	*init_dollar_sign(t_str *str, char **envp);
+static t_dollar_sign	*init_dollar_sign(t_str *str, char **envp, \
+						int *visited);
 static void				set_dollar_env_value(t_str *str, char **envp, \
 						t_dollar_sign *dollar);
-static int				set_dollar_indices(t_str *str, t_dollar_sign *dollar);
+static int				set_dollar_indices(t_str *str, t_dollar_sign *dollar, \
+						int *visited);
 static int				is_unallowed_char(t_str *str, int char_idx);
 
 int	convert_single_dollar_to_env(t_str *str, char **envp, int *visited)
 {
 	t_dollar_sign	*dollar;
 
-	dollar = init_dollar_sign(str, envp, visited); // 여기서는 ignore_idx 값을 읽어서 무시할 놈을 알아내고
-	if (!dollar) // 여기서는 ignore_idx를 추가한다.
+	dollar = init_dollar_sign(str, envp, visited);
+	if (!dollar)
 		return (0);
-	replace_dollar_with_env(str, dollar);
+	replace_dollar_with_env(str, dollar, visited);
 	free(dollar);
 	return (1);
 }
 
-static t_dollar_sign	*init_dollar_sign(t_str *str, char **envp)
+static t_dollar_sign	*init_dollar_sign(t_str *str, char **envp, \
+	int *visited)
 {
 	t_dollar_sign	*dollar;
 	int				has_dollar_in_str;
@@ -39,7 +43,7 @@ static t_dollar_sign	*init_dollar_sign(t_str *str, char **envp)
 	dollar = malloc(sizeof (t_dollar_sign) * 1);
 	if (!dollar)
 		builtin_exit(12);
-	else if (!set_dollar_indices(str, dollar))
+	else if (!set_dollar_indices(str, dollar, visited))
 	{
 		has_dollar_in_str = 0;
 		return (NULL);
@@ -59,13 +63,13 @@ static void	set_dollar_env_value(t_str *str, char **envp, t_dollar_sign *dollar)
 	name = malloc(sizeof (char) * (size + 1));
 	if (!name)
 		builtin_exit(12);
-	if (ft_strlcpy(name, (str -> s) + dollar -> first_idx + 1, size + 1))
-		builtin_exit(12);
+	ft_strlcpy(name, (str -> s) + dollar -> first_idx + 1, size + 1);
 	dollar -> env_value = my_getenv(envp, name);
 	free(name);
 }
 
-static int	set_dollar_indices(t_str *str, t_dollar_sign *dollar)
+static int	set_dollar_indices(t_str *str, t_dollar_sign *dollar, \
+	int *visited)
 {
 	int	i;
 	int	is_dollar_found;
@@ -75,7 +79,7 @@ static int	set_dollar_indices(t_str *str, t_dollar_sign *dollar)
 	dollar -> first_idx = -1;
 	while (str -> s[i])
 	{
-		if (str -> s[i] == '$' && is_quoted(str, i) != '\'')
+		if (str -> s[i] == '$' && !visited[i])
 		{
 			dollar -> first_idx = i;
 			is_dollar_found = 1;
@@ -100,8 +104,9 @@ static	int	is_unallowed_char(t_str *str, int char_idx)
 
 	c = str -> s[char_idx];
 	if (str -> s[char_idx - 1] == '$')
-		return (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || c == '_');
+		return (!(('a' <= c && c <= 'z') || \
+			('A' <= c && c <= 'Z') || c == '_'));
 	else
-		return (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || \
-			('0' <= c && c <= '9') || c == '_');
+		return (!(('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || \
+			('0' <= c && c <= '9') || c == '_'));
 }

@@ -6,28 +6,41 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:09:04 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/06 17:01:05 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/06 20:17:39 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
 #include "builtin.h"
+#include "vararr.h"
+
+//TODO: convert_single_dollar_to_env를 실행할 때 마다 문자열을 malloc하기 때문에
+//		leak가 발생할거다. 이거 꼭 잡자.
 
 void	convert_dollar_to_env(t_str *str, char **envp)
 {
-	while (convert_single_dollar_to_env(str, envp))
+	int	*visited;
+
+	visited = init_visited(ft_strlen(str -> s));
+	convert_single_dollar_to_env(str, envp, visited);
+	while (convert_single_dollar_to_env(str, envp, visited))
 		;
+	free(visited);
 }
 
-int	replace_dollar_with_env(t_str *str, t_dollar_sign *dollar)
+int	replace_dollar_with_env(t_str *str, t_dollar_sign *dollar, \
+	int *visited)
 {
 	char	*dest1;
 	char	*dest2;
 	char	*dest3;
 
 	if (dollar -> first_idx == dollar -> last_idx)
+	{
+		visited[dollar -> first_idx] = 1;
 		return (0);
+	}
 	dest1 = malloc(sizeof (char) * (dollar -> first_idx) + 1);
 	if (!dest1)
 		builtin_exit(12);
@@ -41,11 +54,24 @@ int	replace_dollar_with_env(t_str *str, t_dollar_sign *dollar)
 	if (!dest3)
 		builtin_exit(12);
 	free(dest2);
+	free(str -> s);
 	str -> s = dest3;
 	return (1);
 }
 
-int	*init_ignore_idx(void)
+int	*init_visited(int size)
 {
-	
+	int	i;
+	int	*visited;
+
+	i = 0;
+	visited = malloc(sizeof (int) * size);
+	if (!visited)
+		builtin_exit(12);
+	while (i < size)
+	{
+		visited[i] = 0;
+		i++;
+	}
+	return (visited);
 }
