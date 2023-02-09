@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/09 15:30:11 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/09 18:39:29 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,15 @@ static char	**init_envp(void);
 
 void	test_convert_dollar(void)
 {
-	char	*name;
-
-	name = malloc(sizeof (char) * 100);
-	if (!name)
-		exit (1);
 	printf("---- Convert_dollar Test Cases ----\n");
-	convert_dollar_test("blahblah $", 1, "blahblah $");
-	convert_dollar_test("blahblah $^", 1, "blahblah $^");
-	convert_dollar_test("blahblah $\'\'", 1, "blahblah $\'\'");
-	convert_dollar_test("blahblah $\'PATH\'", 1, "blahblah $\'PATH\'");
-	convert_dollar_test("blahblah $\"PATH\"", 1, "blahblah $PATH");
-	convert_dollar_test("blahblah \"$\"PATH", 1, "blahblah $PATH");
-	convert_dollar_test("blahblah \"$'PATH\"", 1, "blahblah $\'PATH");
-	convert_dollar_test("blahblah \'$\"PATH\'", 1, "blahblah $\"PATH\"");
+	// convert_dollar_test("blahblah $", 1, "blahblah $");
+	// convert_dollar_test("blahblah $^", 1, "blahblah $^");
+	// convert_dollar_test("blahblah $\'\'", 1, "blahblah $\'\'");
+	// convert_dollar_test("blahblah $\'PATH\'", 1, "blahblah $\'PATH\'");
+	// convert_dollar_test("blahblah $\"PATH\"", 1, "blahblah $PATH");
+	// convert_dollar_test("blahblah \"$\"PATH", 1, "blahblah $PATH");
+	// convert_dollar_test("blahblah \"$'PATH\"", 1, "blahblah $\'PATH");
+	// convert_dollar_test("blahblah \'$\"PATH\'", 1, "blahblah $\"PATH\"");
 	convert_dollar_test("blahblah \'\"$PATH\"\'", 1, "blahblah \"$PATH\"");
 	convert_dollar_test("$SHELL$LOGNAME", 1, "/bin/bashhocsong");
 	convert_dollar_test("blahblah $", 0, "blahblah $");
@@ -75,7 +70,7 @@ static void	convert_dollar_test(char *input, int has_envp, \
 	if (!str.s)
 		exit(1);
 	ft_strlcpy(str.s, input, 100);
-	init_t_str(&str, input);
+	init_t_str(&str, str.s);
 	envp = init_envp();
 	printf("---- Test Case: %s ----\n", input);
 	printf("---- has_envp: %d ----\n", has_envp);

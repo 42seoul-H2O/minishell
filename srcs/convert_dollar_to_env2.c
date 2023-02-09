@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:09:04 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/06 20:17:39 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/09 18:41:33 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int	replace_dollar_with_env(t_str *str, t_dollar_sign *dollar, \
 	dest1 = malloc(sizeof (char) * (dollar -> first_idx) + 1);
 	if (!dest1)
 		builtin_exit(12);
-	if (!ft_strlcpy(dest1, str -> s, dollar -> first_idx + 1))
-		builtin_exit(12);
+	ft_strlcpy(dest1, str -> s, dollar -> first_idx + 1);
 	dest2 = ft_strjoin(dest1, dollar -> env_value);
 	if (!dest2)
 		builtin_exit(12);
