@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:40:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 20:14:09 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/09 18:17:22 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ static void	set_quote_flags(t_str *str)
 		if (is_quote(str -> s[i], &quote) && quote.is_quoted)
 			quote.is_quoted = 0;
 		else if (is_quote(str -> s[i], &quote))
+		{
 			quote.is_quoted = str -> s[i];
+			flags[i] = 0;
+			i++;
+			continue ;
+		}
 		flags[i] = quote.is_quoted;
 		i++;
 	}
