@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:47:36 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 17:51:46 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 17:59:58 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_list
 }				t_list;
 
 t_list	*make_new_node(t_list *prev);
-void	set_cmd(t_list *node, char *str);
+int		set_cmd(t_list *node, char *str);
 void	destory_node(t_list *node);
 void	destory_list(t_list *head);
 t_list	*list_reset_loc(t_list *curr);

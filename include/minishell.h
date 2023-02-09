@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 15:12:49 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 17:55:24 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "constants.h"
 # include "prompt.h"
 # include "vararr.h"
+# include "cmdlist.h"
 
 int		init(t_vararr **env, char **envp);
 int		init_env_arr(t_vararr *env, char **envp);
