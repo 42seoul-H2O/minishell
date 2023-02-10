@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vararr_oper2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 14:42:33 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:21:31 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int	append_element(t_vararr *varr, char *val)
 int	update_element(t_vararr *varr, char *key, char *value)
 {
 	char	*target;
-	char	*temp;
 	int		i;
 
 	if (!varr || !key)
