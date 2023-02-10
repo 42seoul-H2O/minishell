@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/10 14:52:32 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/10 15:18:24 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
 						t_vararr *env, int *visited);
 static void				set_dollar_env_value(char *word, t_vararr *env, \
 						t_dollar_sign *dollar);
-static int				set_dollar_indices(t_str *str, t_dollar_sign *dollar, \
+static int				set_dollar_indices(char *word, t_dollar_sign *dollar, \
 						int *visited);
 static	int				is_unallowed_char(char *word, int char_idx);
 
@@ -70,7 +70,7 @@ static void	set_dollar_env_value(char *word, t_vararr *env, \
 	free(name);
 }
 
-static int	set_dollar_indices(t_str *str, t_dollar_sign *dollar, \
+static int	set_dollar_indices(char *word, t_dollar_sign *dollar, \
 	int *visited)
 {
 	int	i;
@@ -79,14 +79,14 @@ static int	set_dollar_indices(t_str *str, t_dollar_sign *dollar, \
 	i = 0;
 	is_dollar_found = 0;
 	dollar -> first_idx = -1;
-	while (str -> s[i])
+	while (word[i])
 	{
-		if (str -> s[i] == '$' && !visited[i])
+		if (word[i] == '$' && !visited[i])
 		{
 			dollar -> first_idx = i;
 			is_dollar_found = 1;
 		}
-		else if (is_dollar_found && is_unallowed_char(str, i))
+		else if (is_dollar_found && is_unallowed_char(word, i))
 		{
 			dollar -> last_idx = i - 1;
 			return (1);
