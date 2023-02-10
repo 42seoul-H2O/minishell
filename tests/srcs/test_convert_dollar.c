@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/10 15:15:38 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/10 15:32:21 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static t_vararr	*init_env(int has_env)
 {
 	t_vararr	*env;
 
-	env = make_new_arr(0);
+	env = make_new_arr(1);
 	if (!has_env)
 		return (env);
 	else
