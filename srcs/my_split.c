@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:07:47 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 20:02:36 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/10 13:37:44 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "builtin.h"
 #include "libft.h"
 
-char	**my_split(t_str *str)
+void	my_split(t_str *str)
 {
 	int		i;
 	char	*word;
@@ -35,5 +35,5 @@ char	**my_split(t_str *str)
 		i++;
 	}
 	words[i] = NULL;
-	return (words);
+	str -> words = words;
 }

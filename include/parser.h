@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/06 19:44:18 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/10 13:26:13 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_str{
 	char	*included_delimiters;
 	int		*token_indices;
 	int		*quote_flags;
+	char	**words;
 	int		word_count;
 }t_str;
 
@@ -43,11 +44,11 @@ int		is_quoted(t_str *str, int idx);
 int		is_special_delimiter(t_str *str, int idx);
 int		is_delimiter(t_str *str, int idx);
 char	*my_getenv(char **envp, char *name);
-int		replace_dollar_with_env(t_str *str, t_dollar_sign *dollar, \
+int		replace_dollar_with_env(t_str *str, int word_i, t_dollar_sign *dollar, \
 		int *visited);
 void	convert_dollar_to_env(t_str *str, char **envp);
-int		convert_single_dollar_to_env(t_str *str, char **envp, \
-		int *visited);
+int		convert_single_dollar_to_env(t_str *str, int word_i, \
+		char **envp, int *visited);
 int		*init_visited(int size);
 
 #endif
