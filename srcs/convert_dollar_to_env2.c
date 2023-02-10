@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:09:04 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/10 13:12:43 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/10 14:47:30 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 #include "libft.h"
 #include "builtin.h"
 #include "vararr.h"
+#include "builtin.h"
 
 //TODO: convert_single_dollar_to_env를 실행할 때 마다 문자열을 malloc하기 때문에
 //		leak가 발생할거다. 이거 꼭 잡자.
 
-void	convert_dollar_to_env(t_str *str, char **envp)
+void	convert_dollar_to_env(t_str *str, t_vararr *env)
 {
 	int		*visited;
 	size_t	i;
@@ -27,7 +28,7 @@ void	convert_dollar_to_env(t_str *str, char **envp)
 	while (str -> words[i])
 	{
 		visited = init_visited(ft_strlen(str -> words[i]));
-		while (convert_single_dollar_to_env(str, i, envp, visited))
+		while (convert_single_dollar_to_env(str, i, env, visited))
 			;
 		free(visited);
 		i++;

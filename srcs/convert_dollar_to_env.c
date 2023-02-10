@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/10 13:28:07 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/10 14:52:32 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 #include "parser.h"
 #include "vararr.h"
 
-static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, char **envp, \
-						int *visited);
-static void				set_dollar_env_value(char *word, char **envp, \
+static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
+						t_vararr *env, int *visited);
+static void				set_dollar_env_value(char *word, t_vararr *env, \
 						t_dollar_sign *dollar);
 static int				set_dollar_indices(t_str *str, t_dollar_sign *dollar, \
 						int *visited);
 static	int				is_unallowed_char(char *word, int char_idx);
 
 int	convert_single_dollar_to_env(t_str *str, int word_i, \
-	char **envp, int *visited)
+	t_vararr *env, int *visited)
 {
 	t_dollar_sign	*dollar;
 
-	dollar = init_dollar_sign(str, word_i, envp, visited);
+	dollar = init_dollar_sign(str, word_i, env, visited);
 	if (!dollar)
 		return (0);
 	replace_dollar_with_env(str, word_i, dollar, visited);
@@ -35,8 +35,8 @@ int	convert_single_dollar_to_env(t_str *str, int word_i, \
 	return (1);
 }
 
-static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, char **envp, \
-	int *visited)
+static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
+						t_vararr *env, int *visited)
 {
 	t_dollar_sign	*dollar;
 	int				has_dollar_in_str;
@@ -49,11 +49,12 @@ static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, char **envp, \
 		has_dollar_in_str = 0;
 		return (NULL);
 	}
-	set_dollar_env_value(str -> words[word_i], envp, dollar);
+	set_dollar_env_value(str -> words[word_i], env, dollar);
 	return (dollar);
 }
 
-static void	set_dollar_env_value(char *word, char **envp, t_dollar_sign *dollar)
+static void	set_dollar_env_value(char *word, t_vararr *env, \
+			t_dollar_sign *dollar)
 {
 	int		i;
 	int		size;
@@ -65,7 +66,7 @@ static void	set_dollar_env_value(char *word, char **envp, t_dollar_sign *dollar)
 	if (!name)
 		builtin_exit(12);
 	ft_strlcpy(name, word + dollar -> first_idx + 1, size + 1);
-	dollar -> env_value = my_getenv(envp, name);
+	dollar -> env_value = ft_getenv(env, name);
 	free(name);
 }
 
