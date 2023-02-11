@@ -6,13 +6,14 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/10 15:58:44 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/11 16:47:59 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 # include "vararr.h"
+# include <fcntl.h>
 
 typedef struct s_quote{
 	int		is_quoted;
@@ -34,6 +35,30 @@ typedef struct s_str{
 	char	**words;
 	int		word_count;
 }t_str;
+
+typedef struct s_list
+{
+	char		*cmd;
+	t_vararr	*args;
+	int			cmd_type;
+	int			pipe[2];
+	int			input_fd;
+	int			output_fd;
+	t_list		*next;
+	t_list		*prev;
+}t_list;
+
+enum e_cmd_type
+{
+	EXECUTABLE,
+	CD,
+	ECHO,
+	ENV,
+	EXIT,
+	EXPORT,
+	PWD,
+	UNSET,
+};
 
 void	init_t_str(t_str *str, char *s);
 char	**my_split(t_str *str);
