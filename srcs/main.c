@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 16:21:37 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:53:35 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,28 @@ static int	split_len(char **s)
 	return (i);
 }
 
-static int	exec_bin(void)
+static int	exec_bin(t_cmdlist *node, t_vararr *env)
 {
+	int		temp;
+	pid_t	pid;
+
+	if (node->cmd_type == EXECUTABLE)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			printf("child pid : %d\n", getpid());
+			execve(node->cmd, node->args->arr, env->arr);
+		}
+		wait(&temp);
+		return (1);
+	}
 	return (0);
 }
 
 static void	check_leak(void)
 {
-	system("leaks --list minishell");
+	system("leaks --list minishell | grep leaks");
 }
 
 static int	is_builtin(t_cmdlist *node)
@@ -98,17 +112,54 @@ static int	is_builtin(t_cmdlist *node)
 	return (1);
 }
 
-static int	is_executable(t_cmdlist *node, t_vararr *env)
+static char	*is_executable(t_cmdlist *node, t_vararr *env)
 {
-	return (0);
+	char	**path;
+	char	*temp;
+	char	*check_path;
+	int		i;
+
+	temp = NULL;
+	if (ft_getenv(env, "PATH") != NULL)
+		temp = ft_strdup(ft_getenv(env, "PATH"));
+	path = ft_split(temp, ':');
+	if (temp)
+		free(temp);
+	i = 0;
+	while (path[i] != NULL)
+	{
+		check_path = ft_strjoin(path[i], "/");
+		temp = ft_strjoin(check_path, node->cmd);
+		free(check_path);
+		if (access(temp, F_OK) == 0)
+		{
+			free_arr(path);
+			return (temp);
+		}
+		i++;
+		free(temp);
+		temp = NULL;
+	}
+	free_arr(path);
+	if (access(node->cmd, F_OK) == 0)
+		return (ft_strdup(node->cmd));
+	return (NULL);
 }
 
 static void	check_cmd_type(t_cmdlist *node, t_vararr *env)
 {
+	char	*temp;
+	
 	if (is_builtin(node) == 1)
 		return ;
-	if (is_executable(node, env) == 1)
+	temp = is_executable(node, env);
+	if (temp != NULL)
+	{
+		free(node->cmd);
+		node->cmd = temp;
+		node->cmd_type = EXECUTABLE;
 		return ;
+	}
 	node->cmd_type = ERROR;
 }
 
@@ -157,8 +208,8 @@ int	main(int argc, char **argv, char **envp)
 		{
 			parsed = list_maker(input, env);
 			flag += exec_builtins(parsed, env);
-			// if (flag == 0)
-			// 	flag += exec_bin();
+			if (flag == 0)
+				flag += exec_bin(parsed, env);
 			if (flag == 0)
 				printf("h2osh: %s: command not found\n", parsed->cmd);
 			destory_list(parsed);
