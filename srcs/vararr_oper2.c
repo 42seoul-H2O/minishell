@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 14:42:33 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:48:37 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	delete_element(t_vararr *varr, char *key)
 	int	i;
 	int	j;
 
-	if (!varr)
+	if (!varr || varr->len == 0)
 		return (-1);
 	i = find_element(varr, key);
 	if (i == -1)

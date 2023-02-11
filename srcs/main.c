@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 15:25:11 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:21:37 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,65 @@ static int	exec_bin(void)
 
 static void	check_leak(void)
 {
-	system("leaks --list minishell | grep leaks");
+	system("leaks --list minishell");
+}
+
+static int	is_builtin(t_cmdlist *node)
+{
+	if (ft_strncmp(node->cmd, "echo", ft_strlen(node->cmd)) == 0)
+		node->cmd_type = ECHO;
+	else if (ft_strncmp(node->cmd, "env", ft_strlen(node->cmd)) == 0)
+		node->cmd_type = ENV;
+	else if (ft_strncmp(node->cmd, "export", ft_strlen(node->cmd)) == 0)
+		node->cmd_type = EXPORT;
+	else if (ft_strncmp(node->cmd, "exit", ft_strlen(node->cmd)) == 0)
+		node->cmd_type = EXIT;
+	else if (ft_strncmp(node->cmd, "pwd", ft_strlen(node->cmd)) == 0)
+		node->cmd_type = PWD;
+	else if (ft_strncmp(node->cmd, "unset", ft_strlen(node->cmd)) == 0)
+		node->cmd_type = UNSET;
+	else if (ft_strncmp(node->cmd, "cd", ft_strlen(node->cmd)) == 0)
+		node->cmd_type = CD;
+	else
+		return (0);
+	return (1);
+}
+
+static int	is_executable(t_cmdlist *node, t_vararr *env)
+{
+	return (0);
+}
+
+static void	check_cmd_type(t_cmdlist *node, t_vararr *env)
+{
+	if (is_builtin(node) == 1)
+		return ;
+	if (is_executable(node, env) == 1)
+		return ;
+	node->cmd_type = ERROR;
+}
+
+static void	copy_vararr(t_vararr *dst, t_vararr *src)
+{
+	int	i;
+
+	i = 0;
+	while (i < src->len)
+	{
+		append_element(dst, get_element(src, i));
+		i++;
+	}
+}
+
+static t_cmdlist	*list_maker(t_vararr *input, t_vararr *env)
+{
+	t_cmdlist	*result;
+
+	result = make_new_node(NULL);
+	copy_vararr(result->args, input);
+	set_cmd(result, get_element(result->args, 0));
+	check_cmd_type(result, env);
+	return (result);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -83,23 +141,27 @@ int	main(int argc, char **argv, char **envp)
 	char		*line;
 	t_vararr	*input;
 	t_vararr	*env;
+	t_cmdlist	*parsed;
 
 	atexit(check_leak);
 	if (init(&env, envp) == -1)
 		return (-1);
 	line = NULL;
 	line = get_line(line);
+	parsed = NULL;
 	while (line != NULL)
 	{
 		flag = 0;
 		input = parse_input(line, ' ');
 		if (input->len != 0)
 		{
-			flag += exec_builtins(input, env);
+			parsed = list_maker(input, env);
+			flag += exec_builtins(parsed, env);
+			// if (flag == 0)
+			// 	flag += exec_bin();
 			if (flag == 0)
-				flag += exec_bin();
-			if (flag == 0)
-				printf("h2osh: %s: command not found\n", input->arr[0]);
+				printf("h2osh: %s: command not found\n", parsed->cmd);
+			destory_list(parsed);
 		}
 		destroy_arr(input);
 		line = get_line(line);

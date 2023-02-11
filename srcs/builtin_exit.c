@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:08 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 18:22:41 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:58:11 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static int	is_all_digit(char *s)
 	return (1);
 }
 
-void	builtin_exit(t_list	*node)
+void	builtin_exit(t_cmdlist *node)
 {
-	if (node->args->len == 0)
+	if (node->args->len == 1)
 		ft_exit(0);
-	else if (node->args->len == 1)
+	else if (node->args->len == 2)
 	{
 		if (is_all_digit(get_element(node->args, 1)))
 			ft_exit(ft_atoi(get_element(node->args, 1)));

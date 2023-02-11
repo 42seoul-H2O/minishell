@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 18:37:05 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:57:19 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	sort_and_print(t_vararr *arr)
 {
 	char	**temp;
 
-	temp = copy_arr(arr);
+	temp = copy_arr(arr, 0);
 	if (!temp)
 		return (-1);
 	quick_sort(temp, 0, arr->len - 1);
@@ -94,18 +94,18 @@ static int	builtin_export_no_arg(t_vararr *env)
 	return (1);
 }
 
-void	builtin_export(t_list *node, t_vararr *env)
+void	builtin_export(t_cmdlist *node, t_vararr *env)
 {
 	int		i;
 	char	*temp;
 
-	if (node->args->len == 0)
+	if (node->args->len == 1)
 	{
 		if (builtin_export_no_arg(env) == -1)
 			ft_exit(1);
 		return ;
 	}
-	i = 0;
+	i = 1;
 	while (i < node->args->len)
 	{
 		builtin_export_check_args(get_element(node->args, i), env);

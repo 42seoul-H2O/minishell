@@ -6,20 +6,20 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:12:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 18:31:32 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:51:18 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	builtin_cd(t_list *node)
+void	builtin_cd(t_cmdlist *node)
 {
-	if (node->args->len != 0)
+	if (node->args->len == 1)
 	{
 		printf("h2osh: cd: argument not found\n");
 		return ;
 	}
-	if (node->args->len != 1)
+	if (node->args->len != 2)
 	{
 		printf("h2osh: cd: too many arguments\n");
 		return ;

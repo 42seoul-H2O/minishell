@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:47:36 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 18:13:12 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:47:02 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@
 # include "../lib/libft/libft.h"
 # include "vararr.h"
 
-typedef struct s_list
+typedef struct s_cmdlist
 {
-	char		*cmd;
-	t_vararr	*args;
-	int			cmd_type;
-	int			pipe[2];
-	t_list		*prev;
-	t_list		*next;
-}				t_list;
+	char				*cmd;
+	t_vararr			*args;
+	int					cmd_type;
+	int					pipe[2];
+	struct s_cmdlist	*prev;
+	struct s_cmdlist	*next;
+}				t_cmdlist;
 
-t_list	*make_new_node(t_list *prev);
-int		set_cmd(t_list *node, char *str);
-void	destory_node(t_list *node);
-void	destory_list(t_list *head);
-t_list	*list_reset_loc(t_list *curr);
+t_cmdlist	*make_new_node(t_cmdlist *prev);
+int			set_cmd(t_cmdlist *node, char *str);
+void		destory_node(t_cmdlist *node);
+void		destory_list(t_cmdlist *head);
+t_cmdlist	*list_reset_loc(t_cmdlist *curr);
 
 #endif

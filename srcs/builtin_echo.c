@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 18:44:52 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:57:19 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static int	check_n_option(char *input)
 	return (1);
 }
 
-void	builtin_echo(t_list *node, t_vararr *env)
+void	builtin_echo(t_cmdlist *node, t_vararr *env)
 {
 	int		i;
 	char	*temp;
 
-	i = 0;
+	i = 1;
 	i += check_n_option(get_element(node->args, 0));
 	while (i < node->args->len)
 	{

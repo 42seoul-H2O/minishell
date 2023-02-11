@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:13:54 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 14:42:46 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:23:48 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vararr	*make_new_arr(int size);
 void		free_arr(char **arr);
 void		destroy_arr(t_vararr *varr);
 int			realloc_arr(t_vararr *varr, float ratio);
-char		**copy_arr(t_vararr *varr);
+char		**copy_arr(t_vararr *varr, int idx);
 
 char		*get_element(t_vararr *varr, int idx);
 int			find_element(t_vararr *varr, char *val);
