@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:18 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 15:21:16 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 16:21:01 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	del_char(t_str *str, size_t i)
 	if (i == 0)
 		pre[0] = 0;
 	else
-		ft_strlcpy(pre, str -> s, i);
+		ft_strlcpy(pre, str -> s, i + 1);
 	ft_strlcpy(post, str -> s + i + 1, ft_strlen(str -> s));
 	new = ft_strjoin(pre, post);
 	free(pre);
