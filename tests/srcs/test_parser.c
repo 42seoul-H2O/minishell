@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 11:27:29 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 13:23:43 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "tests.h"
 
 static void		print_words(t_str *str);
+static void		print_expected_outputs(va_list ap, int count);
 static void		parser_test(char *input, int has_env, int word_count, ...);
 static t_vararr	*init_env(int has_env);
 
@@ -67,7 +68,7 @@ void	test_parser(void)
 
 static void	parser_test(char *input, int has_env, int word_count, ...)
 {
-	t_str		*str;
+	t_str		str;
 	t_vararr	*env;
 	va_list		ap;
 
@@ -77,7 +78,7 @@ static void	parser_test(char *input, int has_env, int word_count, ...)
 	printf("---- has_envp: %d ----\n", has_env);
 	str = parse(input, env);
 	printf("---- Output ----\n");
-	print_words(str);
+	print_words(&str);
 	printf("---- Expected Output ----\n");
 	print_expected_outputs(ap, word_count);
 	destroy_arr(env);
@@ -119,7 +120,7 @@ static void	print_words(t_str *str)
 static void	print_expected_outputs(va_list ap, int count)
 {
 	char	*word;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (i < count)
