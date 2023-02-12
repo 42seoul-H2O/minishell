@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 17:53:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:33:23 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,23 @@
 
 int	init(t_vararr **env, char **envp)
 {
+	char	*temp;
+
 	set_sig_handler();
 	*env = make_new_arr(30);
 	if (!env)
 		return (-1);
 	if (init_env_arr(*env, envp) == -1)
 		return (-1);
+	temp = ft_getenv(*env, "SHLVL");
+	if (!temp)
+		temp = ft_strdup("1");
+	else
+		temp = ft_itoa(ft_atoi(temp) + 1);
+	if (!temp)
+		return (-1);
+	ft_setenv(*env, "SHLVL", temp, 1);
+	free(temp);
 	return (0);
 }
 
@@ -69,18 +80,18 @@ static int	split_len(char **s)
 
 static int	exec_bin(t_cmdlist *node, t_vararr *env)
 {
-	int		temp;
+	int		stat;
 	pid_t	pid;
+	char	*temp;
 
 	if (node->cmd_type == EXECUTABLE)
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			printf("child pid : %d\n", getpid());
 			execve(node->cmd, node->args->arr, env->arr);
 		}
-		wait(&temp);
+		wait(&stat);
 		return (1);
 	}
 	return (0);
@@ -149,7 +160,7 @@ static char	*is_executable(t_cmdlist *node, t_vararr *env)
 static void	check_cmd_type(t_cmdlist *node, t_vararr *env)
 {
 	char	*temp;
-	
+
 	if (is_builtin(node) == 1)
 		return ;
 	temp = is_executable(node, env);
