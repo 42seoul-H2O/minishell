@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:18 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 15:07:01 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 15:21:16 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	del_char(t_str *str, size_t i)
 	char	*new;
 
 	pre = malloc(sizeof (char) * ft_strlen(str -> s) + 1);
-	post = malloc(sizeof (char) * ft_strlen(str -> s)) + 1;
+	post = malloc(sizeof (char) * (ft_strlen(str -> s) + 1));
 	if (!pre || !post)
 		builtin_exit(12);
 	if (i == 0)

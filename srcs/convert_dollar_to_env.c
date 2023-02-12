@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/10 15:18:24 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 16:03:52 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static void	set_dollar_env_value(char *word, t_vararr *env, \
 		builtin_exit(12);
 	ft_strlcpy(name, word + dollar -> first_idx + 1, size + 1);
 	dollar -> env_value = ft_getenv(env, name);
+	if (!dollar -> env_value)
+		dollar -> env_value = "";
 	free(name);
 }
 
