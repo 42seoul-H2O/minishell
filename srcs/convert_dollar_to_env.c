@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 17:20:06 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 17:30:57 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static int	set_dollar_indices(char *word, t_dollar_sign *dollar, \
 	dollar -> first_idx = -1;
 	while (word[i])
 	{
-		if (word[i] == '$' && !visited[i])
+		if (word[i] == '$' && !visited[i] && !is_dollar_found)
 		{
 			dollar -> first_idx = i;
 			is_dollar_found = 1;
