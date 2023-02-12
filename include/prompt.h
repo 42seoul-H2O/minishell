@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:38:43 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/05 15:51:10 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 11:41:10 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-# include <termios.h>
 # include "../lib/libft/libft.h"
 
 void	set_sig_handler(void);
