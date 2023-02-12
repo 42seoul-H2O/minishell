@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:09:04 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/10 15:39:06 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 17:20:10 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,17 @@ int	*init_visited(int size)
 		i++;
 	}
 	return (visited);
+}
+
+int	is_unallowed_char(char *word, int char_idx)
+{
+	char	c;
+
+	c = word[char_idx];
+	if (word[char_idx - 1] == '$')
+		return (!(('a' <= c && c <= 'z') || \
+			('A' <= c && c <= 'Z') || c == '_'));
+	else
+		return (!(('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || \
+			('0' <= c && c <= '9') || c == '_'));
 }

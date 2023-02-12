@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 16:03:52 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 17:20:06 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void				set_dollar_env_value(char *word, t_vararr *env, \
 						t_dollar_sign *dollar);
 static int				set_dollar_indices(char *word, t_dollar_sign *dollar, \
 						int *visited);
-static	int				is_unallowed_char(char *word, int char_idx);
+static int				is_dollar_single_quoted(t_str *str, int word_i, \
+						int dollar_i);
 
 int	convert_single_dollar_to_env(t_str *str, int word_i, \
 	t_vararr *env, int *visited)
@@ -30,9 +31,25 @@ int	convert_single_dollar_to_env(t_str *str, int word_i, \
 	dollar = init_dollar_sign(str, word_i, env, visited);
 	if (!dollar)
 		return (0);
+	// if a dollar sign is single quoted, then stop this function. Also mark the dollar sign visited.
+	if (is_dollar_single_quoted(str, word_i, dollar -> first_idx))
+	{
+		visited[dollar -> first_idx] = 1;
+		return (1);
+	}
 	replace_dollar_with_env(str, word_i, dollar, visited);
 	free(dollar);
 	return (1);
+}
+
+static int	is_dollar_single_quoted(t_str *str, int word_i, int dollar_i)
+{
+	t_str	temp;
+
+	init_t_str(&temp, str -> words[word_i]);
+	if (is_quoted(&temp, dollar_i) == '\'')
+		return (1);
+	return (0);
 }
 
 static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
@@ -102,15 +119,3 @@ static int	set_dollar_indices(char *word, t_dollar_sign *dollar, \
 	return (0);
 }
 
-static	int	is_unallowed_char(char *word, int char_idx)
-{
-	char	c;
-
-	c = word[char_idx];
-	if (word[char_idx - 1] == '$')
-		return (!(('a' <= c && c <= 'z') || \
-			('A' <= c && c <= 'Z') || c == '_'));
-	else
-		return (!(('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || \
-			('0' <= c && c <= '9') || c == '_'));
-}
