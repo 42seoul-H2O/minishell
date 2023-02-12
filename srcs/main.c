@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 11:23:39 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:16:19 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,20 +197,6 @@ static t_cmdlist	*list_maker(t_vararr *input, t_vararr *env)
 	return (result);
 }
 
-static void	heap_free(char *line, t_vararr *input, t_vararr *env,
-	t_cmdlist *parsed)
-{
-	if (line)
-	{
-		free(line);
-		line = NULL;
-	}
-	if (input)
-	{
-		
-	}
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	int			flag;
@@ -219,7 +205,7 @@ int	main(int argc, char **argv, char **envp)
 	t_vararr	*env;
 	t_cmdlist	*parsed;
 
-	atexit(check_leak);
+	//atexit(check_leak);
 	if (init(&env, envp) == -1)
 		return (-1);
 	line = NULL;
@@ -233,6 +219,8 @@ int	main(int argc, char **argv, char **envp)
 		{
 			parsed = list_maker(input, env);
 			flag += exec_builtins(parsed, env);
+			if (flag == -1)
+				break ;
 			if (flag == 0)
 				flag += exec_bin(parsed, env);
 			if (flag == 0)
@@ -242,5 +230,5 @@ int	main(int argc, char **argv, char **envp)
 		destroy_arr(input);
 		line = get_line(line);
 	}
-	return (0);
+	return (ft_exit(line, input, env, parsed));
 }

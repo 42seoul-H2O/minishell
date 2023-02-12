@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:55:09 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 11:23:47 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:14:33 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_cmdlist	*list_reset_loc(t_cmdlist *curr)
 	t_cmdlist	*temp;
 
 	temp = curr;
-	while (!(temp->prev))
+	while (temp->prev)
 		temp = temp->prev;
 	return (temp);
 }
