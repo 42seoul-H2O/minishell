@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:08 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 12:26:30 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:13:31 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	ft_exit(char *line, t_vararr *input, t_vararr *env, t_cmdlist *lst)
 
 	printf("%s\n", "exit");
 	errnum = 0;
-	if (lst && is_all_digit(get_element(lst->args, 1)))
+	if (is_all_digit(get_element(lst->args, 1)))
 		errnum = ft_atoi(get_element(lst->args, 1));
-	else if (lst && lst->args->len == 2)
+	else if (lst->args->len == 2)
 	{
 		printf("exit\nh2osh: exit: %s: numeric argument required\n",
 			get_element(lst->args, 1));
