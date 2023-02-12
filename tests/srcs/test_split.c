@@ -6,14 +6,13 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:30:48 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 20:05:09 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 10:50:44 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
 #include "tests.h"
-#include <stdarg.h>
 
 static void	test_split_implementation(char *s, int word_count, ...);
 
