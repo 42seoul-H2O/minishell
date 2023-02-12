@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 11:43:54 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 14:01:40 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void	convert_dollar_to_env(t_str *str, t_vararr *env);
 int		convert_single_dollar_to_env(t_str *str, int word_i, \
 		t_vararr *env, int *visited);
 int		*init_visited(int size);
+
+void	remove_quotes(t_str *str);
 
 #endif
