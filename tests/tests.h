@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:30:47 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 10:50:23 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 16:27:18 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 enum e_env
 {
-	HAS_ENV,
-	NOT_HAVE_ENV
+	NOT_HAVE_ENV,
+	HAS_ENV
 };
 
 void	test_split(void);

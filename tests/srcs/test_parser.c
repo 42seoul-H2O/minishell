@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 14:52:25 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 16:33:59 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ void	test_parser(void)
 	parser_test("blahblah \"$\"PATH", HAS_ENV, 2, "blahblah", "$PATH");
 	parser_test("blahblah \"$\'PATH\"", HAS_ENV, 2, "blahblah", "$\'PATH");
 	parser_test("blahblah \'$\"PATH\'", HAS_ENV, 2, "blahblah", "$\"PATH");
-	parser_test("blahblah \'\"$PATH\"\'", HAS_ENV, 2, "blahblah", "\"$PATH\"");
-	parser_test("$SHELL$LOGNAME", HAS_ENV, 1, "/bin/bashhocsong");
+	parser_test("blahblah \'\"$PATH\"\'", HAS_ENV, 2, "blahblah", "\"$PATH\""); // 실패
+	parser_test("blahblah \'$HOME\'", HAS_ENV, 2, "blahblah", "$HOME"); // 실패
+	parser_test("blahblah \"$HOME\"", HAS_ENV, 2, "blahblah", "/Users/hocsong");
+	parser_test("$SHELL$LOGNAME", HAS_ENV, 1, "/bin/bashhocsong"); // 실패.
 	parser_test("blahblah $", NOT_HAVE_ENV, 2, "blahblah", "$");
 	parser_test("blahblah $\"dff\"", HAS_ENV, 2, "blahblah", "$dff");
 	parser_test("blahblah $\"dff\"", NOT_HAVE_ENV, 2, "blahblah", "$dff");
-	parser_test("blahblah $\"LOGNAME\"", HAS_ENV, 2, "blahblah", "$hocsong");
+	parser_test("blahblah $\"LOGNAME\"", HAS_ENV, 2, "blahblah", "$LOGNAME");
 	parser_test("blahblah $\"LOGNAME\"", NOT_HAVE_ENV, 2, "blahblah", "$LOGNAME");
 	parser_test("blahblah$", HAS_ENV, 1, "blahblah$");
 	parser_test("blahblah$", NOT_HAVE_ENV, 1, "blahblah$");
