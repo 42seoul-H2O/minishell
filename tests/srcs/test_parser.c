@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 13:23:43 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 14:52:25 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_vararr	*init_env(int has_env);
 
 void	test_parser(void)
 {
-	printf("---- Convert_dollar Test Cases ----\n");
+	printf("---- Parser Test Cases ----\n\n");
 	parser_test("blahblah $", HAS_ENV, 2, "blahblah", "$");
 	parser_test("blahblah $^", HAS_ENV, 2, "blahblah", "$^");
 	parser_test("blahblah $\'\'", HAS_ENV, 2, "blahblah", "$");
@@ -62,7 +62,11 @@ void	test_parser(void)
 	parser_test("blahblah $ $", NOT_HAVE_ENV, 3, "blahblah", "$", "$");
 	parser_test("blahblah $\"dff\" $", HAS_ENV, 3, "blahblah", "$dff", "$");
 	parser_test("blahblah $\"dff\" $", NOT_HAVE_ENV, 3, "blahblah", "$dff", "$");
-	printf("---- End of Convert_dollar ----\n\n");
+	parser_test("ab\"\"\"\"", HAS_ENV, 1, "ab");
+	parser_test("ab\"\'\"\"\"", HAS_ENV, 1, "ab\'");
+	parser_test("", HAS_ENV, 1, ""); // 이 케이스와 아래 케이스는, 빈 문자열이 반환되는 게 맞는지 따로 체크할 필요가 있다. 출력 값만 봐서는 알 수 없음.
+	parser_test(" ", HAS_ENV, 1, "");
+	printf("---- End of Parser ----\n\n");
 	// quote의 짝이 안 맞는 경우에 대한 테스트 코드가 없다.
 }
 
