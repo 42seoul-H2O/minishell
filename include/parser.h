@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/11 16:47:59 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/12 10:02:12 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ enum e_cmd_type
 	UNSET,
 };
 
+t_str	*parse(char *input, t_vararr *env);
 void	init_t_str(t_str *str, char *s);
 char	**my_split(t_str *str);
 void	set_token_indices(t_str *str);
