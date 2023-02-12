@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 12:15:28 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:57:19 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	builtin_export(t_cmdlist *node, t_vararr *env)
 	if (node->args->len == 1)
 	{
 		if (builtin_export_no_arg(env) == -1)
-			exit(1);
+			ft_exit(1);
 		return ;
 	}
 	i = 1;
