@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 12:16:19 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:28:24 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	line = get_line(line);
 	parsed = NULL;
+	input = NULL;
 	while (line != NULL)
 	{
 		flag = 0;
