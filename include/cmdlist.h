@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:47:36 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 15:47:02 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/12 11:23:11 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_cmdlist
 
 t_cmdlist	*make_new_node(t_cmdlist *prev);
 int			set_cmd(t_cmdlist *node, char *str);
-void		destory_node(t_cmdlist *node);
-void		destory_list(t_cmdlist *head);
+void		destroy_node(t_cmdlist *node);
+void		destroy_list(t_cmdlist *head);
 t_cmdlist	*list_reset_loc(t_cmdlist *curr);
 
 #endif

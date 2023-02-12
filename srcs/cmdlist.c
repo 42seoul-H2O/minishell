@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:55:09 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 16:18:59 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/12 11:23:47 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	set_cmd(t_cmdlist *node, char *str)
 	return (1);
 }
 
-void	destory_node(t_cmdlist *node)
+void	destroy_node(t_cmdlist *node)
 {
 	destroy_arr(node->args);
 	if (node->cmd != NULL)
@@ -63,7 +63,7 @@ void	destory_node(t_cmdlist *node)
 	node = NULL;
 }
 
-void	destory_list(t_cmdlist *head)
+void	destroy_list(t_cmdlist *head)
 {
 	t_cmdlist	*curr;
 	t_cmdlist	*temp;
@@ -72,7 +72,7 @@ void	destory_list(t_cmdlist *head)
 	while (curr != NULL)
 	{
 		temp = curr->next;
-		destory_node(curr);
+		destroy_node(curr);
 		curr = temp;
 	}
 }
