@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 14:48:37 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:55:01 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int	append_element(t_vararr *varr, char *val)
 int	update_element(t_vararr *varr, char *key, char *value)
 {
 	char	*target;
-	char	*temp;
 	int		i;
 
 	if (!varr || !key)

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:48 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 14:21:10 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:54:50 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ char	*ft_getenv(t_vararr *env, char *key)
 	int		i;
 	char	*temp;
 
+	if (!env || !key)
+		return (NULL);
+	if (*key == '\0')
+		return (NULL);
 	if (!env || !key)
 		return (NULL);
 	if (*key == '\0')

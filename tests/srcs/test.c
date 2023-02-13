@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 16:53:58 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/05 13:08:54 by hocsong           #+#    #+#             */
+/*   Updated: 2023/02/12 11:36:23 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#include "minishell.h"
+#include "parser.h"
+#include "tests.h"
 
-enum e_cmd_type
+void	check_leak(void)
 {
-	ERROR,
-	EXECUTABLE,
-	CD,
-	ECHO,
-	ENV,
-	EXIT,
-	EXPORT,
-	PWD,
-	UNSET,
-};
+	system("leaks test");
+}
 
-enum e_token_type
+int	main(void)
 {
-	EOA = -1,
-	NO_QUOTE = -1,
-	OFF = 0,
-	ON = 1,
-};
-
-#endif
+	atexit(check_leak);
+	// test_split();
+	test_parser();
+}

@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 16:53:58 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/12 09:46:36 by hocsong           #+#    #+#             */
+/*   Updated: 2023/02/13 14:37:08 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#include "parser.h"
+#include "builtin.h"
 
-enum e_cmd_type
+t_str	parse(char *input, t_vararr *env)
 {
-	ERROR,
-	EXECUTABLE,
-	CD,
-	ECHO,
-	ENV,
-	EXIT,
-	EXPORT,
-	PWD,
-	UNSET,
-};
+	t_str	str;
 
-enum e_token_type
-{
-	EOA = -1,
-	NO_QUOTE = -1,
-	OFF = 0,
-	ON = 1,
-};
-
-#endif
+	init_t_str(&str, input);
+	my_split(&str);
+	convert_dollar_to_env(&str, env);
+	remove_quotes(&str);
+	return (str);
+}

@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 16:53:58 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/04 16:30:47 by hocsong           #+#    #+#             */
+/*   Updated: 2023/02/12 16:27:18 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#ifndef TESTS_H
+# define TESTS_H
+# include <stdarg.h>
 
-enum e_cmd_type
+enum e_env
 {
-	ERROR,
-	EXECUTABLE,
-	CD,
-	ECHO,
-	ENV,
-	EXIT,
-	EXPORT,
-	PWD,
-	UNSET,
+	NOT_HAVE_ENV,
+	HAS_ENV
 };
 
-enum e_token_type
-{
-	EOA = -1,
-	NO_QUOTE = -1,
-	OFF = 0,
-	ON = 1,
-};
+void	test_split(void);
+void	test_parser(void);
 
 #endif

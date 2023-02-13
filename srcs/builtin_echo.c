@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 14:57:19 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:57:53 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,17 @@ void	builtin_echo(t_cmdlist *node, t_vararr *env)
 	i += check_n_option(get_element(node->args, 0));
 	while (i < node->args->len)
 	{
-		temp = get_element(node->args, i);
-		if (temp[0] == '$') // TODO : 달러 사인 파싱 부분 삭제
-		{
-			if (ft_getenv(env, &temp[1]) == NULL)
-			{
-				i++;
-				continue ;
-			}
-			printf("%s", ft_getenv(env, &temp[1]));
-		}
-		else
-			printf("%s", temp);
+		// if (input[i][0] == '$')
+		// {
+		// 	if (ft_getenv(env, &input[i][1]) == NULL)
+		// 	{
+		// 		i++;
+		// 		continue ;
+		// 	}
+		// 	printf("%s", ft_getenv(env, &input[i][1]));
+		// }
+		// else
+		printf("%s", input[i]);
 		i++;
 		if (temp != NULL)
 			printf(" ");
