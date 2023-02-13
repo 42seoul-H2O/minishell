@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 17:55:24 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:00:53 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@
 # include "vararr.h"
 # include "cmdlist.h"
 
-int		init(t_vararr **env, char **envp);
-int		init_env_arr(t_vararr *env, char **envp);
-int		*find_quote(char const *s, char *c, int start_idx);
-int		get_word_len(char const *s, char *c, int start_idx);
-char	**ft_tokenize(char const *s, char *c);
+int			init(t_vararr **env, char **envp);
+int			init_env_arr(t_vararr *env, char **envp);
+
+int			is_builtin(t_cmdlist *node);
+char		*is_executable(t_cmdlist *node, t_vararr *env);
+void		check_cmd_type(t_cmdlist *node, t_vararr *env);
+void		copy_vararr(t_vararr *dst, t_vararr *src);
+t_cmdlist	*list_maker(t_vararr *input, t_vararr *env);
+t_vararr	*parse_input(char *s, char c);
 
 #endif
