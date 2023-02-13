@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vararr_oper3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:48 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 18:17:28 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:57:32 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ char	*ft_getenv(t_vararr *env, char *key)
 	int		i;
 	char	*temp;
 
+	if (!env || !key)
+		return (NULL);
+	if (*key == '\0')
+		return (NULL);
 	i = find_element(env, key);
 	if (i == -1)
 		return (NULL);

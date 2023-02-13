@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/06 19:17:58 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/06 12:00:04 by hocsong          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,16 @@ INCS = -I./include
 
 SRCS_NAME = main.c \
 			prompt.c \
+			convert_dollar_to_env.c \
+			convert_dollar_to_env2.c \
+			ft_getenv.c \
+			get_word_len.c \
+			init_t_str.c \
+			is_delimiter.c \
+			is_quoted.c \
+			my_split.c \
+			set_token_indices.c \
+			set_word_count.c \
 			builtin_main.c \
 			builtin_exit.c \
 			builtin_pwd.c \
@@ -44,6 +54,8 @@ LIB_RDL_INC = -I/Users/hyunjuki/.brew/opt/readline/include
 #LIB_RDL = -L/Users/hocsong/.brew/opt/readline/lib
 #LIB_RDL_INC = -I/Users/hocsong/.brew/opt/readline/include
 
+TEST_PATH = ./tests
+
 all : $(NAME)
 
 $(NAME) : $(OBJS)
@@ -65,4 +77,11 @@ re :
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY : all clean fclean re
+test :
+	@echo Compiling the tests
+	@$(MAKE) -sC $(TEST_PATH) test
+	@echo The tests have been compiled. The tests will now be executed.
+	tests/test
+	@$(MAKE) -sC $(TEST_PATH) fclean
+
+.PHONY : all clean fclean re test

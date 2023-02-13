@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 15:38:43 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 11:41:10 by hocsong          ###   ########seoul.kr  */
+/*   Created: 2023/02/12 09:46:36 by hocsong           #+#    #+#             */
+/*   Updated: 2023/02/13 14:37:08 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#include "parser.h"
+#include "builtin.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include "../lib/libft/libft.h"
-# include "builtin.h"
+t_str	parse(char *input, t_vararr *env)
+{
+	t_str	str;
 
-void	set_sig_handler(void);
-void	interupt_handler(int signum);
-void	init_term_setting(void);
-char	*get_line(char *line);
-
-#endif
+	init_t_str(&str, input);
+	my_split(&str);
+	convert_dollar_to_env(&str, env);
+	remove_quotes(&str);
+	return (str);
+}

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:36:54 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 19:20:34 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:41:04 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ void	destroy_arr(t_vararr *varr)
 	varr = NULL;
 }
 
-int	realloc_2x_arr(t_vararr *varr)
+int	realloc_arr(t_vararr *varr, float ratio)
 {
 	char	**buf;
 	int		i;
 
-	buf = (char **)ft_calloc(varr->capacity * 2 + 1, sizeof(char *));
+	buf = (char **)ft_calloc(
+			(int)(varr->capacity * ratio) + 1, sizeof(char *));
 	if (!buf)
 		return (-1);
 	i = 0;
@@ -75,7 +76,7 @@ int	realloc_2x_arr(t_vararr *varr)
 	}
 	free_arr(varr->arr);
 	varr->arr = buf;
-	varr->capacity *= 2;
+	varr->capacity = (int)(varr->capacity * ratio);
 	return (1);
 }
 
