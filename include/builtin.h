@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 15:50:03 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:50:14 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	builtin_export(t_cmdlist *node, t_vararr *env);
 void	builtin_export_check_args(char *argument, t_vararr *env);
 void	builtin_unset(t_cmdlist *node, t_vararr *env);
 void	builtin_env(t_cmdlist *node, t_vararr *env);
-void	builtin_echo(t_cmdlist *node, t_vararr *env);
+void	builtin_echo(t_cmdlist *node);
 
 void	swap_element(char **a, char **b);
 

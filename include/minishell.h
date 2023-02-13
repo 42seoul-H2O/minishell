@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 17:41:57 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:53:01 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int			init_env_arr(t_vararr *env, char **envp);
 t_cmdlist	*list_maker(t_vararr *input, t_vararr *env);
 void		make_prompt(t_vararr *env);
 
+void		execution(t_cmdlist *node, t_vararr *env);
 int			exec_bin(t_cmdlist *node, t_vararr *env);
 
 int			is_builtin(t_cmdlist *node);

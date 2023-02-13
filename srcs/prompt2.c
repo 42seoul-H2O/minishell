@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 17:41:43 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:53:26 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,7 @@ void	make_prompt(t_vararr *env)
 		if (input->len != 0)
 		{
 			parsed = list_maker(input, env);
-			flag += exec_builtins(parsed, env);
-			if (flag == 0)
-				flag += exec_bin(parsed, env);
-			if (flag == 0)
-				printf("h2osh: %s: command not found\n", parsed->cmd);
+			execution(parsed, env);
 			destroy_list(parsed);
 		}
 		destroy_arr(input);

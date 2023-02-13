@@ -6,11 +6,22 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 17:43:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:53:42 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	execution(t_cmdlist *node, t_vararr *env)
+{
+	if (node->prev == NULL && node->next == NULL \
+		&& node->cmd_type != ERROR && node->cmd_type != EXECUTABLE)
+		exec_builtins(node, env);
+	else if (node->cmd_type == EXECUTABLE)
+		exec_bin(node, env);
+	else
+		printf("h2osh: %s: command not found\n", node->cmd);
+}
 
 int	exec_bin(t_cmdlist *node, t_vararr *env)
 {
