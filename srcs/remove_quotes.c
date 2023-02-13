@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:18 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 16:21:01 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 14:39:35 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	remove_quotes(t_str *str)
 		init_t_str(temp, str -> words[i]);
 		del_quotes(temp);
 		str -> words[i] = temp -> s;
+		free(temp -> quote_flags);
 		free(temp);
 		i++;
 	}

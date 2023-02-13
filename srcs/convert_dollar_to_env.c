@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 11:56:53 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 14:41:05 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int	is_dollar_single_quoted(t_str *str, int word_i, int dollar_i)
 	init_t_str(&temp, str -> words[word_i]);
 	if (is_quoted(&temp, dollar_i) == '\'')
 		return (1);
+	free(temp.quote_flags);
 	return (0);
 }
 

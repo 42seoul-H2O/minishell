@@ -6,14 +6,14 @@
 #    By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 16:27:42 by hocsong           #+#    #+#              #
-#    Updated: 2023/02/13 11:02:04 by hocsong          ###   ########seoul.kr   #
+#    Updated: 2023/02/13 14:41:33 by hocsong          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = test
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
 INCS = -I../include -I../lib/libft -I./
 
 EXT_SRCS_PATH = ../srcs

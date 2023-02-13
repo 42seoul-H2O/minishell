@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 18:23:11 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 14:40:12 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static void	parser_test(char *input, int has_env, int word_count, ...)
 	printf("---- Expected Output ----\n");
 	print_expected_outputs(ap, word_count);
 	destroy_arr(env);
+	destroy_t_str(&str);
 	va_end(ap);
 }
 
