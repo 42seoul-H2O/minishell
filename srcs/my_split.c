@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:07:47 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/10 15:16:19 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 16:35:35 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "builtin.h"
-#include "libft.h"
 
 char	**my_split(t_str *str)
 {

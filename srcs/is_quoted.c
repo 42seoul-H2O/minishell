@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   is_quoted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:40:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/09 18:17:22 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 16:35:27 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "libft.h"
-#include "builtin.h"
 
 static void	set_quote_flags(t_str *str);
 static int	is_quote(char c, t_quote *quote);

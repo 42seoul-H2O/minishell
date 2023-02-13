@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   convert_dollar_to_env2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:09:04 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 12:11:58 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 16:33:56 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "libft.h"
 #include "builtin.h"
 #include "vararr.h"
-#include "builtin.h"
 
 void	convert_dollar_to_env(t_str *str, t_vararr *env)
 {

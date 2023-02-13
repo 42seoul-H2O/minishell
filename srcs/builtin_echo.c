@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 19:13:19 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:38:50 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ void	builtin_echo(char **input, t_vararr *env)
 	i += check_n_option(input[1]);
 	while (input[i] != NULL)
 	{
-		if (input[i][0] == '$')
-		{
-			if (ft_getenv(env, &input[i][1]) == NULL)
-			{
-				i++;
-				continue ;
-			}
-			printf("%s", ft_getenv(env, &input[i][1]));
-		}
-		else
-			printf("%s", input[i]);
+		// if (input[i][0] == '$')
+		// {
+		// 	if (ft_getenv(env, &input[i][1]) == NULL)
+		// 	{
+		// 		i++;
+		// 		continue ;
+		// 	}
+		// 	printf("%s", ft_getenv(env, &input[i][1]));
+		// }
+		// else
+		printf("%s", input[i]);
 		i++;
 		if (input[i] != NULL)
 			printf(" ");

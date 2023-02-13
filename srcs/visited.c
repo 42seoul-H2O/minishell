@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   visited.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:02:13 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 14:49:06 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 16:34:25 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "builtin.h"
 
 t_visited	*init_visited(void)
 {
