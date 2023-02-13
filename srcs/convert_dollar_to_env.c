@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_dollar_to_env.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 14:54:35 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 16:06:51 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
 						t_vararr *env, t_visited *visited)
 {
 	t_dollar_sign	*dollar;
-	int				has_dollar_in_str;
 
 	dollar = malloc(sizeof (t_dollar_sign) * 1);
 	if (!dollar)
@@ -68,7 +67,6 @@ static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
 	else if (!set_dollar_indices(str -> words[word_i], dollar, visited))
 	{
 		free(dollar);
-		has_dollar_in_str = 0;
 		return (NULL);
 	}
 	set_dollar_env_value(str -> words[word_i], env, dollar);
@@ -78,11 +76,9 @@ static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
 static void	set_dollar_env_value(char *word, t_vararr *env, \
 			t_dollar_sign *dollar)
 {
-	int		i;
 	int		size;
 	char	*name;
 
-	i = 0;
 	size = dollar -> last_idx - dollar -> first_idx;
 	name = malloc(sizeof (char) * (size + 1));
 	if (!name)
