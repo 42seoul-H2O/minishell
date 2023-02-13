@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 17:07:30 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:28:53 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,13 @@ void	builtin_echo(t_cmdlist *node, t_vararr *env)
 	char	*temp;
 
 	i = 1;
-	i += check_n_option(get_element(node->args, 0));
+	i += check_n_option(get_element(node->args, 1));
 	while (i < node->args->len)
 	{
-		printf("%s", get_element(node->args, i));
+		printf("%s ", get_element(node->args, i));
 		i++;
-		if (temp != NULL)
-			printf(" ");
 	}
-	if (check_n_option(get_element(node->args, 0)) != 1)
+	printf("\b");
+	if (check_n_option(get_element(node->args, 1)) != 1)
 		printf("\n");
 }

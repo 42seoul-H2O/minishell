@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/13 16:59:06 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/13 17:42:20 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CFLAGS = -Wall -Wextra -Werror
 INCS = -I./include
 
 SRCS_NAME = main.c \
-			prompt.c \
+			prompt1.c \
+			prompt2.c \
 			convert_dollar_to_env.c \
 			convert_dollar_to_env2.c \
 			get_word_len.c \
@@ -44,7 +45,7 @@ SRCS_NAME = main.c \
 			vararr_oper3.c \
 			cmdlist.c \
 			temp_checker.c \
-			temp_parser.c
+			cmd_executor.c
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 

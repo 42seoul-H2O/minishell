@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   temp_parser.c                                      :+:      :+:    :+:   */
+/*   prompt2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 14:55:08 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 15:01:00 by hyunjuki         ###   ########.fr       */
+/*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/13 17:41:43 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,30 @@ t_cmdlist	*list_maker(t_vararr *input, t_vararr *env)
 	return (result);
 }
 
-t_vararr	*parse_input(char *s, char c)
+void	make_prompt(t_vararr *env)
 {
-	char		**splited;
-	t_vararr	*result;
-	int			i;
+	int			flag;
+	char		*line;
+	t_vararr	*input;
+	t_cmdlist	*parsed;
 
-	i = 0;
-	result = make_new_arr(10);
-	if (!result)
-		return (NULL);
-	splited = ft_split(s, c);
-	while (splited[i] != NULL)
+	line = NULL;
+	line = get_line(line);
+	while (line != NULL)
 	{
-		append_element(result, splited[i]);
-		i++;
+		flag = 0;
+		input = parse(line, env);
+		if (input->len != 0)
+		{
+			parsed = list_maker(input, env);
+			flag += exec_builtins(parsed, env);
+			if (flag == 0)
+				flag += exec_bin(parsed, env);
+			if (flag == 0)
+				printf("h2osh: %s: command not found\n", parsed->cmd);
+			destroy_list(parsed);
+		}
+		destroy_arr(input);
+		line = get_line(line);
 	}
-	free_arr(splited);
-	return (result);
 }
