@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 13:42:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:48:50 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,6 @@ static t_vararr	*parse_input(char *s, char c)
 	}
 	free_arr(splited);
 	return (result);
-}
-
-static int	split_len(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
 }
 
 static int	exec_bin(t_cmdlist *node, t_vararr *env)
