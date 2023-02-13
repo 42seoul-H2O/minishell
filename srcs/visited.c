@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:02:13 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 12:10:55 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 14:49:06 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ void	destroy_visited(t_visited *visited)
 		vnode = vnode->next;
 		free(temp);
 	}
+	free(visited);
 }

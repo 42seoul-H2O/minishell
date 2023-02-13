@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 14:41:05 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 14:54:35 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	convert_single_dollar_to_env(t_str *str, int word_i, \
 	if (is_dollar_single_quoted(str, word_i, dollar -> first_idx))
 	{
 		set_visited(visited, dollar -> first_idx);
+		free(dollar);
 		return (1);
 	}
 	replace_dollar_with_env(str, word_i, dollar, visited);
@@ -47,7 +48,10 @@ static int	is_dollar_single_quoted(t_str *str, int word_i, int dollar_i)
 
 	init_t_str(&temp, str -> words[word_i]);
 	if (is_quoted(&temp, dollar_i) == '\'')
+	{
+		free(temp.quote_flags);
 		return (1);
+	}
 	free(temp.quote_flags);
 	return (0);
 }
@@ -63,6 +67,7 @@ static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
 		builtin_exit(12);
 	else if (!set_dollar_indices(str -> words[word_i], dollar, visited))
 	{
+		free(dollar);
 		has_dollar_in_str = 0;
 		return (NULL);
 	}
