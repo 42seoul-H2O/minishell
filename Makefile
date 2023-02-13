@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/13 14:57:55 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/13 15:19:06 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,15 @@ INCS = -I./include
 
 SRCS_NAME = main.c \
 			prompt.c \
-			builtin/builtin_main.c \
-			builtin/builtin_exit.c \
-			builtin/builtin_pwd.c \
-			builtin/builtin_export.c \
-			builtin/builtin_export2.c \
-			builtin/builtin_env.c \
-			builtin/builtin_echo.c \
-			builtin/builtin_cd.c \
-			builtin/builtin_unset.c \
+			builtin_main.c \
+			builtin_exit.c \
+			builtin_pwd.c \
+			builtin_export.c \
+			builtin_export2.c \
+			builtin_env.c \
+			builtin_echo.c \
+			builtin_cd.c \
+			builtin_unset.c \
 			vararr_oper1.c \
 			vararr_oper2.c \
 			vararr_oper3.c \

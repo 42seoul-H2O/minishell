@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:57:37 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 15:01:06 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:10:57 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,24 @@ int	is_builtin(t_cmdlist *node)
 	return (1);
 }
 
+char	*check_default_path(char *target, char *path)
+{
+	char	*temp;
+
+	temp = ft_strjoin(path, target);
+	free(path);
+	path = NULL;
+	if (access(temp, F_OK) == 0)
+		return (temp);
+	free(temp);
+	temp = NULL;
+	return (NULL);
+}
+
 char	*is_executable(t_cmdlist *node, t_vararr *env)
 {
 	char	**path;
 	char	*temp;
-	char	*check_path;
 	int		i;
 
 	temp = NULL;
@@ -49,17 +62,13 @@ char	*is_executable(t_cmdlist *node, t_vararr *env)
 	i = 0;
 	while (path[i] != NULL)
 	{
-		check_path = ft_strjoin(path[i], "/");
-		temp = ft_strjoin(check_path, node->cmd);
-		free(check_path);
-		if (access(temp, F_OK) == 0)
+		temp = check_default_path(node->cmd, ft_strjoin(path[i], "/"));
+		if (temp != NULL)
 		{
 			free_arr(path);
 			return (temp);
 		}
 		i++;
-		free(temp);
-		temp = NULL;
 	}
 	free_arr(path);
 	if (access(node->cmd, F_OK) == 0)

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 15:00:53 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:11:22 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int			init(t_vararr **env, char **envp);
 int			init_env_arr(t_vararr *env, char **envp);
 
 int			is_builtin(t_cmdlist *node);
+char		*check_default_path(char *target, char *path);
 char		*is_executable(t_cmdlist *node, t_vararr *env);
 void		check_cmd_type(t_cmdlist *node, t_vararr *env);
 void		copy_vararr(t_vararr *dst, t_vararr *src);
