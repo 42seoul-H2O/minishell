@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:09:04 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 17:20:10 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 12:11:58 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@
 
 void	convert_dollar_to_env(t_str *str, t_vararr *env)
 {
-	int		*visited;
-	size_t	i;
+	t_visited	*visited;
+	size_t		i;
 
 	i = 0;
 	while (str -> words[i])
 	{
-		visited = init_visited(ft_strlen(str -> words[i]));
+		visited = init_visited();
 		while (convert_single_dollar_to_env(str, i, env, visited))
 			;
-		free(visited);
+		destroy_visited(visited);
 		i++;
 	}
 }
 
 int	replace_dollar_with_env(t_str *str, int word_i, t_dollar_sign *dollar, \
-	int *visited)
+	t_visited *visited)
 {
 	char	*dest1;
 	char	*dest2;
@@ -41,7 +41,7 @@ int	replace_dollar_with_env(t_str *str, int word_i, t_dollar_sign *dollar, \
 
 	if (dollar -> first_idx == dollar -> last_idx)
 	{
-		visited[dollar -> first_idx] = 1;
+		set_visited(visited, dollar->first_idx);
 		return (0);
 	}
 	dest1 = malloc(sizeof (char) * (dollar -> first_idx) + 1);
@@ -59,23 +59,6 @@ int	replace_dollar_with_env(t_str *str, int word_i, t_dollar_sign *dollar, \
 	free(str -> words[word_i]);
 	str -> words[word_i] = dest3;
 	return (1);
-}
-
-int	*init_visited(int size)
-{
-	int	i;
-	int	*visited;
-
-	i = 0;
-	visited = malloc(sizeof (int) * size);
-	if (!visited)
-		builtin_exit(12);
-	while (i < size)
-	{
-		visited[i] = 0;
-		i++;
-	}
-	return (visited);
 }
 
 int	is_unallowed_char(char *word, int char_idx)

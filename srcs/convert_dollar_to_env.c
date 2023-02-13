@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 17:30:57 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 11:56:53 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 #include "vararr.h"
 
 static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
-						t_vararr *env, int *visited);
+						t_vararr *env, t_visited *visited);
 static void				set_dollar_env_value(char *word, t_vararr *env, \
 						t_dollar_sign *dollar);
 static int				set_dollar_indices(char *word, t_dollar_sign *dollar, \
-						int *visited);
+						t_visited *visited);
 static int				is_dollar_single_quoted(t_str *str, int word_i, \
 						int dollar_i);
 
 int	convert_single_dollar_to_env(t_str *str, int word_i, \
-	t_vararr *env, int *visited)
+	t_vararr *env, t_visited *visited)
 {
 	t_dollar_sign	*dollar;
 
 	dollar = init_dollar_sign(str, word_i, env, visited);
 	if (!dollar)
 		return (0);
-	// if a dollar sign is single quoted, then stop this function. Also mark the dollar sign visited.
 	if (is_dollar_single_quoted(str, word_i, dollar -> first_idx))
 	{
-		visited[dollar -> first_idx] = 1;
+		set_visited(visited, dollar -> first_idx);
 		return (1);
 	}
 	replace_dollar_with_env(str, word_i, dollar, visited);
@@ -53,7 +52,7 @@ static int	is_dollar_single_quoted(t_str *str, int word_i, int dollar_i)
 }
 
 static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
-						t_vararr *env, int *visited)
+						t_vararr *env, t_visited *visited)
 {
 	t_dollar_sign	*dollar;
 	int				has_dollar_in_str;
@@ -90,7 +89,7 @@ static void	set_dollar_env_value(char *word, t_vararr *env, \
 }
 
 static int	set_dollar_indices(char *word, t_dollar_sign *dollar, \
-	int *visited)
+	t_visited *visited)
 {
 	int	i;
 	int	is_dollar_found;
@@ -100,7 +99,7 @@ static int	set_dollar_indices(char *word, t_dollar_sign *dollar, \
 	dollar -> first_idx = -1;
 	while (word[i])
 	{
-		if (word[i] == '$' && !visited[i] && !is_dollar_found)
+		if (word[i] == '$' && !is_visited(visited, i) && !is_dollar_found)
 		{
 			dollar -> first_idx = i;
 			is_dollar_found = 1;
@@ -118,4 +117,3 @@ static int	set_dollar_indices(char *word, t_dollar_sign *dollar, \
 		return (1);
 	return (0);
 }
-
