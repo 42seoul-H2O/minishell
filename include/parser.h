@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 14:59:39 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 14:37:00 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,30 @@ typedef struct s_str{
 	char	**words;
 	int		word_count;
 }t_str;
+
+typedef struct s_cmd_list
+{
+	char		*cmd;
+	t_vararr	*args;
+	int			cmd_type;
+	int			pipe[2];
+	int			input_fd;
+	int			output_fd;
+	t_list		*next;
+	t_list		*prev;
+}t_cmd_list;
+
+enum e_cmd_type
+{
+	EXECUTABLE,
+	CD,
+	ECHO,
+	ENV,
+	EXIT,
+	EXPORT,
+	PWD,
+	UNSET,
+};
 
 t_str		parse(char *input, t_vararr *env);
 void		init_t_str(t_str *str, char *s);
