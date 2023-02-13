@@ -20,10 +20,11 @@
 # include <readline/history.h>
 # include <signal.h>
 # include "../lib/libft/libft.h"
+# include "builtin.h"
 
 void	set_sig_handler(void);
 void	interupt_handler(int signum);
 void	init_term_setting(void);
-char	*get_line(void);
+char	*get_line(char *line);
 
 #endif

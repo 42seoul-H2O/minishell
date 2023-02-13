@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/05 13:18:02 by hocsong          ###   ########seoul.kr  */
+/*   Created: 2023/02/06 14:49:21 by hyunjuki          #+#    #+#             */
+/*   Updated: 2023/02/06 19:24:19 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "builtin.h"
 
-# include "constants.h"
-# include "prompt.h"
-# include "vararr.h"
+void	builtin_unset(char **input, t_vararr *env)
+{
+	int	i;
 
-int		init(t_vararr *env, char **envp);
-int		init_env_arr(t_vararr *env, char **envp);
-
-#endif
+	i = 1;
+	while (input[i] != NULL)
+	{
+		ft_unsetenv(env, input[i]);
+		i++;
+	}
+}
