@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 16:57:27 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:02:50 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	int			flag;
 	char		*line;
-	t_str		input;
+	t_vararr	*input;
 	t_vararr	*env;
 	t_cmdlist	*parsed;
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		flag = 0;
 		input = parse(line, env);
-		if (parsed.word_count != 0)
+		if (input->len != 0)
 		{
 			parsed = list_maker(input, env);
 			flag += exec_builtins(parsed, env);
@@ -100,7 +100,7 @@ int	main(int argc, char **argv, char **envp)
 				printf("h2osh: %s: command not found\n", parsed->cmd);
 			destroy_list(parsed);
 		}
-		destroy_t_str(&parsed);
+		destroy_arr(input);
 		line = get_line(line);
 	}
 	return (0);

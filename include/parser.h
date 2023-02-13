@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 16:34:20 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:01:00 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_str{
 	int		word_count;
 }t_str;
 
-t_str		parse(char *input, t_vararr *env);
+t_vararr	*parse(char *input, t_vararr *env);
 void		init_t_str(t_str *str, char *s);
 void		destroy_t_str(t_str *str);
 char		**my_split(t_str *str);
@@ -69,6 +69,6 @@ int			is_visited(t_visited *visited, int idx);
 void		destroy_visited(t_visited *visited);
 int			is_unallowed_char(char *word, int char_idx);
 
-void	remove_quotes(t_str *str);
+void		remove_quotes(t_str *str);
 
 #endif

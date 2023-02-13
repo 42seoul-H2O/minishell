@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:07:06 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 16:06:51 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:06:25 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static t_dollar_sign	*init_dollar_sign(t_str *str, int word_i, \
 
 	dollar = malloc(sizeof (t_dollar_sign) * 1);
 	if (!dollar)
-		builtin_exit(12);
+		ft_exit(12);
 	else if (!set_dollar_indices(str -> words[word_i], dollar, visited))
 	{
 		free(dollar);
@@ -82,7 +82,7 @@ static void	set_dollar_env_value(char *word, t_vararr *env, \
 	size = dollar -> last_idx - dollar -> first_idx;
 	name = malloc(sizeof (char) * (size + 1));
 	if (!name)
-		builtin_exit(12);
+		ft_exit(12);
 	ft_strlcpy(name, word + dollar -> first_idx + 1, size + 1);
 	dollar -> env_value = ft_getenv(env, name);
 	if (!dollar -> env_value)
