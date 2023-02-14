@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_word_count.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:22:41 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 13:28:12 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/15 00:33:02 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_word_count(t_str *str)
 		if (!is_delimiter(str, i)
 			&& is_delimiter(str, i + 1))
 			count++;
-		if (is_special_delimiter(str, i))
+		else if (is_special_delimiter(str, i))
 			count++;
 		i++;
 	}

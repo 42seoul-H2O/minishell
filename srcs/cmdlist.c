@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:55:09 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 11:23:47 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/15 00:27:35 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ t_cmdlist	*make_new_node(t_cmdlist *prev)
 	result->pipe[0] = STDIN_FILENO;
 	result->pipe[1] = STDOUT_FILENO;
 	if (prev)
+	{
 		result->prev = prev;
+		prev->next = result;
+	}
 	else
 		result->prev = NULL;
 	return (result);
@@ -82,7 +85,7 @@ t_cmdlist	*list_reset_loc(t_cmdlist *curr)
 	t_cmdlist	*temp;
 
 	temp = curr;
-	while (!(temp->prev))
+	while (temp->prev != NULL)
 		temp = temp->prev;
 	return (temp);
 }

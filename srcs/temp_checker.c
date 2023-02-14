@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:57:37 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 15:10:57 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/14 23:58:03 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,13 @@ void	check_cmd_type(t_cmdlist *node, t_vararr *env)
 	node->cmd_type = ERROR;
 }
 
-void	copy_vararr(t_vararr *dst, t_vararr *src)
+void	copy_vararr(t_vararr *dst, t_vararr *src, int start_idx)
 {
 	int	i;
 
-	i = 0;
+	i = start_idx;
+	if (i < 0)
+		i = 0;
 	while (i < src->len)
 	{
 		append_element(dst, get_element(src, i));
