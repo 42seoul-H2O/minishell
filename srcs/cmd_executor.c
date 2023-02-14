@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 17:53:42 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:06:57 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ int	exec_bin(t_cmdlist *node, t_vararr *env)
 		pid = fork();
 		if (pid == 0)
 		{
+			set_sig_default();
 			execve(node->cmd, node->args->arr, env->arr);
 		}
+		set_sig_ignore();
 		wait(&stat);
+		set_sig_handler();
 		return (1);
 	}
 	return (0);

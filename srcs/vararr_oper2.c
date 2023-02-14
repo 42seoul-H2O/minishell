@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 16:55:01 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:38:22 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	append_element(t_vararr *varr, char *val)
 {
 	char	*temp;
 
-	if (!varr)
+	if (!varr || !val)
 		return (-1);
 	if (varr->capacity == varr->len)
 		if (realloc_arr(varr, 2.0) == -1)
