@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 14:56:01 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/15 12:07:49 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_vararr	*init_env(int has_env);
 void	test_parser(void)
 {
 	printf("---- Parser Test Cases ----\n\n");
+	parser_test("ls -la |wc -l", HAS_ENV, 5, "ls", "-la", "|", "wc", "-l");
 	parser_test("blahblah $", HAS_ENV, 2, "blahblah", "$");
 	parser_test("blahblah $^", HAS_ENV, 2, "blahblah", "$^");
 	parser_test("blahblah $\'\'", HAS_ENV, 2, "blahblah", "$");

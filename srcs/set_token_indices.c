@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:02:42 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/05 14:04:30 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/15 12:15:09 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	set_token_indices(t_str *str)
 		builtin_exit(12);
 	while (str -> s[i])
 	{
-		if ((is_delimiter(str, i - 1) && \
+		if (((is_delimiter(str, i - 1) || is_special_delimiter(str, i - 1)) && \
 			!is_delimiter(str, i)) || \
 			is_special_delimiter(str, i))
 		{
