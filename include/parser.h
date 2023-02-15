@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 14:37:00 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/15 20:06:54 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ typedef struct s_cmd_list
 	t_vararr	*args;
 	int			cmd_type;
 	int			pipe[2];
-	int			input_fd;
-	int			output_fd;
 	t_list		*next;
 	t_list		*prev;
 }t_cmd_list;
