@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/15 00:21:03 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:00:41 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,28 @@ char	*get_element(t_vararr *varr, int idx)
 
 int	find_element(t_vararr *varr, char *val)
 {
-	int	i;
+	int		i;
+	int		len;
+	char	*key;
 
 	i = 0;
 	while (i < varr->len)
 	{
-		if (ft_strncmp(varr->arr[i], val, ft_strlen(val)) == 0)
+		key = NULL;
+		if (ft_strchr(varr->arr[i], '=') == NULL)
+			key = ft_strdup(varr->arr[i]);
+		else
+			key = ft_substr(varr->arr[i], 0, \
+				ft_strchr(varr->arr[i], '=') - varr->arr[i]);
+		if (key == NULL)
+			return (-1);
+		len = ft_strlen(key);
+		if (len < ft_strlen(val))
+			len = ft_strlen(val);
+		if (ft_strncmp(key, val, len) == 0)
 			return (i);
+		if (key)
+			free(key);
 		i++;
 	}
 	return (-1);
