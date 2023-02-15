@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 19:23:21 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:50:14 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@
 # include <stdio.h>
 # include "../lib/libft/libft.h"
 # include "vararr.h"
+# include "cmdlist.h"
+# include "constants.h"
 
-int		exec_builtins(char **input, int len, t_vararr *env);
-void	check_exit_code(char **input, int len);
-void	builtin_exit(int errnum);
+int		exec_builtins(t_cmdlist *exec, t_vararr *env);
+void	ft_exit(int errnum);
+void	builtin_exit(t_cmdlist	*node);
 void	builtin_pwd(void);
-void	builtin_cd(char *path);
-void	builtin_export(char **input, t_vararr *env);
-void	builtin_env(char **input, t_vararr *env);
-void	builtin_echo(char **input, t_vararr *env);
-void	builtin_unset(char **input, t_vararr *env);
+void	builtin_cd(t_cmdlist *node);
+void	builtin_export(t_cmdlist *node, t_vararr *env);
+void	builtin_export_check_args(char *argument, t_vararr *env);
+void	builtin_unset(t_cmdlist *node, t_vararr *env);
+void	builtin_env(t_cmdlist *node, t_vararr *env);
+void	builtin_echo(t_cmdlist *node);
 
 void	swap_element(char **a, char **b);
 

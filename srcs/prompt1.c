@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   prompt1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:20:02 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 14:36:53 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:43:08 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ void	set_sig_handler(void)
 {
 	signal(SIGINT, interupt_handler);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+void	set_sig_ignore(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	set_sig_default(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 void	interupt_handler(int signum)
@@ -38,7 +50,7 @@ char	*get_line(char *line)
 	}
 	line = readline("h2osh$ ");
 	if (line == NULL)
-		builtin_exit(0);
+		ft_exit(0);
 	add_history(line);
 	return (line);
 }

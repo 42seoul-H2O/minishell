@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:35:37 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/11 17:52:03 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 17:08:32 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int	get_heredoc_fd(char *eof)
 
 	fd = open("heredoc_temp", O_RDWR | O_CREAT | O_TRUNC, 0600);
 	if (!fd)
-		builtin_exit(1);
+		ft_exit(1);
 	line = readline("> ");
 	write(fd, line, ft_strlen(line));
 	if (!write)
-		builtin_exit(1);
+		ft_exit(1);
 	while (ft_strncmp(line, eof, ft_strlen(eof) + 1))
 	{
 		free(line);
 		line = readline("> ");
 		write(fd, line, ft_strlen(line));
 		if (!write)
-			builtin_exit(1);
+			ft_exit(1);
 	}
 	free(line);
 	return (fd);

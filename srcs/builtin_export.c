@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 19:23:59 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:57:19 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	sort_and_print(t_vararr *arr)
 {
 	char	**temp;
 
-	temp = copy_arr(arr);
+	temp = copy_arr(arr, 0);
 	if (!temp)
 		return (-1);
 	quick_sort(temp, 0, arr->len - 1);
@@ -94,30 +94,21 @@ static int	builtin_export_no_arg(t_vararr *env)
 	return (1);
 }
 
-void	builtin_export(char **input, t_vararr *env)
+void	builtin_export(t_cmdlist *node, t_vararr *env)
 {
 	int		i;
-	int		j;
 	char	*temp;
 
-	if (input[1] == NULL)
+	if (node->args->len == 1)
 	{
 		if (builtin_export_no_arg(env) == -1)
-			builtin_exit(1);
+			ft_exit(1);
 		return ;
 	}
 	i = 1;
-	while (input[i] != NULL)
+	while (i < node->args->len)
 	{
-		if (ft_strchr(input[i], '=') == NULL)
-			append_element(env, input[i]);
-		else
-		{
-			j = ft_strchr(input[i], '=') - input[i];
-			temp = ft_substr(input[i], 0, j);
-			ft_setenv(env, temp, &input[i][j + 1], 1);
-			free(temp);
-		}
+		builtin_export_check_args(get_element(node->args, i), env);
 		i++;
 	}
 }

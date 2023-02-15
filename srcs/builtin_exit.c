@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:08 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/04 19:28:34 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:58:11 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ static int	is_all_digit(char *s)
 	return (1);
 }
 
-void	builtin_exit(int errnum)
+void	builtin_exit(t_cmdlist *node)
 {
-	printf("%s\n", "exit");
-	exit(errnum);
-}
-
-void	check_exit_code(char **input, int len)
-{
-	if (len == 1)
-		builtin_exit(0);
-	else if (len == 2)
+	if (node->args->len == 1)
+		ft_exit(0);
+	else if (node->args->len == 2)
 	{
-		if (is_all_digit(input[1]))
-			builtin_exit(atoi(input[1]));
+		if (is_all_digit(get_element(node->args, 1)))
+			ft_exit(ft_atoi(get_element(node->args, 1)));
 		printf("exit\nh2osh: exit: %s: numeric argument required\n",
-			input[1]);
+			get_element(node->args, 1));
 		exit(2);
 	}
 	else
 		printf("exit\nh2osh: exit: too many arguments\n");
+}
+
+void	ft_exit(int errnum)
+{
+	printf("%s\n", "exit");
+	exit(errnum);
 }

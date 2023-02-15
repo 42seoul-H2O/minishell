@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:57:18 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 14:39:35 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/13 17:06:25 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	remove_quotes(t_str *str)
 	{
 		temp = malloc(sizeof (t_str));
 		if (!temp)
-			builtin_exit(12);
+			ft_exit(12);
 		init_t_str(temp, str -> words[i]);
 		del_quotes(temp);
 		str -> words[i] = temp -> s;
@@ -45,7 +45,7 @@ static void	del_char(t_str *str, size_t i)
 	pre = malloc(sizeof (char) * ft_strlen(str -> s) + 1);
 	post = malloc(sizeof (char) * (ft_strlen(str -> s) + 1));
 	if (!pre || !post)
-		builtin_exit(12);
+		ft_exit(12);
 	if (i == 0)
 		pre[0] = 0;
 	else

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:02:13 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 16:34:25 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:06:25 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_visited	*init_visited(void)
 
 	visited = malloc(sizeof(t_visited));
 	if (!visited)
-		builtin_exit(12);
+		ft_exit(12);
 	visited->head = malloc(sizeof(t_vnode));
 	if (!visited -> head)
-		builtin_exit(12);
+		ft_exit(12);
 	visited->head->visited_idx = -1;
 	visited->head->next = NULL;
 	return (visited);
@@ -36,7 +36,7 @@ int	set_visited(t_visited *visited, int idx)
 		vnode = vnode->next;
 	vnode->next = malloc(sizeof (t_vnode));
 	if (!vnode->next)
-		builtin_exit(12);
+		ft_exit(12);
 	vnode->next->visited_idx = idx;
 	vnode->next->next = NULL;
 	return (1);
