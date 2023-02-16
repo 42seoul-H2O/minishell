@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:55:10 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/16 15:49:21 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/16 16:34:54 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ static int	get_optype(char *word)
 			return (REDIR_IN);
 		if (word[0] == '>')
 			return (REDIR_OUT);
+	}
+	if (ft_strlen(word) == 2)
+	{
+		if (word[0] == '<' && word[1] == '<')
+			return (HEREDOC);
+		if (word[0] == '>' && word[2] == '>')
+			return (APPEND);
 	}
 	return (0);
 }
