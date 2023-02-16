@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/16 14:57:47 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/16 16:13:34 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_str{
 	int		*quote_flags;
 	char	**words;
 	int		word_count;
+	int		merge_count;
 }t_str;
 
 typedef struct s_cmd_list
@@ -91,6 +92,7 @@ int			is_unallowed_char(char *word, int char_idx);
 
 void		remove_quotes(t_str *str);
 
-void		merge_redir_tokens(char **words);
+void		merge_redir_tokens(t_str *str);
+int			get_token_type(char **words, int idx);
 
 #endif
