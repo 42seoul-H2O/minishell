@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/15 20:06:54 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/16 14:57:47 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int			is_visited(t_visited *visited, int idx);
 void		destroy_visited(t_visited *visited);
 int			is_unallowed_char(char *word, int char_idx);
 
-void	remove_quotes(t_str *str);
+void		remove_quotes(t_str *str);
+
+void		merge_redir_tokens(char **words);
 
 #endif
