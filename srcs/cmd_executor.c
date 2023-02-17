@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 22:36:37 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 22:38:59 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	execution(t_cmdlist *node, t_vararr *env)
 			exec_child(curr, env);
 		curr = curr->next;
 	}
-	break_pipe_and_wait_child(node);
+	break_pipe_and_wait_child(node, pid);
 }
 
-void	break_pipe_and_wait_child(t_cmdlist *node)
+void	break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child)
 {
 	int	stat;
 
@@ -58,7 +58,7 @@ void	break_pipe_and_wait_child(t_cmdlist *node)
 		node = node->next;
 	}
 	set_sig_ignore();
-	wait(&stat);
+	waitpid(last_child, &stat, 0);
 	if (WIFSIGNALED(stat))
 		write(1, "\n", 1);
 	set_sig_handler();
