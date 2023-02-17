@@ -3,6 +3,7 @@
 		"libft.h": "c",
 		"vararr.h": "c",
 		"minishell.h": "c",
-		"__node_handle": "c"
+		"__node_handle": "c",
+		"parser.h": "c"
 	}
 }

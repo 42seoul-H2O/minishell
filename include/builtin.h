@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 20:57:27 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:37:24 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "vararr.h"
 # include "cmdlist.h"
 # include "constants.h"
-# include "minishell.h"
 
 int		exec_single_builtin(t_cmdlist *exec, t_vararr *env);
 int		exec_builtins(t_cmdlist *exec, t_vararr *env);

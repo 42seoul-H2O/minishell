@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 21:00:59 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:39:27 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 int	exec_single_builtin(t_cmdlist *exec, t_vararr *env)
 {

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:07:47 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 17:06:25 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:38:29 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**my_split(t_str *str)
 	i = 0;
 	words = malloc(sizeof (char *) * (str -> word_count + 1));
 	if (!words)
-		ft_exit(12);
+		exit(12);
 	set_token_indices(str);
 	while (str -> token_indices[i] != -1)
 	{

@@ -6,15 +6,15 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/17 12:12:08 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:38:42 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 # include "vararr.h"
+# include "constants.h"
 # include "../lib/libft/libft.h"
-# include "builtin.h"
 # include <fcntl.h>
 
 typedef struct s_quote{
@@ -54,7 +54,7 @@ typedef struct s_parsed
 	char	**words;
 }t_parsed;
 
-t_vararr	*parse(char *input, t_vararr *env);
+t_parsed	*parse(char *input, t_vararr *env);
 void		init_t_str(t_str *str, char *s);
 void		destroy_t_str(t_str *str);
 char		**my_split(t_str *str);
