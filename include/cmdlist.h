@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:47:36 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 11:23:11 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:07:11 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include "../lib/libft/libft.h"
 # include "vararr.h"
 

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:12:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 15:51:18 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:50:34 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	builtin_cd(t_cmdlist *node)
 {
 	if (node->args->len == 1)
 	{
-		printf("h2osh: cd: argument not found\n");
+		ft_putstr_fd("h2osh: cd: argument not found\n", 2);
 		return ;
 	}
 	if (node->args->len != 2)
 	{
-		printf("h2osh: cd: too many arguments\n");
+		ft_putstr_fd("h2osh: cd: too many arguments\n", 2);
 		return ;
 	}
 	if (access(get_element(node->args, 1), F_OK) == 0)

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:13:54 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 16:58:17 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:07:40 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define VARARR_H
 
 # include "../lib/libft/libft.h"
-# include <stdio.h>
 /*
 ** capacity : array max size
 ** len : array current size

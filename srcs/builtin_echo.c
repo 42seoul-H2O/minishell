@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 17:49:57 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:53:14 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ void	builtin_echo(t_cmdlist *node)
 	i += check_n_option(get_element(node->args, 1));
 	while (i < node->args->len)
 	{
-		printf("%s ", get_element(node->args, i));
+		ft_putstr_fd(get_element(node->args, i), 1);
+		ft_putchar_fd(' ', 1);
 		i++;
 	}
-	printf("\b");
+	ft_putchar_fd('\b', 1);
 	if (check_n_option(get_element(node->args, 1)) != 1)
-		printf("\n");
+		ft_putchar_fd('\n', 1);
 }

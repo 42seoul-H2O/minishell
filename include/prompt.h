@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:38:43 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 16:58:37 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:08:06 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PROMPT_H
 
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
