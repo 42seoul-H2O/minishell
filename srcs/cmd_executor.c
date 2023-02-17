@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 18:44:14 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:58:35 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	execution(t_cmdlist *node, t_vararr *env)
 	curr = node;
 	while (curr)
 	{
-		if (curr->prev && curr->prev->prev)
-			close_prev_pipe(curr);
+		close_prev_pipe(curr);
 		pid = fork();
 		if (pid < 0)
 			ft_exit(11);
@@ -71,38 +70,15 @@ void	exec_child(t_cmdlist *node, t_vararr *env)
 	set_redirection(node);
 	if (node->cmd_type == ERROR)
 	{
-
+		ft_putstr_fd("h2osh : ", 2);
+		ft_putstr_fd(node->cmd, 2);
+		ft_putstr_fd(": command not found\n", 2);
 	}
 	else if (node->cmd_type == EXECUTABLE)
 	{
-
+		if (execve(node->cmd, node->args->words, env->arr) < 0)
+			ft_exit(11);
 	}
 	else
-	{
-
-	}
+		exec_builtins(node, env);
 }
-/*
-int	exec_bin(t_cmdlist *node, t_vararr *env)
-{
-	int		stat;
-	pid_t	pid;
-	char	*temp;
-
-	if (node->cmd_type == EXECUTABLE)
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			execve(node->cmd, node->args->arr, env->arr);
-		}
-		set_sig_ignore();
-		wait(&stat);
-		if (WIFSIGNALED(stat))
-			write(1, "\n", 1);
-		set_sig_handler();
-		return (1);
-	}
-	return (0);
-}
-*/
