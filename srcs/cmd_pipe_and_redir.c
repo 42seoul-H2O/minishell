@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 18:59:29 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:31:31 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,19 @@ void	set_redirection(t_cmdlist *node)
 
 void	set_pipe_fd(t_cmdlist *node)
 {
-	
+	if (node->prev != NULL)
+	{
+		dup2(node->prev->pipe[0], STDIN_FILENO);
+		close(node->prev->pipe[0]);
+		close(node->prev->pipe[1]);
+	}
+	if (node->next != NULL)
+	{
+		dup2(node->pipe[1], STDOUT_FILENO);
+		close(node->pipe[1]);
+		close(node->pipe[0]);
+	}
+
 }
 
 void	close_prev_pipe(t_cmdlist *node)
