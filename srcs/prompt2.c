@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 16:01:43 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:14:34 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	make_prompt(t_vararr *env)
 		input = parse(line, env); //parsed 구조체에 내용이 채워져서 들어올 예정
 		if (input != NULL && input->word_count != 0)
 		{
-			head = list_maker(input, env); //parsed 구조체를 활용하여 리스트를 만들기
+			head = list_maker(input, env);
 			if (head->next == NULL)
 			{
 				head->args = subparsed(input, 0, input->word_count - 1);

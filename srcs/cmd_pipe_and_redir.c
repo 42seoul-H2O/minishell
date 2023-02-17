@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 20:19:36 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:13:00 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	set_pipe_fd(t_cmdlist *node)
 		close(node->pipe[1]);
 		close(node->pipe[0]);
 	}
-
 }
 
 void	close_prev_pipe(t_cmdlist *node)
