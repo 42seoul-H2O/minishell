@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 21:14:34 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 22:26:50 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ t_parsed	*subparsed(t_parsed *input, int start, int end)
 	result->word_count = end - start + 1;
 	if (result->word_count <= 0)
 		ft_exit(11);
-	result->words = malloc (sizeof(char *) * result->word_count + 1);
+	result->words = malloc(sizeof(char *) * result->word_count + 1);
 	result->token_types = malloc(sizeof(int) * result->word_count);
-	if (result->words || result->token_types)
+	if (!(result->words) || !(result->token_types))
 		ft_exit(11);
 	i = 0;
 	while (i < result->word_count)
@@ -51,31 +51,30 @@ t_parsed	*subparsed(t_parsed *input, int start, int end)
 	return (result);
 }
 
-t_cmdlist	*list_maker(t_parsed *input, t_vararr *env)
+t_cmdlist	*list_maker(t_parsed *input, t_vararr *env, int *last_pipe)
 {
 	t_cmdlist	*result;
 	int			i;
-	int			last_pipe;
 
 	i = 0;
-	last_pipe = -1;
+	*last_pipe = -1;
 	result = make_new_node(NULL);
 	if (!result)
 		ft_exit(11);
 	while (i < input->word_count)
 	{
-		if (ft_strncmp(input->words[i], "|", ft_strlen(input->words[i]) == 0))
+		if (input->token_types[i] == PIPE)
 		{
 			result = make_new_node(result);
 			if (!result)
 				ft_exit(11);
-			result->args = subparsed(input, last_pipe + 1, i - 1);
+			result->prev->args = subparsed(input, *last_pipe + 1, i - 1);
 			check_cmd_type(result->prev, env);
-			last_pipe = i;
+			*last_pipe = i;
 		}
 		i++;
 	}
-	return (list_reset_loc(result));
+	return (result);
 }
 
 void	parsed_delete_idx(t_parsed *p, int idx)
@@ -100,27 +99,23 @@ void	parsed_delete_idx(t_parsed *p, int idx)
 
 void	make_prompt(t_vararr *env)
 {
-	int			flag;
+	int			pipe;
 	char		*line;
 	t_parsed	*input;
-	t_cmdlist	*head;
+	t_cmdlist	*node;
 
 	line = NULL;
 	line = get_line(line);
 	while (line != NULL)
 	{
-		flag = 0;
 		input = parse(line, env); //parsed 구조체에 내용이 채워져서 들어올 예정
 		if (input != NULL && input->word_count != 0)
 		{
-			head = list_maker(input, env);
-			if (head->next == NULL)
-			{
-				head->args = subparsed(input, 0, input->word_count - 1);
-				check_cmd_type(head, env);
-			}
-			execution(head, env);
-			destroy_list(list_reset_loc(head));
+			node = list_maker(input, env, &pipe);
+			node->args = subparsed(input, pipe + 1, input->word_count - 1);
+			check_cmd_type(node, env);
+			execution(list_reset_loc(node), env);
+			destroy_list(list_reset_loc(node));
 		}
 		destroy_parsed(input);
 		line = get_line(line);

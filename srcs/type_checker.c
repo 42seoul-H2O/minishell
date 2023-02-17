@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:57:37 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 14:13:49 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:48:32 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	check_cmd_type(t_cmdlist *node, t_vararr *env)
 	{
 		if (node->args->token_types[i] == CMD)
 			set_cmd(node, node->args->words[i]);
+		i++;
 	}
 	if (is_builtin(node) == 1)
 		return ;
