@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 18:58:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:36:54 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,18 @@ void	break_pipe_and_wait_child(t_cmdlist *node)
 
 void	exec_child(t_cmdlist *node, t_vararr *env)
 {
+	int	temp;
+
 	set_pipe_fd(node);
-	set_redirection(node);
+	temp = set_redirection(node);
+	if (temp != 0)
+	{
+		ft_putstr_fd("h2osh : ", 2);
+		ft_putstr_fd(node->args->words[temp + 1], 2);
+		ft_putstr_fd(": ", 2);
+		perror(NULL);
+		return ;
+	}
 	if (node->cmd_type == ERROR)
 	{
 		ft_putstr_fd("h2osh : ", 2);

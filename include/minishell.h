@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 18:49:03 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:18:31 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void		execution(t_cmdlist *node, t_vararr *env);
 void		break_pipe_and_wait_child(t_cmdlist *node);
 void		exec_child(t_cmdlist *node, t_vararr *env);
 
-void		set_redirection(t_cmdlist *node);
+int			set_redirection(t_cmdlist *node);
 void		set_pipe_fd(t_cmdlist *node);
 void		close_prev_pipe(t_cmdlist *node);
-
+int			open_redir_and_set_fd(t_cmdlist *node, int idx, int type);
 
 int			is_builtin(t_cmdlist *node);
 char		*check_default_path(char *target, char *path);
