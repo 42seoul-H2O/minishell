@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   temp_checker.c                                     :+:      :+:    :+:   */
+/*   type_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:57:37 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/14 23:58:03 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:13:49 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,14 @@ char	*is_executable(t_cmdlist *node, t_vararr *env)
 void	check_cmd_type(t_cmdlist *node, t_vararr *env)
 {
 	char	*temp;
+	int		i;
 
+	i = 0;
+	while (i < node->args->word_count)
+	{
+		if (node->args->token_types[i] == CMD)
+			set_cmd(node, node->args->words[i]);
+	}
 	if (is_builtin(node) == 1)
 		return ;
 	temp = is_executable(node, env);
@@ -91,18 +98,4 @@ void	check_cmd_type(t_cmdlist *node, t_vararr *env)
 		return ;
 	}
 	node->cmd_type = ERROR;
-}
-
-void	copy_vararr(t_vararr *dst, t_vararr *src, int start_idx)
-{
-	int	i;
-
-	i = start_idx;
-	if (i < 0)
-		i = 0;
-	while (i < src->len)
-	{
-		append_element(dst, get_element(src, i));
-		i++;
-	}
 }

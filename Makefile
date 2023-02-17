@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/17 11:50:22 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/17 12:28:19 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SRCS_NAME = main.c \
 			vararr_oper3.c \
 			vararr_oper4.c \
 			cmdlist.c \
-			temp_checker.c \
+			type_checker.c \
 			cmd_executor.c
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))

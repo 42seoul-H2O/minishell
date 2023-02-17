@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:47:36 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 12:07:11 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:10:20 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 # include <unistd.h>
 # include "../lib/libft/libft.h"
 # include "vararr.h"
+# include "minishell.h"
 
 typedef struct s_cmdlist
 {
 	char				*cmd;
-	t_vararr			*args;
+	t_parsed			*args;
 	int					cmd_type;
 	int					pipe[2];
 	struct s_cmdlist	*prev;

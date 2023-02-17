@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:55:09 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/15 00:27:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:09:33 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	set_cmd(t_cmdlist *node, char *str)
 
 void	destroy_node(t_cmdlist *node)
 {
-	destroy_arr(node->args);
+	destroy_parsed(node->args);
 	if (node->cmd != NULL)
 		free(node->cmd);
 	if (node->pipe[0] != 0)

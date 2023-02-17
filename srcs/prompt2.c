@@ -6,33 +6,75 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 12:15:04 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:14:31 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	delete_after_pipe(t_cmdlist *node, int pipe_idx)
+void	destroy_parsed(t_parsed *p)
 {
-	int		i;
+	int	i;
 
-	i = pipe_idx;
-	while (i < node->args->len)
-	{
-		delete_element(node->args, get_element(node->args, i));
-	}
+	if (!p)
+		return ;
+	if (p->words)
+		free_arr(p->words);
+	if (p->token_types)
+		free(p->token_types);
+	free(p);
+	p = NULL;
 }
 
-t_cmdlist	*list_maker(t_vararr *input, t_vararr *env)
+t_parsed	*subparsed(t_parsed *input, int start, int end)
+{
+	t_parsed	*result;
+	int			i;
+
+	result = malloc(sizeof(t_parsed));
+	if (!result)
+		ft_exit(11);
+	result->word_count = end - start + 1;
+	if (result->word_count <= 0)
+		ft_exit(11);
+	result->words = malloc (sizeof(char *) * result->word_count + 1);
+	result->token_types = malloc(sizeof(int) * result->word_count);
+	if (result->words || result->token_types)
+		ft_exit(11);
+	i = 0;
+	while (i < result->word_count)
+	{
+		result->token_types[i] = input->token_types[i];
+		result->words[i] = ft_strdup(input->words[i]);
+		i++;
+	}
+	return (result);
+}
+
+t_cmdlist	*list_maker(t_parsed *input, t_vararr *env)
 {
 	t_cmdlist	*result;
 	int			i;
+	int			last_pipe;
 
 	i = 0;
+	last_pipe = -1;
 	result = make_new_node(NULL);
-	copy_vararr(result->args, input, 0);
-	set_cmd(result, get_element(result->args, 0));
-	check_cmd_type(result, env);
+	if (!result)
+		ft_exit(11);
+	while (i < input->word_count)
+	{
+		if (ft_strncmp(input->words[i], "|", ft_strlen(input->words[i]) == 0))
+		{
+			result = make_new_node(result);
+			if (!result)
+				ft_exit(11);
+			result->args = subparsed(input, last_pipe + 1, i - 1);
+			check_cmd_type(result->prev, env);
+			last_pipe = i;
+		}
+		i++;
+	}
 	return (list_reset_loc(result));
 }
 
@@ -49,13 +91,18 @@ void	make_prompt(t_vararr *env)
 	{
 		flag = 0;
 		input = parse(line, env); //parsed 구조체에 내용이 채워져서 들어올 예정
-		if (input->word_count != 0)
+		if (input != NULL && input->word_count != 0)
 		{
 			head = list_maker(input, env); //parsed 구조체를 활용하여 리스트를 만들기
+			if (head->next == NULL)
+			{
+				head->args = subparsed(input, 0, input->word_count - 1);
+				check_cmd_type(head, env);
+			}
 			execution(head, env);
 			destroy_list(head);
 		}
-		destroy_arr(input); //destory_parsed로 교체
+		destroy_parsed(input);
 		line = get_line(line);
 	}
 }
