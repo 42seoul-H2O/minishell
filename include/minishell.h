@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 14:58:36 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:05:07 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void		destroy_parsed(t_parsed *p);
 void		parsed_delete_idx(t_parsed *p, int idx);
 
 void		execution(t_cmdlist *node, t_vararr *env);
-int			exec_bin(t_cmdlist *node, t_vararr *env);
+void		set_redirection(t_cmdlist *node);
+void		set_pipe_fd(t_cmdlist *node);
+void		close_prev_pipe(t_cmdlist *node);
+void		exec_child(t_cmdlist *node, t_vararr *env);
 
 int			is_builtin(t_cmdlist *node);
 char		*check_default_path(char *target, char *path);

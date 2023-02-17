@@ -6,11 +6,16 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 17:49:39 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:03:51 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+
+int	exec_single_builtin(t_cmdlist *exec, t_vararr *env)
+{
+	return (1);
+}
 
 int	exec_builtins(t_cmdlist *exec, t_vararr *env)
 {

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 12:09:14 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:04:03 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "cmdlist.h"
 # include "constants.h"
 
+int		exec_single_builtin(t_cmdlist *exec, t_vararr *env);
 int		exec_builtins(t_cmdlist *exec, t_vararr *env);
 void	ft_exit(int errnum);
 void	builtin_exit(t_cmdlist	*node);
