@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 21:00:40 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:00:59 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	exec_single_builtin(t_cmdlist *exec, t_vararr *env)
 			//g_error_code = 1;
 		}
 		exec_builtins(exec, env);
+		//g_error_code = 0;
 		return (1);
 	}
 	return (0);
