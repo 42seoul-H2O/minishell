@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 14:14:31 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:58:27 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,26 @@ t_cmdlist	*list_maker(t_parsed *input, t_vararr *env)
 		i++;
 	}
 	return (list_reset_loc(result));
+}
+
+void	parsed_delete_idx(t_parsed *p, int idx)
+{
+	int	i;
+
+	if (!p)
+		return ;
+	if (idx < 0 || idx >= p->word_count)
+		return ;
+	free(p->words[idx]);
+	i = idx + 1;
+	while (i < p->word_count)
+	{
+		p->token_types[i - 1] = p->token_types[i];
+		p->words[i - 1] = p->words[i];
+	}
+	p->token_types[p->word_count - 1] = -1;
+	p->words[p->word_count - 1] = NULL;
+	p->word_count--;
 }
 
 void	make_prompt(t_vararr *env)
