@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:48 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 11:49:57 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:12:25 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ int	ft_unsetenv(t_vararr *env, char *key)
 		result = 0;
 	return (result);
 }
-
-
 
 char	*join_key_value_string(char *key, char *value)
 {

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/17 12:07:43 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:12:08 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ typedef struct s_str{
 	char	**words;
 	int		word_count;
 }t_str;
+
+typedef struct s_parsed
+{
+	int		word_count;
+	int		*token_types;
+	char	**words;
+}t_parsed;
 
 t_vararr	*parse(char *input, t_vararr *env);
 void		init_t_str(t_str *str, char *s);
