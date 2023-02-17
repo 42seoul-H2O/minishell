@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 16:03:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:44:14 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,62 @@ void	execution(t_cmdlist *node, t_vararr *env)
 		pipe(curr->pipe);
 		curr = curr->next;
 	}
+	curr = node;
+	while (curr)
+	{
+		if (curr->prev && curr->prev->prev)
+			close_prev_pipe(curr);
+		pid = fork();
+		if (pid < 0)
+			ft_exit(11);
+		if (pid == 0)
+			exec_child(curr, env);
+		curr = curr->next;
+	}
+	break_pipe_and_wait_child(node);
+}
+
+void	break_pipe_and_wait_child(t_cmdlist *node)
+{
+	int	stat;
+
 	while (node)
 	{
-		if (node->prev && node->prev->prev)
-			close_prev_pipe(node);
-		pid = fork();
-		if (pid == 0)
-			exec_child(node, env);
-		if (node->next == NULL)
-			close_prev_pipe(node);
+		if (node->pipe[0] != 0)
+		{
+			close(node->pipe[0]);
+			node->pipe[0] = 0;
+		}
+		if (node->pipe[1] != 1)
+		{
+			close(node->pipe[1]);
+			node->pipe[1] = 1;
+		}
 		node = node->next;
 	}
-	wait(NULL);
-}
-
-void	set_redirection(t_cmdlist *node)
-{
-}
-
-void	set_pipe_fd(t_cmdlist *node)
-{
-}
-
-void	close_prev_pipe(t_cmdlist *node)
-{
+	set_sig_ignore();
+	wait(&stat);
+	if (WIFSIGNALED(stat))
+		write(1, "\n", 1);
+	set_sig_handler();
 }
 
 void	exec_child(t_cmdlist *node, t_vararr *env)
 {
+	set_pipe_fd(node);
+	set_redirection(node);
+	if (node->cmd_type == ERROR)
+	{
+
+	}
+	else if (node->cmd_type == EXECUTABLE)
+	{
+
+	}
+	else
+	{
+
+	}
 }
 /*
 int	exec_bin(t_cmdlist *node, t_vararr *env)
