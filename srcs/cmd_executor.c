@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 20:36:54 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:48:50 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,17 @@ void	exec_child(t_cmdlist *node, t_vararr *env)
 		ft_putstr_fd(node->args->words[temp + 1], 2);
 		ft_putstr_fd(": ", 2);
 		perror(NULL);
-		return ;
+		exit(1);
 	}
 	if (node->cmd_type == ERROR)
 	{
 		ft_putstr_fd("h2osh : ", 2);
 		ft_putstr_fd(node->cmd, 2);
 		ft_putstr_fd(": command not found\n", 2);
+		exit(127);
 	}
 	else if (node->cmd_type == EXECUTABLE)
-	{
 		if (execve(node->cmd, node->args->words, env->arr) < 0)
 			ft_exit(11);
-	}
-	else
-		exec_builtins(node, env);
+	exec_builtins(node, env);
 }

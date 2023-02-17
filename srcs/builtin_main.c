@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 16:03:51 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:00:40 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,24 @@
 
 int	exec_single_builtin(t_cmdlist *exec, t_vararr *env)
 {
-	return (1);
+	int	temp;
+
+	if (exec->next == NULL && exec->prev == NULL \
+		&& exec->cmd_type > EXECUTABLE)
+	{
+		temp = set_redirection(exec);
+		if (temp != 0)
+		{
+			ft_putstr_fd("h2osh : ", 2);
+			ft_putstr_fd(exec->args->words[temp + 1], 2);
+			ft_putstr_fd(": ", 2);
+			perror(NULL);
+			//g_error_code = 1;
+		}
+		exec_builtins(exec, env);
+		return (1);
+	}
+	return (0);
 }
 
 int	exec_builtins(t_cmdlist *exec, t_vararr *env)

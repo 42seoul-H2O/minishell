@@ -2,6 +2,7 @@
 	"files.associations": {
 		"libft.h": "c",
 		"vararr.h": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"__node_handle": "c"
 	}
 }
