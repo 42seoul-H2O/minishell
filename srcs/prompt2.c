@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 11:17:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 12:03:02 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ t_parsed	*subparsed(t_parsed *input, int start, int end)
 	i = 0;
 	while (i < result->word_count)
 	{
-		result->token_types[i] = input->token_types[i];
-		result->words[i] = ft_strdup(input->words[i]);
+		result->token_types[i] = input->token_types[start + i];
+		result->words[i] = ft_strdup(input->words[start + i]);
 		i++;
 	}
 	return (result);
@@ -91,6 +91,7 @@ void	parsed_delete_idx(t_parsed *p, int idx)
 	{
 		p->token_types[i - 1] = p->token_types[i];
 		p->words[i - 1] = p->words[i];
+		i++;
 	}
 	p->token_types[p->word_count - 1] = -1;
 	p->words[p->word_count - 1] = NULL;

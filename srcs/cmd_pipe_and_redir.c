@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 11:21:13 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 11:53:29 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 int	set_redirection(t_cmdlist *node)
 {
@@ -42,7 +43,8 @@ int	open_redir_and_set_fd(t_cmdlist *node, int idx, int type)
 	if (type == REDIR_IN)
 		fd = open(node->args->words[idx + 1], O_RDONLY, 0644);
 	else if (type == REDIR_OUT)
-		fd = open(node->args->words[idx + 1], O_WRONLY | O_CREAT, 0644);
+		fd = open(node->args->words[idx + 1], O_WRONLY | O_CREAT | O_TRUNC, \
+			0644);
 	else if (type == APPEND)
 		fd = open(node->args->words[idx + 1], O_WRONLY | O_APPEND | O_CREAT, \
 			0644);
