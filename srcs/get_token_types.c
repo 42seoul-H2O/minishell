@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_token_types.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 11:42:34 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 17:55:59 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 19:46:50 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	*get_token_types(t_str *str)
 	token_types = malloc(sizeof (int) * (i + 1));
 	i = 0;
 	if (!token_types)
-		builtin_exit(12);
+		exit(12);
 	while (str -> words[i])
 	{
 		token_types[i] = get_token_type(str -> words, i);

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:12:56 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:42:39 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	builtin_echo(t_cmdlist *node)
 
 	i = 1;
 	i += check_n_option(node->args->words[1]);
-	while (i < node->args->word_count)
+	while (i < node->args->words_count)
 	{
 		ft_putstr_fd(node->args->words[i], 1);
 		ft_putchar_fd(' ', 1);

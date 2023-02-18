@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:17:22 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:42:39 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	builtin_export(t_cmdlist *node, t_vararr *env)
 	int		check_fail;
 	char	*temp;
 
-	if (node->args->word_count == 1)
+	if (node->args->words_count == 1)
 	{
 		if (builtin_export_no_arg(env) == -1)
 			ft_exit(1);
@@ -110,7 +110,7 @@ void	builtin_export(t_cmdlist *node, t_vararr *env)
 	}
 	i = 1;
 	check_fail = 0;
-	while (i < node->args->word_count)
+	while (i < node->args->words_count)
 	{
 		check_fail += builtin_export_check_args(node->args->words[i], env);
 		i++;

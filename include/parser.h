@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 19:10:01 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 19:46:16 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_parsed{
 	int		words_count;
 }t_parsed;
 
-t_parsed	parse(char *input, t_vararr *env);
+t_parsed	*parse(char *input, t_vararr *env);
 void		init_t_str(t_str *str, char *s);
 void		destroy_t_str(t_str *str);
 char		**my_split(t_str *str);
@@ -88,6 +88,5 @@ int			is_redir_word(char **words, int idx);
 
 void		catch_syntax_err(t_parsed *parsed);
 void		catch_unmatching_quotes(t_parsed *parsed);
-
 
 #endif

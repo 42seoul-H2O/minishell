@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:52:10 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 19:43:41 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 # define MINISHELL_H
 
 # include "parser.h"
-# include "libft.h"
+# include "../lib/libft/libft.h"
 # include "builtin.h"
 # include "vararr.h"
 # include "constants.h"
 # include "cmdlist.h"
+# include "prompt.h"
 # include <string.h>
 
 extern int	g_exit_code;

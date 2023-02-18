@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:57:37 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 18:09:53 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:42:39 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	check_cmd_type(t_cmdlist *node, t_vararr *env)
 	int		i;
 
 	i = 0;
-	while (i < node->args->word_count)
+	while (i < node->args->words_count)
 		if (node->args->token_types[i++] == CMD)
 			set_cmd(node, node->args->words[i - 1]);
 	if (node->cmd == NULL)

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:08 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:13:28 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:42:39 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static int	is_all_digit(char *s)
 
 void	builtin_exit(t_cmdlist *node)
 {
-	if (node->args->word_count == 1 && \
+	if (node->args->words_count == 1 && \
 		node->next == NULL && node->prev == NULL)
 		ft_exit(0);
-	else if (node->args->word_count == 1)
+	else if (node->args->words_count == 1)
 		exit(0);
-	else if (node->args->word_count == 2)
+	else if (node->args->words_count == 2)
 	{
 		if (is_all_digit(node->args->words[1]))
 			ft_exit(ft_atoi(node->args->words[1]));

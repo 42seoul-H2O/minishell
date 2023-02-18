@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/18 15:35:05 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/18 19:48:52 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,13 @@ SRCS_NAME = main.c \
 			cmdlist.c \
 			type_checker.c \
 			cmd_executor.c \
-			cmd_pipe_and_redir.c
+			cmd_pipe_and_redir.c \
+			catch_syntax_err.c \
+			catch_syntax_err2.c \
+			get_token_type.c \
+			get_token_type2.c \
+			get_token_types.c \
+			merge_redir_tokens.c
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 
