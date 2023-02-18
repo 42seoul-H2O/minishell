@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:30:48 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/12 10:50:44 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/15 12:27:56 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	test_split(void)
 {
 	printf("---- Split Test Cases ----\n");
 
+	test_split_implementation("ls -la |wc -l", 5, "ls", "-la", "|", "wc", "-l");
+	test_split_implementation("ls -la ||wc -l", 6, "ls", "-la", "|", "|", "wc", "-l");
+	test_split_implementation("ls -la | |wc -l", 6, "ls", "-la", "|", "|", "wc", "-l");
+	test_split_implementation("ls -la | | wc -l", 6, "ls", "-la", "|", "|", "wc", "-l");
 	test_split_implementation("abcdefg", 1, "abcdefg");
 	test_split_implementation("", 1, "");
 	test_split_implementation("ls -la | wc -l", 5, "ls", "-la", "|", "wc", "-l");

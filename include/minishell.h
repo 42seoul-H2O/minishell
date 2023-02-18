@@ -6,18 +6,19 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 18:16:27 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:52:10 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "constants.h"
-# include "prompt.h"
-# include "vararr.h"
-# include "cmdlist.h"
 # include "parser.h"
+# include "libft.h"
+# include "builtin.h"
+# include "vararr.h"
+# include "constants.h"
+# include "cmdlist.h"
 # include <string.h>
 
 extern int	g_exit_code;

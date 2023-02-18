@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 14:56:01 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 17:04:11 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,30 @@
 #include "builtin.h"
 #include "tests.h"
 
-static void		print_words(t_str *str);
-static void		print_expected_outputs(va_list ap, int count);
+static void		print_words(t_parsed *parsed);
+static void		print_expected_words(va_list ap, int count);
 static void		parser_test(char *input, int has_env, int word_count, ...);
 static t_vararr	*init_env(int has_env);
 
 void	test_parser(void)
 {
 	printf("---- Parser Test Cases ----\n\n");
+	parser_test("<< ls -la | $?-l", HAS_ENV, 6, "<<", "ls", "-la", "|", "wc", "0-l");
+	parser_test("<< ls -la |wc -l", HAS_ENV, 6, "<<", "ls", "-la", "|", "wc", "-l");
+	parser_test("ls -la |<>wc -l", HAS_ENV, 7, "ls", "-la", "|", "<", ">", "wc", "-l");
+	parser_test("ls -la |<>>wc -l", HAS_ENV, 7, "ls", "-la", "|", "<", ">>", "wc", "-l");
+	parser_test("ls -la |<<wc -l", HAS_ENV, 6, "ls", "-la", "|", "<<", "wc", "-l");
+	parser_test("ls -la | <<wc -l", HAS_ENV, 6, "ls", "-la", "|", "<<", "wc", "-l");
+	parser_test("ls -la |<< wc -l", HAS_ENV, 6, "ls", "-la", "|", "<<", "wc", "-l");
+	parser_test("ls -la | << wc -l", HAS_ENV, 6, "ls", "-la", "|", "<<", "wc", "-l");
+	parser_test("ls << -la |wc -l", HAS_ENV, 6, "ls", "<<", "-la", "|", "wc", "-l");
+	parser_test("ls <<-la |wc -l", HAS_ENV, 6, "ls", "<<", "-la", "|", "wc", "-l");
+	parser_test("ls << -la|wc -l", HAS_ENV, 6, "ls", "<<", "-la", "|", "wc", "-l");
+	parser_test("ls <<< -la|wc -l", HAS_ENV, 7, "ls", "<<", "<", "-la", "|", "wc", "-l");
+	parser_test("ls <<<< -la|wc -l", HAS_ENV, 7, "ls", "<<", "<<", "-la", "|", "wc", "-l");
+	parser_test("ls << << -la|wc -l", HAS_ENV, 7, "ls", "<<", "<<", "-la", "|", "wc", "-l");
+	parser_test("ls << < -la|wc -l", HAS_ENV, 7, "ls", "<<", "<", "-la", "|", "wc", "-l");
+	parser_test("ls < < < -la|wc -l", HAS_ENV, 8, "ls", "<", "<", "<", "-la", "|", "wc", "-l");
 	parser_test("blahblah $", HAS_ENV, 2, "blahblah", "$");
 	parser_test("blahblah $^", HAS_ENV, 2, "blahblah", "$^");
 	parser_test("blahblah $\'\'", HAS_ENV, 2, "blahblah", "$");
@@ -37,7 +53,7 @@ void	test_parser(void)
 	parser_test("blahblah \'$HOME\'", HAS_ENV, 2, "blahblah", "$HOME");
 	parser_test("blahblah \"$HOME\"", HAS_ENV, 2, "blahblah", "/Users/hocsong");
 	parser_test("$SHELL$LOGNAME", HAS_ENV, 1, "/bin/bashhocsong");
-	parser_test("\"$HOME \'$SHELL\'\"", HAS_ENV, 1, "/Users/hocsong \'/bin/bash\'"); // 실패.
+	parser_test("\"$HOME \'$SHELL\'\"", HAS_ENV, 1, "/Users/hocsong \'/bin/bash\'");
 	parser_test("blahblah $", NOT_HAVE_ENV, 2, "blahblah", "$");
 	parser_test("blahblah $\"dff\"", HAS_ENV, 2, "blahblah", "$dff");
 	parser_test("blahblah $\"dff\"", NOT_HAVE_ENV, 2, "blahblah", "$dff");
@@ -58,7 +74,7 @@ void	test_parser(void)
 	parser_test("abc$SHELL\'ab\'", HAS_ENV, 1, "abc/bin/bashab");
 	parser_test("abc$SHELL\'ab\'", NOT_HAVE_ENV, 1, "abcab");
 	parser_test("abc$ABC^yap ", HAS_ENV, 1, "abc^yap");
-	//Test cases with more than one $
+	// Test cases with more than one $
 	parser_test("blahblah $$", HAS_ENV, 2, "blahblah", "$$");
 	parser_test("blahblah $$$", HAS_ENV, 2, "blahblah" , "$$$");
 	parser_test("blahblah $ $", HAS_ENV, 3, "blahblah", "$", "$");
@@ -75,7 +91,7 @@ void	test_parser(void)
 
 static void	parser_test(char *input, int has_env, int word_count, ...)
 {
-	t_str		str;
+	t_parsed	parsed;
 	t_vararr	*env;
 	va_list		ap;
 
@@ -83,13 +99,13 @@ static void	parser_test(char *input, int has_env, int word_count, ...)
 	env = init_env(has_env);
 	printf("---- Test Case: %s ----\n", input);
 	printf("---- has_envp: %d ----\n", has_env);
-	str = parse(input, env);
-	printf("---- Output ----\n");
-	print_words(&str);
-	printf("---- Expected Output ----\n");
-	print_expected_outputs(ap, word_count);
+	parsed = parse(input, env);
+	printf("---- Words ----\n");
+	print_words(&parsed);
+	printf("---- Expected Words ----\n");
+	print_expected_words(ap, word_count);
 	destroy_arr(env);
-	destroy_t_str(&str);
+	destroy_parsed(&parsed);
 	va_end(ap);
 }
 
@@ -113,19 +129,19 @@ static t_vararr	*init_env(int has_env)
 	return (env);
 }
 
-static void	print_words(t_str *str)
+static void	print_words(t_parsed *parsed)
 {
 	size_t	i;
 
 	i = 0;
-	while (str -> words[i])
+	while (parsed -> words[i])
 	{
-		printf("%s\n", str -> words[i]);
+		printf("%s\n", parsed -> words[i]);
 		i++;
 	}
 }
 
-static void	print_expected_outputs(va_list ap, int count)
+static void	print_expected_words(va_list ap, int count)
 {
 	char	*word;
 	int		i;
