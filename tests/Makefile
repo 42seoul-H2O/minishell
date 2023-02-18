@@ -6,7 +6,7 @@
 #    By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 16:27:42 by hocsong           #+#    #+#              #
-#    Updated: 2023/02/18 12:12:53 by hocsong          ###   ########seoul.kr   #
+#    Updated: 2023/02/18 19:09:34 by hocsong          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ EXT_SRCS_WO_PATH = init_t_str.c is_quoted.c my_split.c set_word_count.c \
 	convert_dollar_to_env.c convert_dollar_to_env2.c \
 	vararr_oper1.c vararr_oper2.c vararr_oper3.c parse.c remove_quotes.c \
 	visited.c get_token_types.c get_token_type.c  get_token_type2.c \
-	merge_redir_tokens.c
+	merge_redir_tokens.c catch_syntax_err.c catch_syntax_err2.c
 
 SRCS_WO_PATH = test.c test_split.c test_parser.c
 SRCS_WO_PATH += $(EXT_SRCS_WO_PATH)
