@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:07:47 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 16:04:57 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child)
 		write(1, "\n", 1);
 	}
 	set_sig_handler();
-	g_exit_code = (unsigned char)(stat % 255);
+	g_exit_code = (stat % 255);
 }
 
 void	exec_child(t_cmdlist *node, t_vararr *env)

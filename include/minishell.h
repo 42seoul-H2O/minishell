@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 13:51:01 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 16:04:47 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "cmdlist.h"
 # include "parser.h"
 
-extern unsigned char	g_exit_code;
+extern int	g_exit_code;
 
 int			init(t_vararr **env, char **envp);
 int			init_env_arr(t_vararr *env, char **envp);
