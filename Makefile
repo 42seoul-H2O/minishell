@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/18 11:13:31 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/18 13:17:36 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,10 +69,10 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT_PATH)
-	$(CC) -g -fsanitize=address $(CFLAGS) $(OBJS) $(INCS) -L$(LIBFT_PATH) -lft $(LIB_RDL) -lreadline -o $(NAME)
+	$(CC) -g $(CFLAGS) $(OBJS) $(INCS) -L$(LIBFT_PATH) -lft $(LIB_RDL) -lreadline -o $(NAME)
 
 $(OBJS_PATH)/%.o : $(SRCS_PATH)/%.c
-	$(CC) -g -fsanitize=address $(CFALGS) $(INCS) $(LIB_RDL_INC) -o $@ -c $<
+	$(CC) -g $(CFALGS) $(INCS) $(LIB_RDL_INC) -o $@ -c $<
 
 clean :
 	rm -f $(OBJS)

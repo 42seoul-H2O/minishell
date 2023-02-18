@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/14 16:33:32 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 13:34:26 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ int	init_env_arr(t_vararr *env, char **envp)
 
 static void	check_leak(void)
 {
-	system("leaks --list minishell | grep leaks");
+	system("leaks --list minishell");
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_vararr	*env;
 
-	//atexit(check_leak);
+	atexit(check_leak);
 	if (init(&env, envp) == -1)
 		return (-1);
 	make_prompt(env);

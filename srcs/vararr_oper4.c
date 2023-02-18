@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 11:43:06 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 12:12:31 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 13:39:11 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,12 @@ void	print_all_string(char *prefix, char **arr, int value_quote, int no_val)
 		}
 		i++;
 	}
+}
+
+int	math_min(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	else
+		return (b);
 }
