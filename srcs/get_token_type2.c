@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 11:32:01 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 12:12:06 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 16:19:52 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_cmd(char **words, int idx)
 	is_op = 1;
 	while (idx_from <= idx && idx_from <= idx_to)
 	{
-		is_op = get_optype(words[idx]);
+		is_op = get_optype(words[idx_from]);
 		if (!is_op && !is_redir_word(words, idx_from))
 		{
 			if (idx_from < idx)

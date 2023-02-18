@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:55:10 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 12:14:02 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 17:02:11 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	get_optype(char *word)
 	{
 		if (word[0] == '<' && word[1] == '<')
 			return (HEREDOC);
-		if (word[0] == '>' && word[2] == '>')
+		if (word[0] == '>' && word[1] == '>')
 			return (APPEND);
 	}
 	return (0);
@@ -58,21 +58,26 @@ static int	get_word_type(char **words, int idx)
 	if (is_redir_word(words, idx))
 		return (REDIR_WORD);
 	else if (is_cmd(words, idx))
-		return (ARG);
-	else
 		return (CMD);
+	else
+		return (ARG);
 }
 
 int	is_redir_word(char **words, int idx)
 {
+	int	cur_optype;
 	int	pre_optype;
 
+	cur_optype = get_optype(words[idx]);
 	if (idx == 0)
 		pre_optype = -1;
 	else
 		pre_optype = get_optype(words[idx - 1]);
-	if (pre_optype == REDIR_IN \
-		|| pre_optype == REDIR_OUT)
+	if ((pre_optype == REDIR_IN \
+		|| pre_optype == REDIR_OUT \
+		|| pre_optype == HEREDOC \
+		|| pre_optype == APPEND) \
+		&& !cur_optype)
 		return (REDIR_WORD);
 	return (0);
 }
