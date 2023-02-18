@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 16:04:47 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:32:29 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		parsed_delete_idx(t_parsed *p, int idx);
 void		execution(t_cmdlist *node, t_vararr *env);
 void		break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child);
 void		exec_child(t_cmdlist *node, t_vararr *env);
+void		puterr_prompt(char *err);
 
 int			set_redirection(t_cmdlist *node);
 void		set_pipe_fd(t_cmdlist *node);

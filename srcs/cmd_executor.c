@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 16:04:57 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:32:03 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,16 @@ void	exec_child(t_cmdlist *node, t_vararr *env)
 	temp = set_redirection(node);
 	if (temp != 0)
 	{
-		ft_putstr_fd("h2osh : ", 2);
-		ft_putstr_fd(node->args->words[temp + 1], 2);
-		ft_putstr_fd(": ", 2);
+		puterr_prompt(node->args->words[temp + 1]);
 		perror(NULL);
 		exit(1);
 	}
+	if (node->cmd_type == NO_CMD)
+		exit(0);
 	if (node->cmd_type == ERROR)
 	{
-		ft_putstr_fd("h2osh : ", 2);
-		ft_putstr_fd(node->cmd, 2);
-		ft_putstr_fd(": command not found\n", 2);
+		puterr_prompt(node->cmd);
+		ft_putstr_fd("command not found\n", 2);
 		exit(127);
 	}
 	else if (node->cmd_type == EXECUTABLE)
@@ -93,4 +92,11 @@ void	exec_child(t_cmdlist *node, t_vararr *env)
 	close(0);
 	exec_builtins(node, env);
 	exit(g_exit_code);
+}
+
+void	puterr_prompt(char *err)
+{
+	ft_putstr_fd("h2osh : ", 2);
+	ft_putstr_fd(err, 2);
+	ft_putstr_fd(": ", 2);
 }
