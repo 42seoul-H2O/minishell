@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
 /*   Updated: 2023/02/18 19:10:01 by hocsong          ###   ########seoul.kr  */
@@ -13,6 +13,8 @@
 #ifndef PARSER_H
 # define PARSER_H
 # include "vararr.h"
+# include "constants.h"
+# include "../lib/libft/libft.h"
 # include <fcntl.h>
 
 typedef struct s_quote{
@@ -47,32 +49,10 @@ typedef struct s_str{
 }t_str;
 
 typedef struct s_parsed{
-	int		*token_types; // 실행부에서 free 필요
-	char	**words; // 실행부에서 free 필요.
+	int		*token_types;
+	char	**words;
 	int		words_count;
 }t_parsed;
-
-typedef struct s_cmd_list
-{
-	char		*cmd;
-	t_vararr	*args;
-	int			cmd_type;
-	int			pipe[2];
-	t_list		*next;
-	t_list		*prev;
-}t_cmd_list;
-
-enum e_cmd_type
-{
-	EXECUTABLE,
-	CD,
-	ECHO,
-	ENV,
-	EXIT,
-	EXPORT,
-	PWD,
-	UNSET,
-};
 
 t_parsed	parse(char *input, t_vararr *env);
 void		init_t_str(t_str *str, char *s);
@@ -108,5 +88,6 @@ int			is_redir_word(char **words, int idx);
 
 void		catch_syntax_err(t_parsed *parsed);
 void		catch_unmatching_quotes(t_parsed *parsed);
+
 
 #endif

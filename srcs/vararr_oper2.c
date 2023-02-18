@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vararr_oper2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/10 15:21:31 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 13:41:02 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,28 @@ char	*get_element(t_vararr *varr, int idx)
 
 int	find_element(t_vararr *varr, char *val)
 {
-	int	i;
+	int		i;
+	char	*key;
 
 	i = 0;
 	while (i < varr->len)
 	{
-		if (ft_strncmp(varr->arr[i], val, ft_strlen(val)) == 0)
+		key = NULL;
+		if (ft_strchr(varr->arr[i], '=') == NULL)
+			key = ft_strdup(varr->arr[i]);
+		else
+			key = ft_substr(varr->arr[i], 0, \
+				ft_strchr(varr->arr[i], '=') - varr->arr[i]);
+		if (key == NULL)
+			return (-1);
+		if (ft_strncmp(key, val, \
+			math_min(ft_strlen(key), ft_strlen(val))) == 0)
+		{
+			free(key);
 			return (i);
+		}
+		if (key)
+			free(key);
 		i++;
 	}
 	return (-1);
@@ -87,7 +102,7 @@ int	append_element(t_vararr *varr, char *val)
 {
 	char	*temp;
 
-	if (!varr)
+	if (!varr || !val)
 		return (-1);
 	if (varr->capacity == varr->len)
 		if (realloc_arr(varr, 2.0) == -1)
@@ -131,7 +146,7 @@ int	delete_element(t_vararr *varr, char *key)
 	int	i;
 	int	j;
 
-	if (!varr)
+	if (!varr || varr->len == 0)
 		return (-1);
 	i = find_element(varr, key);
 	if (i == -1)

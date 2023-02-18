@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:36:54 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/09 14:41:04 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:55:06 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,20 @@ int	realloc_arr(t_vararr *varr, float ratio)
 	return (1);
 }
 
-char	**copy_arr(t_vararr *varr)
+char	**copy_arr(t_vararr *varr, int idx)
 {
 	char	**result;
 	int		i;
 
-	result = (char **)ft_calloc(varr->len + 1, sizeof(char *));
+	result = (char **)ft_calloc(varr->len - idx + 1, sizeof(char *));
 	if (!result)
 		return (NULL);
-	i = 0;
+	i = idx;
 	while (i < varr->len)
 	{
 		result[i] = ft_strdup((varr->arr)[i]);
 		i++;
 	}
-	result[varr->len] = NULL;
+	result[varr->len - idx] = NULL;
 	return (result);
 }

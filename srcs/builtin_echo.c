@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/06 19:13:19 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:12:56 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 static int	check_n_option(char *input)
 {
@@ -30,29 +31,21 @@ static int	check_n_option(char *input)
 	return (1);
 }
 
-void	builtin_echo(char **input, t_vararr *env)
+void	builtin_echo(t_cmdlist *node)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
 	i = 1;
-	i += check_n_option(input[1]);
-	while (input[i] != NULL)
+	i += check_n_option(node->args->words[1]);
+	while (i < node->args->word_count)
 	{
-		if (input[i][0] == '$')
-		{
-			if (ft_getenv(env, &input[i][1]) == NULL)
-			{
-				i++;
-				continue ;
-			}
-			printf("%s", ft_getenv(env, &input[i][1]));
-		}
-		else
-			printf("%s", input[i]);
+		ft_putstr_fd(node->args->words[i], 1);
+		ft_putchar_fd(' ', 1);
 		i++;
-		if (input[i] != NULL)
-			printf(" ");
 	}
-	if (check_n_option(input[1]) != 1)
-		printf("\n");
+	ft_putchar_fd('\b', 1);
+	if (check_n_option(node->args->words[1]) != 1)
+		ft_putchar_fd('\n', 1);
+	g_exit_code = 0;
 }

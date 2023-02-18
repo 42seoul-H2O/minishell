@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   convert_dollar_to_env2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:09:04 by hocsong           #+#    #+#             */
 /*   Updated: 2023/02/18 16:02:28 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
+#include "builtin.h"
+#include "vararr.h"
 
 static void	replace_dollar(t_str *str, int word_i, \
 			t_dollar_sign *dollar);
@@ -69,15 +71,15 @@ static void	replace_dollar(t_str *str, int word_i, \
 
 	dest1 = malloc(sizeof (char) * (dollar -> first_idx) + 1);
 	if (!dest1)
-		builtin_exit(12);
+		exit(12);
 	ft_strlcpy(dest1, str -> words[word_i], dollar -> first_idx + 1);
 	dest2 = ft_strjoin(dest1, dollar -> env_value);
 	if (!dest2)
-		builtin_exit(12);
+		exit(12);
 	free(dest1);
 	dest3 = ft_strjoin(dest2, str -> words[word_i] + dollar -> last_idx + 1);
 	if (!dest3)
-		builtin_exit(12);
+		exit(12);
 	free(dest2);
 	free(str -> words[word_i]);
 	str -> words[word_i] = dest3;

@@ -3,25 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/16 16:22:33 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 17:32:46 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONSTANTS_H
 # define CONSTANTS_H
 
-enum e_token_type
+enum e_cmd_type
 {
-	EOA = -1,
-	NO_QUOTE = -1,
-	OFF = 0,
-	ON = 1,
+	NO_CMD,
+	ERROR,
+	EXECUTABLE,
+	CD,
+	ECHO,
+	ENV,
+	EXIT,
+	EXPORT,
+	PWD,
+	UNSET,
 };
 
-enum e_TOKEN_TYPE
+enum e_token_type
 {
 	CMD = 1,
 	ARG = 2,

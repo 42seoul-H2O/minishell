@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   set_word_count.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 11:22:41 by hocsong           #+#    #+#             */
 /*   Updated: 2023/02/15 12:17:26 by hocsong          ###   ########seoul.kr  */

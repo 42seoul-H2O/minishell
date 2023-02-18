@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:38:43 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/12 11:41:10 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 15:36:05 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PROMPT_H
 
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
@@ -23,8 +23,11 @@
 # include "builtin.h"
 
 void	set_sig_handler(void);
+void	set_sig_ignore(void);
+void	set_sig_default(void);
 void	interupt_handler(int signum);
-void	init_term_setting(void);
 char	*get_line(char *line);
+
+int		get_heredoc_fd(char *eof);
 
 #endif

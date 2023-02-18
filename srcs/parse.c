@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:46:36 by hocsong           #+#    #+#             */
 /*   Updated: 2023/02/18 19:09:07 by hocsong          ###   ########seoul.kr  */
@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "builtin.h"
 
 static int	get_word_count(char **words);
 
