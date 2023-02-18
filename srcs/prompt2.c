@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 22:26:50 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 11:17:35 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_parsed	*subparsed(t_parsed *input, int start, int end)
 	result->word_count = end - start + 1;
 	if (result->word_count <= 0)
 		ft_exit(11);
-	result->words = malloc(sizeof(char *) * result->word_count + 1);
-	result->token_types = malloc(sizeof(int) * result->word_count);
+	result->words = ft_calloc(sizeof(char *), result->word_count + 1);
+	result->token_types = ft_calloc(sizeof(int), result->word_count);
 	if (!(result->words) || !(result->token_types))
 		ft_exit(11);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 21:13:00 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 11:21:13 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	set_redirection(t_cmdlist *node)
 	int	fd;
 
 	i = 0;
-	while (node->args->words[i] != NULL)
+	while (i < node->args->word_count)
 	{
 		if (node->args->token_types[i] == REDIR_IN || \
 			node->args->token_types[i] == REDIR_OUT || \
