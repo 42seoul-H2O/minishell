@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:47:36 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 21:35:10 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 13:45:59 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_cmdlist
 	struct s_cmdlist	*prev;
 	struct s_cmdlist	*next;
 }				t_cmdlist;
-
 
 t_cmdlist	*make_new_node(t_cmdlist *prev);
 int			set_cmd(t_cmdlist *node, char *str);

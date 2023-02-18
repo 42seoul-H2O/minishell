@@ -6,11 +6,13 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 13:34:26 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 13:50:46 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+unsigned char	g_exit_code = 0;
 
 int	init(t_vararr **env, char **envp)
 {
@@ -50,7 +52,7 @@ int	init_env_arr(t_vararr *env, char **envp)
 
 static void	check_leak(void)
 {
-	system("leaks --list minishell");
+	system("leaks --list minishell | grep leaks");
 }
 
 int	main(int argc, char **argv, char **envp)

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 12:22:21 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 14:52:16 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ void	break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child)
 		processes++;
 	}
 	set_sig_ignore();
-	while (processes)
-	{
-		processes--;
+	while (processes--)
 		wait(&stat);
-	}
 	if (WIFSIGNALED(stat))
+	{
+		stat += 128;
 		write(1, "\n", 1);
+	}
 	set_sig_handler();
+	g_exit_code = (unsigned char)(stat % 255);
 }
 
 void	exec_child(t_cmdlist *node, t_vararr *env)
