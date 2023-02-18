@@ -6,25 +6,11 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:40:03 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:16:06 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	destroy_parsed(t_parsed *p)
-{
-	int	i;
-
-	if (!p)
-		return ;
-	if (p->words)
-		free_arr(p->words);
-	if (p->token_types)
-		free(p->token_types);
-	free(p);
-	p = NULL;
-}
 
 t_parsed	*subparsed(t_parsed *input, int start, int end)
 {
@@ -110,7 +96,9 @@ void	make_prompt(t_vararr *env)
 	while (line != NULL)
 	{
 		input = parse(line, env); //parsed 구조체에 내용이 채워져서 들어올 예정
-		if (input != NULL && input->word_count != 0)
+		if (input->word_count == -1)
+			prt_syntax_error();
+		if (input->word_count > 0)
 		{
 			node = list_maker(input, env, &pipe);
 			node->args = subparsed(input, pipe + 1, input->word_count - 1);
@@ -121,4 +109,23 @@ void	make_prompt(t_vararr *env)
 		destroy_parsed(input);
 		line = get_line(line);
 	}
+}
+
+void	prt_syntax_error(void)
+{
+	ft_putstr_fd("h2osh: syntax error\n", 2);
+	g_exit_code = 2;
+}
+void	destroy_parsed(t_parsed *p)
+{
+	int	i;
+
+	if (!p)
+		return ;
+	if (p->words)
+		free_arr(p->words);
+	if (p->token_types)
+		free(p->token_types);
+	free(p);
+	p = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 17:53:51 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:16:27 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int			init_env_arr(t_vararr *env, char **envp);
 t_cmdlist	*list_maker(t_parsed *input, t_vararr *env, int *last_pipe);
 t_parsed	*subparsed(t_parsed *input, int start, int end);
 void		make_prompt(t_vararr *env);
-void		destroy_parsed(t_parsed *p);
+void		prt_syntax_error(void);
 void		parsed_delete_idx(t_parsed *p, int idx);
+void		destroy_parsed(t_parsed *p);
 
 void		execution(t_cmdlist *node, t_vararr *env);
 void		break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child);
