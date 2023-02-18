@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:55:10 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 17:02:11 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 17:55:07 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 #include "builtin.h"
 
 static int	get_word_type(char **words, int idx);
-
-//TODO: << >> 와 < < > > 를 구분할 수 있어야 하는데, 지금 방법으로는 구분하지 않는다. 그렇기에,
-	// 원래 문자열을 참고해서 리디렉션 연산자 쌍 사이에 다른 delimiter/special_delimiter가 있는지 체크해야한다.
-	// 이러면 연산자가 3 개 같이 나올 때 처리가 될런지 모르겠네. "<< <", "<<<", "<<|<", "<|<", "< <"
 
 int	get_token_type(char **words, int idx)
 {
