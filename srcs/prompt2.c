@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 18:16:06 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:33:36 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	prt_syntax_error(void)
 	ft_putstr_fd("h2osh: syntax error\n", 2);
 	g_exit_code = 2;
 }
+
 void	destroy_parsed(t_parsed *p)
 {
 	int	i;
