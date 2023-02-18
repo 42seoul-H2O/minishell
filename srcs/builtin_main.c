@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 13:53:28 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:00:23 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 int	exec_single_builtin(t_cmdlist *exec, t_vararr *env)
 {
 	int	temp;
+	int	stdout_backup;
 
 	if (exec->next == NULL && exec->prev == NULL \
 		&& exec->cmd_type > EXECUTABLE)
 	{
+		stdout_backup = dup(STDOUT_FILENO);
 		temp = set_redirection(exec);
 		if (temp != 0)
 		{
@@ -28,8 +30,11 @@ int	exec_single_builtin(t_cmdlist *exec, t_vararr *env)
 			ft_putstr_fd(": ", 2);
 			perror(NULL);
 			g_exit_code = 1;
+			close(stdout_backup);
 		}
 		exec_builtins(exec, env);
+		dup2(stdout_backup, STDOUT_FILENO);
+		close(stdout_backup);
 		return (1);
 	}
 	return (0);

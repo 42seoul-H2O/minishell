@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 14:52:16 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:04:24 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void	exec_child(t_cmdlist *node, t_vararr *env)
 		if (execve(node->cmd, node->args->words, env->arr) < 0)
 			exit(11);
 	close(0);
-	exit(exec_builtins(node, env));
+	exec_builtins(node, env);
+	exit(g_exit_code);
 }
