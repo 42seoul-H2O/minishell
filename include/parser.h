@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 12:13:48 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 15:25:59 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int			is_special_delimiter(t_str *str, int idx);
 int			is_delimiter(t_str *str, int idx);
 void		destroy_parsed(t_parsed *parsed);
 
-int			replace_dollar_with_env(t_str *str, int word_i, \
+void		replace_dollar_with_env(t_str *str, int word_i, \
 			t_dollar_sign *dollar, t_visited *visited);
 void		convert_dollar_to_env(t_str *str, t_vararr *env);
 int			convert_single_dollar_to_env(t_str *str, int word_i, \
