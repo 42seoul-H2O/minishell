@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:12:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:11:45 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:10:12 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	builtin_cd(t_cmdlist *node)
 		g_exit_code = 1;
 		return ;
 	}
-	if (access(node->args->words[1], F_OK) == 0)
+	if (access(node->args->words[1], X_OK) == 0)
 	{
 		if (chdir(node->args->words[1]) == 0)
 		{

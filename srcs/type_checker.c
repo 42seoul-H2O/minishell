@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:57:37 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 17:42:29 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:09:53 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*check_default_path(char *target, char *path)
 	temp = ft_strjoin(path, target);
 	free(path);
 	path = NULL;
-	if (access(temp, F_OK) == 0)
+	if (access(temp, X_OK) == 0)
 		return (temp);
 	free(temp);
 	temp = NULL;
@@ -82,7 +82,7 @@ char	*is_executable(t_cmdlist *node, t_vararr *env)
 		i++;
 	}
 	free_arr(path);
-	if (access(node->cmd, F_OK) == 0)
+	if (access(node->cmd, X_OK) == 0)
 		return (ft_strdup(node->cmd));
 	return (NULL);
 }
