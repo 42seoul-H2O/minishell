@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:35:37 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/11 17:52:03 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 15:38:34 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	get_heredoc_fd(char *eof)
 	if (!fd)
 		builtin_exit(1);
 	line = readline("> ");
-	write(fd, line, ft_strlen(line));
-	if (!write)
+	if (write(fd, line, ft_strlen(line)) == -1)
 		builtin_exit(1);
 	while (ft_strncmp(line, eof, ft_strlen(eof) + 1))
 	{
