@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 15:25:59 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 19:06:53 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,8 @@ int			get_token_type(char **words, int idx);
 int			get_optype(char *word);
 int			is_cmd(char **words, int idx);
 int			is_redir_word(char **words, int idx);
+
+int			catch_syntax_err(t_parsed *parsed);
+void		catch_unmatching_quotes(t_parsed *parsed);
 
 #endif
