@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:57:37 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 21:48:32 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 12:45:10 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,31 @@ char	*check_default_path(char *target, char *path)
 	return (NULL);
 }
 
+static void	get_path(char **env_string, char ***path, t_vararr *env)
+{
+	*env_string = NULL;
+	if (ft_getenv(env, "PATH") != NULL)
+		*env_string = ft_strdup(ft_getenv(env, "PATH"));
+	if (!*env_string)
+		*path = NULL;
+	else
+		*path = ft_split(*env_string, ':');
+	if (*path)
+	{
+		free(*env_string);
+		*env_string = NULL;
+	}
+}
+
 char	*is_executable(t_cmdlist *node, t_vararr *env)
 {
 	char	**path;
 	char	*temp;
 	int		i;
 
-	temp = NULL;
-	if (ft_getenv(env, "PATH") != NULL)
-		temp = ft_strdup(ft_getenv(env, "PATH"));
-	path = ft_split(temp, ':');
-	if (temp)
-		free(temp);
+	get_path(&temp, &path, env);
 	i = 0;
-	while (path[i] != NULL)
+	while (path && path[i] != NULL)
 	{
 		temp = check_default_path(node->cmd, ft_strjoin(path[i], "/"));
 		if (temp != NULL)
