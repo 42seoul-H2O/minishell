@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:35:37 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 15:38:29 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:42:06 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	get_heredoc_fd(char *eof)
 	char	*line;
 	int		fd;
 
-	fd = open("heredoc_temp", O_RDWR | O_CREAT | O_TRUNC, 0600);
+	fd = open(".my_heredoc_temp", O_RDWR | O_CREAT | O_TRUNC, 0600);
 	if (!fd)
 		ft_exit(1);
 	line = readline("> ");
