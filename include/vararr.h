@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:13:54 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/13 16:58:17 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 13:39:47 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define VARARR_H
 
 # include "../lib/libft/libft.h"
-# include <stdio.h>
 /*
 ** capacity : array max size
 ** len : array current size
@@ -41,8 +40,10 @@ int			delete_element(t_vararr *varr, char *key);
 char		*ft_getenv(t_vararr *env, char *key);
 int			ft_setenv(t_vararr *env, char *key, char *value, int overwrite);
 int			ft_unsetenv(t_vararr *env, char *key);
+char		*join_key_value_string(char *key, char *value);
+
 void		print_all_string(char *prefix, char **arr,
 				int value_quote, int no_val);
-char		*join_key_value_string(char *key, char *value);
+int			math_min(int a, int b);
 
 #endif

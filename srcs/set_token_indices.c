@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:02:42 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 17:06:25 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:38:29 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_token_indices(t_str *str)
 	str -> token_indices = malloc(sizeof (int) * \
 		(str -> word_count + 1));
 	if (!(str -> token_indices))
-		ft_exit(12);
+		exit(12);
 	while (str -> s[i])
 	{
 		if ((is_delimiter(str, i - 1) && \

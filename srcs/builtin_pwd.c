@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 15:13:12 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 14:49:54 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:18:19 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 void	builtin_pwd(void)
 {
@@ -19,9 +20,10 @@ void	builtin_pwd(void)
 	buf = getcwd(NULL, 0);
 	if (buf == NULL)
 	{
-		perror("pwd : failed to getcwd()\n");
-		ft_exit(1);
+		perror("h2osh: pwd: ");
+		g_exit_code = 0;
 	}
-	printf("%s\n", buf);
+	ft_putendl_fd(buf, 1);
 	free(buf);
+	g_exit_code = 1;
 }

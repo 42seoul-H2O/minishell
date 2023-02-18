@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:40:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/13 17:06:25 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:38:29 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	set_quote_flags(t_str *str)
 	quote.is_quoted = 0;
 	flags = malloc(sizeof (int) * ft_strlen(str -> s));
 	if (!flags)
-		ft_exit(12);
+		exit(12);
 	str -> quote_flags = flags;
 	i = 0;
 	while (str -> s[i])

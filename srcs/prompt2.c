@@ -6,70 +6,127 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/15 11:39:37 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:33:36 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	delete_after_pipe(t_cmdlist *node, int pipe_idx)
+t_parsed	*subparsed(t_parsed *input, int start, int end)
 {
-	int		i;
+	t_parsed	*result;
+	int			i;
 
-	i = pipe_idx;
-	while (i < node->args->len)
+	result = malloc(sizeof(t_parsed));
+	if (!result)
+		ft_exit(11);
+	result->word_count = end - start + 1;
+	if (result->word_count <= 0)
+		ft_exit(11);
+	result->words = ft_calloc(sizeof(char *), result->word_count + 1);
+	result->token_types = ft_calloc(sizeof(int), result->word_count);
+	if (!(result->words) || !(result->token_types))
+		ft_exit(11);
+	i = 0;
+	while (i < result->word_count)
 	{
-		delete_element(node->args, get_element(node->args, i));
+		result->token_types[i] = input->token_types[start + i];
+		result->words[i] = ft_strdup(input->words[start + i]);
+		i++;
 	}
+	return (result);
 }
 
-t_cmdlist	*list_maker(t_vararr *input, t_vararr *env)
+t_cmdlist	*list_maker(t_parsed *input, t_vararr *env, int *last_pipe)
 {
 	t_cmdlist	*result;
 	int			i;
-	// char		*temp;
 
 	i = 0;
+	*last_pipe = -1;
 	result = make_new_node(NULL);
-	copy_vararr(result->args, input, 0);
-	// temp = get_element(input, i);
-	// while (temp != NULL)
-	// {
-	// 	if (ft_strncmp(temp, "|", ft_strlen(temp)) == 0 \
-	// 		&& get_element(input, i + 1) != NULL)
-	// 	{
-	// 		result = make_new_node(result);
-	// 		copy_vararr(result->args, input, i + 1);
-	// 		delete_after_pipe(result->prev, i);
-	// 	}
-	// 	i++;
-	// 	temp = get_element(input, i);
-	// }
-	set_cmd(result, get_element(result->args, 0));
-	check_cmd_type(result, env);
-	return (list_reset_loc(result));
+	if (!result)
+		ft_exit(11);
+	while (i < input->word_count)
+	{
+		if (input->token_types[i] == PIPE)
+		{
+			result = make_new_node(result);
+			if (!result)
+				ft_exit(11);
+			result->prev->args = subparsed(input, *last_pipe + 1, i - 1);
+			check_cmd_type(result->prev, env);
+			*last_pipe = i;
+		}
+		i++;
+	}
+	return (result);
+}
+
+void	parsed_delete_idx(t_parsed *p, int idx)
+{
+	int	i;
+
+	if (!p)
+		return ;
+	if (idx < 0 || idx >= p->word_count)
+		return ;
+	free(p->words[idx]);
+	i = idx + 1;
+	while (i < p->word_count)
+	{
+		p->token_types[i - 1] = p->token_types[i];
+		p->words[i - 1] = p->words[i];
+		i++;
+	}
+	p->token_types[p->word_count - 1] = -1;
+	p->words[p->word_count - 1] = NULL;
+	p->word_count--;
 }
 
 void	make_prompt(t_vararr *env)
 {
-	int			flag;
+	int			pipe;
 	char		*line;
-	t_vararr	*input;
-	t_cmdlist	*parsed;
+	t_parsed	*input;
+	t_cmdlist	*node;
 
 	line = NULL;
 	line = get_line(line);
 	while (line != NULL)
 	{
-		flag = 0;
-		input = parse(line, env);
-		if (input->len != 0)
+		input = parse(line, env); //parsed 구조체에 내용이 채워져서 들어올 예정
+		if (input->word_count == -1)
+			prt_syntax_error();
+		if (input->word_count > 0)
 		{
-			parsed = list_maker(input, env);
-			execution(parsed, env);
-			destroy_list(parsed);
+			node = list_maker(input, env, &pipe);
+			node->args = subparsed(input, pipe + 1, input->word_count - 1);
+			check_cmd_type(node, env);
+			execution(list_reset_loc(node), env);
+			destroy_list(list_reset_loc(node));
 		}
-		destroy_arr(input);
+		destroy_parsed(input);
 		line = get_line(line);
 	}
+}
+
+void	prt_syntax_error(void)
+{
+	ft_putstr_fd("h2osh: syntax error\n", 2);
+	g_exit_code = 2;
+}
+
+void	destroy_parsed(t_parsed *p)
+{
+	int	i;
+
+	if (!p)
+		return ;
+	if (p->words)
+		free_arr(p->words);
+	if (p->token_types)
+		free(p->token_types);
+	free(p);
+	p = NULL;
 }

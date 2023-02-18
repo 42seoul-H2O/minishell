@@ -6,29 +6,38 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:12:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/11 15:51:18 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:10:12 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 void	builtin_cd(t_cmdlist *node)
 {
-	if (node->args->len == 1)
+	if (node->args->word_count == 1)
 	{
-		printf("h2osh: cd: argument not found\n");
+		ft_putstr_fd("h2osh: cd: argument not found\n", 2);
+		g_exit_code = 1;
 		return ;
 	}
-	if (node->args->len != 2)
+	if (node->args->word_count != 2)
 	{
-		printf("h2osh: cd: too many arguments\n");
+		ft_putstr_fd("h2osh: cd: too many arguments\n", 2);
+		g_exit_code = 1;
 		return ;
 	}
-	if (access(get_element(node->args, 1), F_OK) == 0)
-		if (chdir(get_element(node->args, 1)) == 0)
+	if (access(node->args->words[1], X_OK) == 0)
+	{
+		if (chdir(node->args->words[1]) == 0)
+		{
+			g_exit_code = 1;
 			return ;
-	ft_putstr_fd("h2osh: cd: ", 1);
-	ft_putstr_fd(get_element(node->args, 1), 1);
+		}
+	}
+	ft_putstr_fd("h2osh: cd: ", 2);
+	ft_putstr_fd(node->args->words[1], 2);
 	ft_putstr_fd(": ", 1);
 	perror(NULL);
+	g_exit_code = 1;
 }

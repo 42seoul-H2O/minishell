@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:55:09 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/15 00:27:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:41:37 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmdlist.h"
+#include "minishell.h"
 
 t_cmdlist	*make_new_node(t_cmdlist *prev)
 {
@@ -19,12 +20,7 @@ t_cmdlist	*make_new_node(t_cmdlist *prev)
 	result = (t_cmdlist *)malloc(sizeof(t_cmdlist));
 	if (!result)
 		return (NULL);
-	result->args = make_new_arr(5);
-	if (!(result->args))
-	{
-		free(result);
-		return (NULL);
-	}
+	result->args = NULL;
 	result->cmd = NULL;
 	result->cmd_type = -1;
 	result->next = NULL;
@@ -55,7 +51,7 @@ int	set_cmd(t_cmdlist *node, char *str)
 
 void	destroy_node(t_cmdlist *node)
 {
-	destroy_arr(node->args);
+	destroy_parsed(node->args);
 	if (node->cmd != NULL)
 		free(node->cmd);
 	if (node->pipe[0] != 0)

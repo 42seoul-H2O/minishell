@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   temp_checker.c                                     :+:      :+:    :+:   */
+/*   type_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:57:37 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/14 23:58:03 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:09:53 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,27 @@ char	*check_default_path(char *target, char *path)
 	temp = ft_strjoin(path, target);
 	free(path);
 	path = NULL;
-	if (access(temp, F_OK) == 0)
+	if (access(temp, X_OK) == 0)
 		return (temp);
 	free(temp);
 	temp = NULL;
 	return (NULL);
+}
+
+static void	get_path(char **env_string, char ***path, t_vararr *env)
+{
+	*env_string = NULL;
+	if (ft_getenv(env, "PATH") != NULL)
+		*env_string = ft_strdup(ft_getenv(env, "PATH"));
+	if (!*env_string)
+		*path = NULL;
+	else
+		*path = ft_split(*env_string, ':');
+	if (*path)
+	{
+		free(*env_string);
+		*env_string = NULL;
+	}
 }
 
 char	*is_executable(t_cmdlist *node, t_vararr *env)
@@ -53,14 +69,9 @@ char	*is_executable(t_cmdlist *node, t_vararr *env)
 	char	*temp;
 	int		i;
 
-	temp = NULL;
-	if (ft_getenv(env, "PATH") != NULL)
-		temp = ft_strdup(ft_getenv(env, "PATH"));
-	path = ft_split(temp, ':');
-	if (temp)
-		free(temp);
+	get_path(&temp, &path, env);
 	i = 0;
-	while (path[i] != NULL)
+	while (path && path[i] != NULL)
 	{
 		temp = check_default_path(node->cmd, ft_strjoin(path[i], "/"));
 		if (temp != NULL)
@@ -71,7 +82,7 @@ char	*is_executable(t_cmdlist *node, t_vararr *env)
 		i++;
 	}
 	free_arr(path);
-	if (access(node->cmd, F_OK) == 0)
+	if (access(node->cmd, X_OK) == 0)
 		return (ft_strdup(node->cmd));
 	return (NULL);
 }
@@ -79,7 +90,18 @@ char	*is_executable(t_cmdlist *node, t_vararr *env)
 void	check_cmd_type(t_cmdlist *node, t_vararr *env)
 {
 	char	*temp;
+	int		i;
 
+	i = 0;
+	while (i < node->args->word_count)
+		if (node->args->token_types[i++] == CMD)
+			set_cmd(node, node->args->words[i - 1]);
+	if (node->cmd == NULL)
+	{
+		node->cmd = ft_strdup("");
+		node->cmd_type = NO_CMD;
+		return ;
+	}
 	if (is_builtin(node) == 1)
 		return ;
 	temp = is_executable(node, env);
@@ -91,18 +113,4 @@ void	check_cmd_type(t_cmdlist *node, t_vararr *env)
 		return ;
 	}
 	node->cmd_type = ERROR;
-}
-
-void	copy_vararr(t_vararr *dst, t_vararr *src, int start_idx)
-{
-	int	i;
-
-	i = start_idx;
-	if (i < 0)
-		i = 0;
-	while (i < src->len)
-	{
-		append_element(dst, get_element(src, i));
-		i++;
-	}
 }
