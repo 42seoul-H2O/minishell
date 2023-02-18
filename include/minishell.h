@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 14:50:04 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 15:52:10 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "builtin.h"
 # include "constants.h"
 
-extern unsigned char	g_exit_code;
+extern int	g_exit_code;
 
 int		init(t_vararr *env, char **envp);
 int		init_env_arr(t_vararr *env, char **envp);
