@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:29:08 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 22:28:22 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:13:28 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 static int	is_all_digit(char *s)
 {
@@ -43,7 +44,10 @@ void	builtin_exit(t_cmdlist *node)
 		exit(2);
 	}
 	else
+	{
 		ft_putstr_fd("exit\nh2osh: exit: too many arguments\n", 2);
+		g_exit_code = 1;
+	}
 }
 
 void	ft_exit(int errnum)

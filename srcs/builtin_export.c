@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 21:10:32 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:17:22 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 static void	quick_sort(char **arr, int left, int right)
 {
@@ -97,18 +98,25 @@ static int	builtin_export_no_arg(t_vararr *env)
 void	builtin_export(t_cmdlist *node, t_vararr *env)
 {
 	int		i;
+	int		check_fail;
 	char	*temp;
 
 	if (node->args->word_count == 1)
 	{
 		if (builtin_export_no_arg(env) == -1)
 			ft_exit(1);
+		g_exit_code = 0;
 		return ;
 	}
 	i = 1;
+	check_fail = 0;
 	while (i < node->args->word_count)
 	{
-		builtin_export_check_args(node->args->words[i], env);
+		check_fail += builtin_export_check_args(node->args->words[i], env);
 		i++;
 	}
+	if (check_fail)
+		g_exit_code = 1;
+	else
+		g_exit_code = 0;
 }

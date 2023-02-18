@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 11:53:29 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:28:48 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,15 @@ int	open_redir_and_set_fd(t_cmdlist *node, int idx, int type)
 	if (fd == -1)
 		return (0);
 	if (type == REDIR_IN)
-		dup2(fd, STDIN_FILENO);
+	{
+		if (dup2(fd, STDIN_FILENO) == -1)
+			exit(11);
+	}
 	else
-		dup2(fd, STDOUT_FILENO);
+	{
+		if (dup2(fd, STDOUT_FILENO) == -1)
+			exit(11);
+	}
 	close(fd);
 	return (1);
 }
@@ -62,13 +68,15 @@ void	set_pipe_fd(t_cmdlist *node)
 {
 	if (node->prev != NULL)
 	{
-		dup2(node->prev->pipe[0], STDIN_FILENO);
+		if (dup2(node->prev->pipe[0], STDIN_FILENO) == -1)
+			exit(11);
 		close(node->prev->pipe[0]);
 		close(node->prev->pipe[1]);
 	}
 	if (node->next != NULL)
 	{
-		dup2(node->pipe[1], STDOUT_FILENO);
+		if (dup2(node->pipe[1], STDOUT_FILENO) == -1)
+			exit(11);
 		close(node->pipe[1]);
 		close(node->pipe[0]);
 	}

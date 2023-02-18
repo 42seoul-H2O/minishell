@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:49:21 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 21:07:28 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:18:43 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 void	builtin_unset(t_cmdlist *node, t_vararr *env)
 {
@@ -22,4 +23,5 @@ void	builtin_unset(t_cmdlist *node, t_vararr *env)
 		ft_unsetenv(env, node->args->words[i]);
 		i++;
 	}
+	g_exit_code = 0;
 }

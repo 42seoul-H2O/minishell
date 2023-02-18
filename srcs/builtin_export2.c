@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:34:19 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 11:20:35 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:16:30 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 void	swap_element(char **a, char **b)
 {
@@ -21,7 +22,7 @@ void	swap_element(char **a, char **b)
 	*b = temp;
 }
 
-void	builtin_export_check_args(char *argument, t_vararr *env)
+int	builtin_export_check_args(char *argument, t_vararr *env)
 {
 	char	*temp;
 
@@ -30,6 +31,7 @@ void	builtin_export_check_args(char *argument, t_vararr *env)
 		ft_putstr_fd("h2osh: export: '", 2);
 		ft_putstr_fd(argument, 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
+		return (1);
 	}
 	else if (ft_strchr(argument, '=') == NULL)
 		append_element(env, argument);
@@ -40,4 +42,5 @@ void	builtin_export_check_args(char *argument, t_vararr *env)
 			&argument[ft_strchr(argument, '=') - argument + 1], 1);
 		free(temp);
 	}
+	return (0);
 }

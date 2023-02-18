@@ -6,22 +6,42 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:00:23 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:26:16 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "minishell.h"
 
+static void	backup_stdio(int std[2])
+{
+	std[0] = dup(STDIN_FILENO);
+	if (std[0] == -1)
+		exit(11);
+	std[1] = dup(STDOUT_FILENO);
+	if (std[1] == -1)
+		exit(11);
+}
+
+static void	close_backup(int std[2])
+{
+	if (dup2(std[0], STDIN_FILENO) == -1)
+		exit(11);
+	if (dup2(std[1], STDOUT_FILENO) == -1)
+		exit(11);
+	close(std[0]);
+	close(std[1]);
+}
+
 int	exec_single_builtin(t_cmdlist *exec, t_vararr *env)
 {
 	int	temp;
-	int	stdout_backup;
+	int	std_backup[2];
 
 	if (exec->next == NULL && exec->prev == NULL \
 		&& exec->cmd_type > EXECUTABLE)
 	{
-		stdout_backup = dup(STDOUT_FILENO);
+		backup_stdio(std_backup);
 		temp = set_redirection(exec);
 		if (temp != 0)
 		{
@@ -30,11 +50,10 @@ int	exec_single_builtin(t_cmdlist *exec, t_vararr *env)
 			ft_putstr_fd(": ", 2);
 			perror(NULL);
 			g_exit_code = 1;
-			close(stdout_backup);
+			close_backup(std_backup);
 		}
 		exec_builtins(exec, env);
-		dup2(stdout_backup, STDOUT_FILENO);
-		close(stdout_backup);
+		close_backup(std_backup);
 		return (1);
 	}
 	return (0);
@@ -58,6 +77,5 @@ int	exec_builtins(t_cmdlist *exec, t_vararr *env)
 		builtin_env(exec, env);
 	else
 		return (0);
-	g_exit_code = 0;
 	return (1);
 }

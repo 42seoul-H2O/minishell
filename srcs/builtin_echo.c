@@ -6,11 +6,12 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:53 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/17 21:12:02 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:12:56 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "minishell.h"
 
 static int	check_n_option(char *input)
 {
@@ -46,4 +47,5 @@ void	builtin_echo(t_cmdlist *node)
 	ft_putchar_fd('\b', 1);
 	if (check_n_option(node->args->words[1]) != 1)
 		ft_putchar_fd('\n', 1);
+	g_exit_code = 0;
 }
