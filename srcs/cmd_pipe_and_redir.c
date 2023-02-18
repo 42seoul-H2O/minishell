@@ -6,12 +6,11 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:28:48 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:36:56 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
 int	set_redirection(t_cmdlist *node)
 {
@@ -36,21 +35,21 @@ int	set_redirection(t_cmdlist *node)
 	return (0);
 }
 
-int	open_redir_and_set_fd(t_cmdlist *node, int idx, int type)
+int	open_redir_and_set_fd(t_cmdlist *n, int idx, int type)
 {
 	int	fd;
 
 	if (type == REDIR_IN)
-		fd = open(node->args->words[idx + 1], O_RDONLY, 0644);
+		fd = open(n->args->words[idx + 1], O_RDONLY, 0644);
 	else if (type == REDIR_OUT)
-		fd = open(node->args->words[idx + 1], O_WRONLY | O_CREAT | O_TRUNC, \
-			0644);
+		fd = open(n->args->words[idx + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == APPEND)
-		fd = open(node->args->words[idx + 1], O_WRONLY | O_APPEND | O_CREAT, \
-			0644);
+		fd = open(n->args->words[idx + 1], O_WRONLY | O_APPEND | O_CREAT, 0644);
+	else if (type == HEREDOC)
+		fd = get_heredoc_fd(n->args->words[idx + 1]);
 	if (fd == -1)
 		return (0);
-	if (type == REDIR_IN)
+	if (type == REDIR_IN || type == HEREDOC)
 	{
 		if (dup2(fd, STDIN_FILENO) == -1)
 			exit(11);

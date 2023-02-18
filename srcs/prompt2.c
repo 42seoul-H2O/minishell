@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:34:27 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 13:49:18 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:40:03 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void	make_prompt(t_vararr *env)
 			destroy_list(list_reset_loc(node));
 		}
 		destroy_parsed(input);
-		printf("g_exit_code : %d\n", g_exit_code);
 		line = get_line(line);
 	}
 }
