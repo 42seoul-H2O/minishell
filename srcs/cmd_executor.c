@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 17:32:03 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:06:29 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	exec_child(t_cmdlist *node, t_vararr *env)
 	temp = set_redirection(node);
 	if (temp != 0)
 	{
-		puterr_prompt(node->args->words[temp + 1]);
-		perror(NULL);
+		puterr_prompt(node->args->words[temp]);
+		ft_putendl_fd(strerror(errno), 2);
 		exit(1);
 	}
 	if (node->cmd_type == NO_CMD)

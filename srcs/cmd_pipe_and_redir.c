@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:36:56 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:50:42 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	set_redirection(t_cmdlist *node)
 			node->args->token_types[i] == APPEND)
 		{
 			if (!open_redir_and_set_fd(node, i, node->args->token_types[i]))
-				return (i);
+				return (i + 1);
 			parsed_delete_idx(node->args, i);
 			parsed_delete_idx(node->args, i);
 		}
