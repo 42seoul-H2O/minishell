@@ -6,14 +6,14 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:55:10 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/16 16:34:54 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 12:14:02 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "constants.h"
+#include "builtin.h"
 
-static int	get_optype(char *word);
 static int	get_word_type(char **words, int idx);
 
 //TODO: << >> 와 < < > > 를 구분할 수 있어야 하는데, 지금 방법으로는 구분하지 않는다. 그렇기에,
@@ -26,16 +26,13 @@ int	get_token_type(char **words, int idx)
 	int	word_type;
 
 	optype = get_optype(words[idx]);
-	word_type = get_word_type(words, idx);
 	if (optype)
 		return (optype);
-	else if (word_type)
-		return (word_type);
-	write(2, "Something went wrong with get_token_type\n", 41);
-	builtin_exit(12);
+	word_type = get_word_type(words, idx);
+	return (word_type);
 }
 
-static int	get_optype(char *word)
+int	get_optype(char *word)
 {
 	if (ft_strlen(word) == 1)
 	{
@@ -58,20 +55,24 @@ static int	get_optype(char *word)
 
 static int	get_word_type(char **words, int idx)
 {
-	int	cur_optype;
+	if (is_redir_word(words, idx))
+		return (REDIR_WORD);
+	else if (is_cmd(words, idx))
+		return (ARG);
+	else
+		return (CMD);
+}
+
+int	is_redir_word(char **words, int idx)
+{
 	int	pre_optype;
 
-	cur_optype = get_optype(words[idx]);
 	if (idx == 0)
 		pre_optype = -1;
 	else
 		pre_optype = get_optype(words[idx - 1]);
-	if (pre_optype == -1 || pre_optype == REDIR_IN \
+	if (pre_optype == REDIR_IN \
 		|| pre_optype == REDIR_OUT)
 		return (REDIR_WORD);
-	if (has_cmd(idx))
-		return (ARG);
-	if (!has_cmd(idx))
-		return (CMD);
 	return (0);
 }

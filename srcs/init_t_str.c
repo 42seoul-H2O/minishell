@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:10:00 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/16 16:24:37 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 12:16:56 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,5 @@ void	destroy_t_str(t_str *str)
 
 	i = 0;
 	free(str->quote_flags);
-	while (str->words[i])
-	{
-		free(str->words[i]);
-		i++;
-	}
-	free(str->words);
 	free(str->token_indices);
 }

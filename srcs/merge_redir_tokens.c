@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:47:18 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/16 16:31:56 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 12:37:12 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ void	merge_redir_tokens(t_str *str)
 	i = 0;
 	while (str -> words[i])
 	{
-		merge_redir_token(str -> words, i);
+		merge_redir_token(str, i);
 		i++;
 	}
 }
 
 static void	merge_redir_token(t_str *str, int idx)
 {
-	if (get_token_type(str -> words, idx) == REDIR_IN \
-		&& get_token_type(str -> words, idx + 1) == REDIR_IN \
+	if (get_optype(str -> words[idx]) == REDIR_IN \
+		&& get_optype(str -> words[idx + 1]) == REDIR_IN \
 		&& should_merge(str, idx, REDIR_IN))
 		merge(str, idx);
-	else if (get_token_type(str -> words, idx) == REDIR_OUT \
-		&& get_token_type(str -> words, idx + 1) == REDIR_IN \
+	else if (get_optype(str -> words[idx]) == REDIR_OUT \
+		&& get_optype(str -> words[idx + 1]) == REDIR_IN \
 		&& should_merge(str, idx, REDIR_OUT))
 		merge(str, idx);
 }
@@ -51,7 +51,7 @@ static int	should_merge(t_str *str, int idx, int optype)
 	count = 0;
 	while (str -> words[i] && i <= idx)
 	{
-		if (str -> words[i] == optype)
+		if (get_optype(str -> words[i]) == optype)
 			count++;
 		i++;
 	}

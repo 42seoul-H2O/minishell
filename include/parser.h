@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/16 16:13:34 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/18 12:13:48 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ typedef struct s_str{
 	int		merge_count;
 }t_str;
 
+typedef struct s_parsed{
+	int		*token_types; // 실행부에서 free 필요
+	char	**words; // 실행부에서 free 필요.
+	int		words_count;
+}t_parsed;
+
 typedef struct s_cmd_list
 {
 	char		*cmd;
@@ -68,7 +74,7 @@ enum e_cmd_type
 	UNSET,
 };
 
-t_str		parse(char *input, t_vararr *env);
+t_parsed	parse(char *input, t_vararr *env);
 void		init_t_str(t_str *str, char *s);
 void		destroy_t_str(t_str *str);
 char		**my_split(t_str *str);
@@ -78,6 +84,7 @@ int			get_word_len(t_str *str, int start_idx);
 int			is_quoted(t_str *str, int idx);
 int			is_special_delimiter(t_str *str, int idx);
 int			is_delimiter(t_str *str, int idx);
+void		destroy_parsed(t_parsed *parsed);
 
 int			replace_dollar_with_env(t_str *str, int word_i, \
 			t_dollar_sign *dollar, t_visited *visited);
@@ -93,6 +100,10 @@ int			is_unallowed_char(char *word, int char_idx);
 void		remove_quotes(t_str *str);
 
 void		merge_redir_tokens(t_str *str);
+int			*get_token_types(t_str *str);
 int			get_token_type(char **words, int idx);
+int			get_optype(char *word);
+int			is_cmd(char **words, int idx);
+int			is_redir_word(char **words, int idx);
 
 #endif
