@@ -63,10 +63,10 @@ OBJS_PATH = ./objs
 OBJS = $(addprefix $(OBJS_PATH)/, $(OBJS_NAME))
 
 LIBFT_PATH = lib/libft
-#LIB_RDL = -L/opt/homebrew/opt/readline/lib
-#LIB_RDL_INC = -I/opt/homebrew/opt/readline/include
-LIB_RDL = -L/Users/hyunjuki/.brew/opt/readline/lib
-LIB_RDL_INC = -I/Users/hyunjuki/.brew/opt/readline/include
+LIB_RDL = -L/opt/homebrew/opt/readline/lib
+LIB_RDL_INC = -I/opt/homebrew/opt/readline/include
+#LIB_RDL = -L/Users/hyunjuki/.brew/opt/readline/lib
+#LIB_RDL_INC = -I/Users/hyunjuki/.brew/opt/readline/include
 #LIB_RDL = -L/Users/hocsong/.brew/opt/readline/lib
 #LIB_RDL_INC = -I/Users/hocsong/.brew/opt/readline/include
 
