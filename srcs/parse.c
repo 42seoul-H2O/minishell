@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:46:36 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 19:46:04 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/19 13:28:03 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ static int	get_word_count(char **words)
 
 void	destroy_parsed(t_parsed *parsed)
 {
-	free(parsed -> words);
-	free(parsed -> token_types);
+	if (!parsed)
+		return ;
+	free_arr(parsed->words);
+	free(parsed->token_types);
 	free(parsed);
 }
