@@ -6,14 +6,14 @@
 #    By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 16:27:42 by hocsong           #+#    #+#              #
-#    Updated: 2023/02/18 19:09:34 by hocsong          ###   ########seoul.kr   #
+#    Updated: 2023/02/19 11:23:25 by hocsong          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = test
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
 INCS = -I../include -I../lib/libft -I./
 
 EXT_SRCS_PATH = ../srcs
@@ -23,9 +23,9 @@ SRCS_PATH = srcs
 EXT_SRCS_WO_PATH = init_t_str.c is_quoted.c my_split.c set_word_count.c \
 	get_word_len.c is_delimiter.c set_token_indices.c builtin_exit.c \
 	convert_dollar_to_env.c convert_dollar_to_env2.c \
-	vararr_oper1.c vararr_oper2.c vararr_oper3.c parse.c remove_quotes.c \
-	visited.c get_token_types.c get_token_type.c  get_token_type2.c \
-	merge_redir_tokens.c catch_syntax_err.c catch_syntax_err2.c
+	vararr_oper1.c vararr_oper2.c vararr_oper3.c vararr_oper4.c parse.c \
+	remove_quotes.c visited.c get_token_types.c get_token_type.c  \
+	get_token_type2.c merge_redir_tokens.c catch_syntax_err.c catch_syntax_err2.c
 
 SRCS_WO_PATH = test.c test_split.c test_parser.c
 SRCS_WO_PATH += $(EXT_SRCS_WO_PATH)
