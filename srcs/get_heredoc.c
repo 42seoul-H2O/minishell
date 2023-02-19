@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:35:37 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/19 16:07:30 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/19 16:34:22 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,44 @@ void	check_heredoc(t_cmdlist *node)
 	}
 }
 
+static void	get_heredoc_child(char *filename, char *eof)
+{
+	int		fd;
+	char	*line;
+
+	set_sig_default();
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (!fd)
+		exit(1);
+	line = readline("> ");
+	while (ft_strncmp(line, eof, ft_strlen(eof) + 1))
+	{
+		ft_putendl_fd(line, fd);
+		free(line);
+		line = readline("> ");
+	}
+	free(line);
+	close(fd);
+	exit(0);
+}
+
 char	*get_heredoc(char *eof)
 {
 	static unsigned char	file_i;
-	char					*line;
+	char					*temp;
 	char					*filename;
 	int						fd;
 	pid_t					pid;
 
-	line = ft_itoa((int)file_i);
-	filename = ft_strjoin(".my_heredoc_temp_", line);
-	free(line);
+	if (file_i == 255)
+		file_i = 0;
+	temp = ft_itoa((int)file_i++);
+	filename = ft_strjoin(".my_heredoc_temp_", temp);
+	free(temp);
 	pid = fork();
 	if (pid == 0)
 	{
-		set_sig_default();
-		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (!fd)
-			exit(1);
-		line = readline("> ");
-		while (ft_strncmp(line, eof, ft_strlen(eof) + 1))
-		{
-			ft_putendl_fd(line, fd);
-			free(line);
-			line = readline("> ");
-		}
-		free(line);
-		close(fd);
-		exit(0);
+		get_heredoc_child(filename, eof);
 	}
 	wait(NULL);
 	set_sig_handler();
@@ -79,14 +89,12 @@ void	destroy_heredoc(void)
 	char			*idx;
 
 	i = 0;
-	while (i <= 255)
+	while (i < 255)
 	{
 		idx = ft_itoa(i);
 		temp = ft_strjoin(".my_heredoc_temp_", idx);
 		free(idx);
-		if (access(temp, F_OK) != -1)
-			if (unlink(temp) == -1)
-				ft_putstr_fd("h2osh: failed to delete heredoc file\n", 2);
+		unlink(temp);
 		free(temp);
 		i++;
 	}
