@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:46:36 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/19 15:00:47 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/19 15:06:11 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,9 @@ static int	get_word_count(char **words)
 
 void	destroy_parsed(t_parsed *parsed)
 {
-	size_t	i;
-
-	i = 0;
-	while (parsed->words[i])
-	{
-		free(parsed->words[i]);
-		i++;
-	}
-	free(parsed -> words);
-	free(parsed -> token_types);
+	if (!parsed)
+		return ;
+	free_arr(parsed->words);
+	free(parsed->token_types);
 	free(parsed);
 }
