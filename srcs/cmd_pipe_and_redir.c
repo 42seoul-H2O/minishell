@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/19 12:20:08 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/19 16:01:32 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	set_redirection(t_cmdlist *node)
 	{
 		if (node->args->token_types[i] == REDIR_IN || \
 			node->args->token_types[i] == REDIR_OUT || \
-			node->args->token_types[i] == APPEND || \
-			node->args->token_types[i] == HEREDOC)
+			node->args->token_types[i] == APPEND)
 		{
 			if (!open_redir_and_set_fd(node, i, node->args->token_types[i]))
 				return (i + 1);
@@ -46,8 +45,6 @@ int	open_redir_and_set_fd(t_cmdlist *n, int idx, int type)
 		fd = open(n->args->words[idx + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == APPEND)
 		fd = open(n->args->words[idx + 1], O_WRONLY | O_APPEND | O_CREAT, 0644);
-	else if (type == HEREDOC)
-		fd = get_heredoc_fd(n->args->words[idx + 1]);
 	if (fd == -1)
 		return (0);
 	if (type == REDIR_IN || type == HEREDOC)

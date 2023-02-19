@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/18 19:48:52 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/19 15:02:39 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS_NAME = main.c \
 			convert_dollar_to_env.c \
 			convert_dollar_to_env2.c \
 			get_word_len.c \
-			get_heredoc_fd.c \
+			get_heredoc.c \
 			init_t_str.c \
 			is_delimiter.c \
 			is_quoted.c \

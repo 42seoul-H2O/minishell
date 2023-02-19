@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:38:43 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:36:05 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/19 14:58:24 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,5 @@ void	set_sig_ignore(void);
 void	set_sig_default(void);
 void	interupt_handler(int signum);
 char	*get_line(char *line);
-
-int		get_heredoc_fd(char *eof);
 
 #endif
