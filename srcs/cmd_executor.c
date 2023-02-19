@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 18:06:29 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/19 15:55:56 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	execution(t_cmdlist *node, t_vararr *env)
 	curr = node;
 	if (exec_single_builtin(node, env))
 		return ;
+	//check_heredoc(node);
 	while (curr->next != NULL)
 	{
 		pipe(curr->pipe);
@@ -64,6 +65,7 @@ void	break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child)
 	}
 	set_sig_handler();
 	g_exit_code = (stat % 255);
+	//destroy_heredoc();
 }
 
 void	exec_child(t_cmdlist *node, t_vararr *env)
@@ -73,30 +75,24 @@ void	exec_child(t_cmdlist *node, t_vararr *env)
 	set_pipe_fd(node);
 	temp = set_redirection(node);
 	if (temp != 0)
-	{
-		puterr_prompt(node->args->words[temp]);
-		ft_putendl_fd(strerror(errno), 2);
-		exit(1);
-	}
+		puterr_prompt_and_exit(node->args->words[temp], strerror(errno), 1);
 	if (node->cmd_type == NO_CMD)
 		exit(0);
 	if (node->cmd_type == ERROR)
-	{
-		puterr_prompt(node->cmd);
-		ft_putstr_fd("command not found\n", 2);
-		exit(127);
-	}
+		puterr_prompt_and_exit(node->cmd, "command not found", 127);
 	else if (node->cmd_type == EXECUTABLE)
 		if (execve(node->cmd, node->args->words, env->arr) < 0)
-			exit(126);
+			puterr_prompt_and_exit(node->cmd, strerror(errno), 126);
 	close(0);
 	exec_builtins(node, env);
 	exit(g_exit_code);
 }
 
-void	puterr_prompt(char *err)
+void	puterr_prompt_and_exit(char *target, char *err, int code)
 {
 	ft_putstr_fd("h2osh : ", 2);
-	ft_putstr_fd(err, 2);
+	ft_putstr_fd(target, 2);
 	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(err, 2);
+	exit(code);
 }
