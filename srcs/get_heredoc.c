@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:35:37 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/19 16:34:22 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:33:13 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char	*get_heredoc(char *eof)
 	static unsigned char	file_i;
 	char					*temp;
 	char					*filename;
-	int						fd;
 	pid_t					pid;
+	int						stat;
 
 	if (file_i == 255)
 		file_i = 0;
@@ -74,10 +74,11 @@ char	*get_heredoc(char *eof)
 	free(temp);
 	pid = fork();
 	if (pid == 0)
-	{
 		get_heredoc_child(filename, eof);
-	}
-	wait(NULL);
+	set_sig_ignore();
+	wait(&stat);
+	if (WIFSIGNALED(stat))
+		write(1, "\n", 1);
 	set_sig_handler();
 	return (filename);
 }
