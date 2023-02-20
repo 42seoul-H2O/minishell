@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:47:18 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/20 13:00:41 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/20 18:18:04 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	merge_redir_tokens(t_str *str)
 
 static void	merge_redir_token(t_str *str, int idx)
 {
-	if (get_optype(str -> words[idx]) == REDIR_IN \
+	if (str->words[idx + 1] && get_optype(str -> words[idx]) == REDIR_IN \
 		&& get_optype(str -> words[idx + 1]) == REDIR_IN \
 		&& should_merge(str, idx, REDIR_IN))
 		merge(str, idx, 1);
-	else if (get_optype(str -> words[idx]) == REDIR_OUT \
+	else if (str->words[idx + 1] && get_optype(str -> words[idx]) == REDIR_OUT \
 		&& get_optype(str -> words[idx + 1]) == REDIR_OUT \
 		&& should_merge(str, idx, REDIR_OUT))
 		merge(str, idx, 0);

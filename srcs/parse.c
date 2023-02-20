@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:46:36 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/19 15:06:11 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/20 18:04:16 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ t_parsed	*parse(char *input, t_vararr *env)
 		return (NULL);
 	parsed->token_types = get_token_types(&str);
 	convert_dollar_to_env(&str, env);
-	remove_quotes(&str);
 	parsed->words = str.words;
 	parsed->words_count = get_word_count(str.words);
-	destroy_t_str(&str);
 	catch_syntax_err(parsed);
+	remove_quotes(&str);
+	parsed->words = str.words;
+	destroy_t_str(&str);
 	return (parsed);
 }
 

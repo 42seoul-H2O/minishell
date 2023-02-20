@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 18:59:47 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/19 15:20:28 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/20 18:28:36 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	catch_contiguous_ops(t_parsed *parsed)
 	while (parsed -> words[i])
 	{
 		if (0 < i && parsed->words[i] && ((is_redir(parsed -> words[i - 1]) \
-		&& is_redir(parsed -> words[i])) \
+		&& get_optype(parsed -> words[i])) \
 		|| (get_optype(parsed -> words[i - 1]) == PIPE \
 		&& get_optype(parsed -> words[i]) == PIPE)))
 		{
