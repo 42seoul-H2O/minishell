@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:11:02 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 19:46:16 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:57:08 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct s_str{
 	int		*quote_flags;
 	char	**words;
 	int		word_count;
-	int		merge_count;
+	int		in_merge_count;
+	int		out_merge_count;
 }t_str;
 
 typedef struct s_parsed{

@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:10:00 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/18 12:16:56 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/20 12:56:34 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	init_t_str(t_str *str, char *s)
 	str -> delimiters = " \t";
 	str -> included_delimiters = "<>|";
 	str -> quote_flags = NULL;
-	str -> merge_count = 0;
+	str -> in_merge_count = 0;
+	str -> out_merge_count = 0;
 	set_word_count(str);
 }
 
