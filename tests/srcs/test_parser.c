@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/20 12:46:13 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/20 13:04:19 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	test_parser(void)
 	parser_test("cat << EOF | echo >>out", HAS_ENV, 7, "cat", "<<", "EOF", "|", "echo", ">>", "out");
 	parser_test("echo | >> EOF", HAS_ENV, 4, "echo", "|", ">>", "EOF");
 	parser_test("cat << EOF", HAS_ENV, 3, "cat", "<<", "EOF");
-	parser_test("<< ls -la | $?-l", HAS_ENV, 6, "<<", "ls", "-la", "|", "wc", "0-l");
+	parser_test("<< ls -la | $?-l", HAS_ENV, 5, "<<", "ls", "-la", "|", "0-l");
 	parser_test("<< ls -la |wc -l", HAS_ENV, 6, "<<", "ls", "-la", "|", "wc", "-l");
 	parser_test("ls -la |<>wc -l", HAS_ENV, 7, "ls", "-la", "|", "<", ">", "wc", "-l");
 	parser_test("ls -la |<>>wc -l", HAS_ENV, 7, "ls", "-la", "|", "<", ">>", "wc", "-l");
