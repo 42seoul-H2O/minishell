@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:57:37 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/20 15:33:19 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:03:13 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,25 @@
 
 int	is_builtin(t_cmdlist *node)
 {
-	if (ft_strncmp(node->cmd, "echo", ft_strlen(node->cmd)) == 0)
+	if (ft_strncmp(node->cmd, "echo", math_min(ft_strlen(node->cmd), 4)) == 0)
 		node->cmd_type = ECHO;
-	else if (ft_strncmp(node->cmd, "env", ft_strlen(node->cmd)) == 0)
+	else if (ft_strncmp(node->cmd, "env", \
+		math_min(ft_strlen(node->cmd), 3)) == 0)
 		node->cmd_type = ENV;
-	else if (ft_strncmp(node->cmd, "export", ft_strlen(node->cmd)) == 0)
+	else if (ft_strncmp(node->cmd, "export", \
+		math_min(ft_strlen(node->cmd), 6)) == 0)
 		node->cmd_type = EXPORT;
-	else if (ft_strncmp(node->cmd, "exit", ft_strlen(node->cmd)) == 0)
+	else if (ft_strncmp(node->cmd, "exit", \
+		math_min(ft_strlen(node->cmd), 4)) == 0)
 		node->cmd_type = EXIT;
-	else if (ft_strncmp(node->cmd, "pwd", ft_strlen(node->cmd)) == 0)
+	else if (ft_strncmp(node->cmd, "pwd", \
+		math_min(ft_strlen(node->cmd), 3)) == 0)
 		node->cmd_type = PWD;
-	else if (ft_strncmp(node->cmd, "unset", ft_strlen(node->cmd)) == 0)
+	else if (ft_strncmp(node->cmd, "unset", \
+		math_min(ft_strlen(node->cmd), 5)) == 0)
 		node->cmd_type = UNSET;
-	else if (ft_strncmp(node->cmd, "cd", ft_strlen(node->cmd)) == 0)
+	else if (ft_strncmp(node->cmd, "cd", \
+		math_min(ft_strlen(node->cmd), 2)) == 0)
 		node->cmd_type = CD;
 	else
 		return (0);
