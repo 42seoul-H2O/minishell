@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/19 16:27:02 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:16:27 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	execution(t_cmdlist *node, t_vararr *env)
 	pid_t		pid;
 
 	curr = node;
+	check_heredoc(node);
 	if (exec_single_builtin(node, env))
 		return ;
-	check_heredoc(node);
 	while (curr->next != NULL)
 	{
 		pipe(curr->pipe);
