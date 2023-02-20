@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:34 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 16:04:55 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:36:40 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,10 @@ int	init_env_arr(t_vararr *env, char **envp)
 	return (0);
 }
 
-static void	check_leak(void)
-{
-	system("leaks --list minishell | grep leaks");
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_vararr	*env;
 
-	//atexit(check_leak);
 	if (init(&env, envp) == -1)
 		return (-1);
 	make_prompt(env);
