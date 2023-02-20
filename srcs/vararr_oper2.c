@@ -3,62 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vararr_oper2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:37:11 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 13:41:02 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:46:35 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vararr.h"
-
-/*
-char	*get_element(t_vararr *varr, int idx)
-** get element of variable array
-** varr = variable array
-** idx = index of array
-** return
-**** NULL : if invalid varr or idx >= varr's len
-**** string(array[idx]) 
-
-int	find_element(t_vararr *varr, char *val)
-** find element(key or "key=value") of variable array
-** varr = variable array
-** val = string to find
-** return
-**** -1 : invalid varr or cannot find val
-**** index : val's index of array
-
-int	append_element(t_vararr *varr, char *val)
-** append element of variable array
-** varr = variable array
-** val = string to append
-** return
-**** -1 : invalid varr or malloc error
-**** 0 : array has 'val' already
-**** 1 : append successfully
-
-int	update_element(t_vararr *varr, char *key, char *value)
-** update element of variable array
-** find key and modify it to "key=value"
-** if there is no key, append "key=value"
-** varr = variable array
-** key = key string to find
-** value = value string to update
-** return
-**** -1 : invalid varr or ft_strjoin error
-**** 0 : failed to update
-**** 1 : update successfully or append successfully
-
-int	delete_element(t_vararr *varr, char *key)
-** delete element of variable array
-** find key and delete it
-** varr = variable array
-** key = key string to delete
-** return
-**** -1 : invalid varr or failed to find key
-**** 1 : delete successfully
-*/
 
 char	*get_element(t_vararr *varr, int idx)
 {

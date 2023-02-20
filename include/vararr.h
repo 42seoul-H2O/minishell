@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vararr.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:13:54 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 13:39:47 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:46:05 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 # define VARARR_H
 
 # include "../lib/libft/libft.h"
-/*
-** capacity : array max size
-** len : array current size
-*/
+
 typedef struct s_vararr
 {
 	int		capacity;
