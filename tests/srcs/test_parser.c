@@ -6,7 +6,7 @@
 /*   By: hocsong <hocsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:59 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/20 13:04:19 by hocsong          ###   ########seoul.kr  */
+/*   Updated: 2023/02/20 21:28:37 by hocsong          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ static t_vararr	*init_env(int has_env);
 void	test_parser(void)
 {
 	printf("---- Parser Test Cases ----\n\n");
+	parser_test(" \'\"\' ", HAS_ENV, 1, "\"");
+	parser_test(" \"\'\" ", HAS_ENV, 1, "\'");
+	parser_test(" \"\"\"\" ", HAS_ENV, 1, "");
 	parser_test("cat << EOF | echo >>out", HAS_ENV, 7, "cat", "<<", "EOF", "|", "echo", ">>", "out");
 	parser_test("echo | >> EOF", HAS_ENV, 4, "echo", "|", ">>", "EOF");
 	parser_test("cat << EOF", HAS_ENV, 3, "cat", "<<", "EOF");
