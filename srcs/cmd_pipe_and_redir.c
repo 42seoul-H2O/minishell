@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/19 16:01:32 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:15:02 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,12 @@ void	close_prev_pipe(t_cmdlist *node)
 	{
 		close(node->prev->prev->pipe[0]);
 		close(node->prev->prev->pipe[1]);
-		node->prev->prev->pipe[0] = 0;
-		node->prev->prev->pipe[1] = 1;
+		node->prev->prev->pipe[0] = -1;
+		node->prev->prev->pipe[1] = -1;
+	}
+	if (node->prev && !(node->next))
+	{
+		close(node->prev->pipe[1]);
+		node->prev->pipe[1] = -1;
 	}
 }

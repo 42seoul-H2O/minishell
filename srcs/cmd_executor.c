@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/20 15:16:27 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:15:09 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child)
 	processes = 0;
 	while (node)
 	{
-		if (node->pipe[0] != 0)
+		if (node->pipe[0] != -1)
 			close(node->pipe[0]);
-		if (node->pipe[1] != 1)
+		if (node->pipe[1] != -1)
 			close(node->pipe[1]);
 		node = node->next;
 		processes++;

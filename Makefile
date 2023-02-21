@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/20 15:40:40 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/21 00:29:17 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,12 +63,12 @@ OBJS_PATH = ./objs
 OBJS = $(addprefix $(OBJS_PATH)/, $(OBJS_NAME))
 
 LIBFT_PATH = lib/libft
-#LIB_RDL = -L/opt/homebrew/opt/readline/lib
-#LIB_RDL_INC = -I/opt/homebrew/opt/readline/include
+LIB_RDL = -L/opt/homebrew/opt/readline/lib
+LIB_RDL_INC = -I/opt/homebrew/opt/readline/include
 #LIB_RDL = -L/Users/hyunjuki/.brew/opt/readline/lib
 #LIB_RDL_INC = -I/Users/hyunjuki/.brew/opt/readline/include
-LIB_RDL = -L/Users/hocsong/.brew/opt/readline/lib
-LIB_RDL_INC = -I/Users/hocsong/.brew/opt/readline/include
+#LIB_RDL = -L/Users/hocsong/.brew/opt/readline/lib
+#LIB_RDL_INC = -I/Users/hocsong/.brew/opt/readline/include
 
 TEST_PATH = ./tests
 
