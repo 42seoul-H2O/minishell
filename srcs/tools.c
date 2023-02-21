@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:17:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 15:26:11 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:32:15 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,3 @@ int	ft_access(const char *path)
 		return (0);
 	return (-1);
 }
-
