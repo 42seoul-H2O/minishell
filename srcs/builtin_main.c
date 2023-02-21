@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:05:47 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 15:26:16 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:05:40 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	exec_builtins(t_cmdlist *exec, t_vararr *env)
 	else if (exec->cmd_type == PWD)
 		builtin_pwd();
 	else if (exec->cmd_type == CD)
-		builtin_cd(exec);
+		builtin_cd(exec, env);
 	else if (exec->cmd_type == EXPORT)
 		builtin_export(exec, env);
 	else if (exec->cmd_type == UNSET)
