@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:17:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 14:58:36 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:26:11 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	ft_wifsignaled(int stat)
 {
-	return (((stat & 0177) != 0177) && (stat != 0));
+	return (((stat & 0177) != 0177) && ((stat & 0177) != 0));
 }
 
 static int	ft_isdir(int mode)
