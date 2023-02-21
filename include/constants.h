@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 11:28:13 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 17:32:46 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:01:39 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ enum e_cmd_type
 {
 	NO_CMD,
 	ERROR,
+	IS_DIR,
 	EXECUTABLE,
 	CD,
 	ECHO,

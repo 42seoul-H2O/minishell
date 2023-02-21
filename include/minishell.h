@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 11:20:29 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:28:55 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "cmdlist.h"
 # include "prompt.h"
 # include <string.h>
+# include <sys/stat.h>
 
 extern int	g_exit_code;
 
@@ -54,5 +55,6 @@ char		*is_executable(t_cmdlist *node, t_vararr *env);
 void		check_cmd_type(t_cmdlist *node, t_vararr *env);
 
 int			ft_wifsignaled(int stat);
+int			ft_access(const char *path);
 
 #endif

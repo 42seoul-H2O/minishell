@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 11:15:09 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:08:36 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child)
 	set_sig_ignore();
 	while (processes--)
 		wait(&stat);
-	if (WIFSIGNALED(stat))
+	if (ft_wifsignaled(stat))
 	{
 		stat += 128;
 		write(1, "\n", 1);
@@ -71,13 +71,17 @@ void	break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child)
 void	exec_child(t_cmdlist *node, t_vararr *env)
 {
 	int	temp;
-
+	
+	if (ft_access(node->cmd) == -2)
+		node->cmd_type = IS_DIR;
 	set_pipe_fd(node);
 	temp = set_redirection(node);
 	if (temp != 0)
 		puterr_prompt_and_exit(node->args->words[temp], strerror(errno), 1);
 	if (node->cmd_type == NO_CMD)
 		exit(0);
+	if (node->cmd_type == IS_DIR)
+		puterr_prompt_and_exit(node->cmd, "Is a directory", 126);
 	if (node->cmd_type == ERROR)
 		puterr_prompt_and_exit(node->cmd, "command not found", 127);
 	else if (node->cmd_type == EXECUTABLE)
@@ -93,6 +97,6 @@ void	puterr_prompt_and_exit(char *target, char *err, int code)
 	ft_putstr_fd("h2osh : ", 2);
 	ft_putstr_fd(target, 2);
 	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(err, 2);
+	ft_putstr_fd(err, 2);
 	exit(code);
 }
