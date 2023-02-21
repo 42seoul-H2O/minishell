@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:55:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 11:28:55 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:20:20 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void		puterr_prompt_and_exit(char *target, char *err, int code);
 
 int			set_redirection(t_cmdlist *node);
 void		set_pipe_fd(t_cmdlist *node);
-void		close_prev_pipe(t_cmdlist *node);
 int			open_redir_and_set_fd(t_cmdlist *node, int idx, int type);
 
 char		*get_heredoc(char *eof);

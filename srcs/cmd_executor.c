@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 14:51:59 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:17:45 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	execution(t_cmdlist *node, t_vararr *env)
 	curr = node;
 	while (curr)
 	{
-		close_prev_pipe(curr);
 		pid = fork();
 		if (pid < 0)
 			ft_exit(11);

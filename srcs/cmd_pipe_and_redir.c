@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:23:25 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 11:15:02 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:17:35 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,34 +63,25 @@ int	open_redir_and_set_fd(t_cmdlist *n, int idx, int type)
 
 void	set_pipe_fd(t_cmdlist *node)
 {
+	t_cmdlist	*curr;
+
+	curr = list_reset_loc(node);
 	if (node->prev != NULL)
 	{
 		if (dup2(node->prev->pipe[0], STDIN_FILENO) == -1)
 			exit(11);
-		close(node->prev->pipe[0]);
-		close(node->prev->pipe[1]);
 	}
 	if (node->next != NULL)
 	{
 		if (dup2(node->pipe[1], STDOUT_FILENO) == -1)
 			exit(11);
-		close(node->pipe[1]);
-		close(node->pipe[0]);
 	}
-}
-
-void	close_prev_pipe(t_cmdlist *node)
-{
-	if (node->prev && node->prev->prev)
+	while (curr)
 	{
-		close(node->prev->prev->pipe[0]);
-		close(node->prev->prev->pipe[1]);
-		node->prev->prev->pipe[0] = -1;
-		node->prev->prev->pipe[1] = -1;
-	}
-	if (node->prev && !(node->next))
-	{
-		close(node->prev->pipe[1]);
-		node->prev->pipe[1] = -1;
+		if (curr->pipe[0] != -1)
+			close(curr->pipe[0]);
+		if (curr->pipe[1] != -1)
+			close(curr->pipe[1]);
+		curr = curr->next;
 	}
 }
