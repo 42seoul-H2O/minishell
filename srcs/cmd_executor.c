@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 15:17:45 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:23:28 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ void	puterr_prompt_and_exit(char *target, char *err, int code)
 	ft_putstr_fd("h2osh : ", 2);
 	ft_putstr_fd(target, 2);
 	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(err, 2);
+	ft_putendl_fd(err, 2);
 	exit(code);
 }
