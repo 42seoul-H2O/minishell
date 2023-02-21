@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 12:08:36 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:51:59 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	break_pipe_and_wait_child(t_cmdlist *node, pid_t last_child)
 void	exec_child(t_cmdlist *node, t_vararr *env)
 {
 	int	temp;
-	
+
 	if (ft_access(node->cmd) == -2)
 		node->cmd_type = IS_DIR;
 	set_pipe_fd(node);
