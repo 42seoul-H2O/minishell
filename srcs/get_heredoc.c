@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:35:37 by hocsong           #+#    #+#             */
-/*   Updated: 2023/02/20 15:33:13 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:20:58 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*get_heredoc(char *eof)
 		get_heredoc_child(filename, eof);
 	set_sig_ignore();
 	wait(&stat);
-	if (WIFSIGNALED(stat))
+	if (ft_wifsignaled(stat))
 		write(1, "\n", 1);
 	set_sig_handler();
 	return (filename);

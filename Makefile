@@ -6,7 +6,7 @@
 #    By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 15:58:59 by hyunjuki          #+#    #+#              #
-#    Updated: 2023/02/21 00:29:17 by hyunjuki         ###   ########.fr        #
+#    Updated: 2023/02/21 11:20:14 by hyunjuki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ SRCS_NAME = main.c \
 			get_token_type.c \
 			get_token_type2.c \
 			get_token_types.c \
-			merge_redir_tokens.c
+			merge_redir_tokens.c \
+			tools.c
 SRCS_PATH = ./srcs
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 
