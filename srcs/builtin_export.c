@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:41:07 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/18 19:42:39 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:48:56 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	quick_sort(char **arr, int left, int right)
 		quick_sort(arr, i, right);
 }
 
-static t_vararr	*get_no_value(t_vararr *env)
+t_vararr	*get_no_value(t_vararr *env)
 {
 	int			i;
 	t_vararr	*result;

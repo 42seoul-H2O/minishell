@@ -6,7 +6,7 @@
 /*   By: hyunjuki <hyunjuki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:40:55 by hyunjuki          #+#    #+#             */
-/*   Updated: 2023/02/21 15:26:25 by hyunjuki         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:54:15 by hyunjuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	exec_child(t_cmdlist *node, t_vararr *env)
 {
 	int	temp;
 
+	destroy_arr(get_no_value(env));
 	if (ft_access(node->cmd) == -2)
 		node->cmd_type = IS_DIR;
 	set_pipe_fd(node);
